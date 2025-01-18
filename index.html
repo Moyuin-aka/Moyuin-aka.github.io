@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"moyuin-aka.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"moyuin-aka.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
@@ -74,7 +74,7 @@
   </style>
 </noscript>
 
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -183,7 +183,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-01-19 01:50:16 / 修改时间：01:56:36" itemprop="dateCreated datePublished" datetime="2025-01-19T01:50:16+08:00">2025-01-19</time>
+              <time title="创建时间：2025-01-19 01:50:16 / 修改时间：02:07:07" itemprop="dateCreated datePublished" datetime="2025-01-19T01:50:16+08:00">2025-01-19</time>
             </span>
 
           
@@ -198,11 +198,11 @@
 
       
           <h1 id="这只是一个存档，用来存储我的支付宝的小荷包的计划收益"><a href="#这只是一个存档，用来存储我的支付宝的小荷包的计划收益" class="headerlink" title="这只是一个存档，用来存储我的支付宝的小荷包的计划收益"></a>这只是一个存档，用来存储我的支付宝的小荷包的计划收益</h1><p>目前想的是一天1元开始0.03元累加的稳定存储，先这样开始吧，运行代码看看一年后200元&#x2F;分的收益+每个月200的固定存储+每日存储看看一年后能存多少钱。<br>啊，如果有什么奖金啊我也会存进去的，看看能不能攒出一个switch2或者其他电子产品什么的…<br>或者明年买GTA6的钱？或者下一张GIDLE专辑的钱？<br>先一年开始吧，留点钱比什么都有用。</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+<pre class=" language-language-cpp"><code class="language-language-cpp">#include<bits/stdc++.h>
 using namespace std;
 
 int main() &#123;
-    system(&quot;chcp 65001&quot;);
+    system("chcp 65001");
     double initial_input = 1;  // 初始存入金额
     double total_sum = 0;      // 总存款
     int month = 1;             // 当前月份
@@ -213,14 +213,14 @@ int main() &#123;
     double monthly_expense = 2000 - 150 - 200;  // 每月固定支出（生活费、订阅费等）
     double daily_food_expense = (5 + 18 + 20) * 30;  // 每月餐费支出
 
-    printf(&quot;初始存入金额为 %.2f, 每月递增比率为 %.2f\n&quot;, initial_input, per_rate);
-    cout &lt;&lt; endl;
+    printf("初始存入金额为 %.2f, 每月递增比率为 %.2f\n", initial_input, per_rate);
+    cout << endl;
 
     bool remain_decreases = false;  // 用于标记remain是否开始减少
     bool negative_remain = false;   // 用于标记是否出现负余额
 
     // 模拟365天
-    for(int i = 0; i &lt; 365; i++) &#123;
+    for(int i = 0; i < 365; i++) &#123;
         total_sum += initial_input;  // 总存款累计
         monthly_input += initial_input;  // 本月存款累计
         initial_input += per_rate;  // 增加递增金额
@@ -230,39 +230,39 @@ int main() &#123;
 
 
         // 每个月结束后，计算剩余余额
-        if (i % 30 == 0 &amp;&amp; i != 0) &#123;
+        if (i % 30 == 0 && i != 0) &#123;
             total_sum+=200;//每月存入两百
             double current_remain = monthly_expense - monthly_input - daily_food_expense;  // 当前月剩余金额
             remain += current_remain;  // 累计剩余余额
 
             // 检查剩余余额是否减少
-            if (!remain_decreases &amp;&amp; remain &gt; 0 &amp;&amp; current_remain &lt; 0) &#123;
+            if (!remain_decreases && remain > 0 && current_remain < 0) &#123;
                 remain_decreases = true;
-                printf(&quot;从第 %d 个月开始，剩余余额开始减少。\n&quot;, month);
+                printf("从第 %d 个月开始，剩余余额开始减少。\n", month);
             &#125;
 
             // 检查余额是否变为负数
-            if (!negative_remain &amp;&amp; remain &lt; 0) &#123;
+            if (!negative_remain && remain < 0) &#123;
                 negative_remain = true;
-                printf(&quot;第 %d 个月，剩余余额变为负数。\n&quot;, month);
+                printf("第 %d 个月，剩余余额变为负数。\n", month);
             &#125;
 
-            cout &lt;&lt; &quot;第 &quot; &lt;&lt; month &lt;&lt; &quot; 个月的存入金额为: &quot; &lt;&lt; initial_input &lt;&lt; &quot; 本月所有存入总额为: &quot; &lt;&lt; monthly_input &lt;&lt; endl;
-            printf(&quot;本月餐费为 %.2f\n&quot;, monthly_expense - monthly_input);
-            printf(&quot;剩余余额为 %.2f\n&quot;, remain);
+            cout << "第 " << month << " 个月的存入金额为: " << initial_input << " 本月所有存入总额为: " << monthly_input << endl;
+            printf("本月餐费为 %.2f\n", monthly_expense - monthly_input);
+            printf("剩余余额为 %.2f\n", remain);
             
-            printf(&quot;目前存入总金额为 %.2f\n&quot;,total_sum+0.04);
-            cout &lt;&lt; endl;
+            printf("目前存入总金额为 %.2f\n",total_sum+0.04);
+            cout << endl;
 
             month++;
             monthly_input = 0;  // 重置本月存款
         &#125;
     &#125;
 
-    //printf(&quot;总存款金额为: %.2f\n&quot;, total_sum);
-    printf(&quot;本年度未包装的支出为: %.2f\n&quot;, 2000 * 12 - total_sum);
-    printf(&quot;每日存入金额最终为: %.2f\n&quot;, initial_input);
-    printf(&quot;最终剩余余额为: %.2f\n&quot;, remain);
+    //printf("总存款金额为: %.2f\n", total_sum);
+    printf("本年度未包装的支出为: %.2f\n", 2000 * 12 - total_sum);
+    printf("每日存入金额最终为: %.2f\n", initial_input);
+    printf("最终剩余余额为: %.2f\n", remain);
 
     return 0;
 &#125;
