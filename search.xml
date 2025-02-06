@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>渗透学习</title>
+      <link href="/2025/02/06/shen-tou-xue-xi-ji-hua/"/>
+      <url>/2025/02/06/shen-tou-xue-xi-ji-hua/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="🛡-CTF-学习计划"><a href="#🛡-CTF-学习计划" class="headerlink" title="🛡 CTF 学习计划"></a>🛡 CTF 学习计划</h1><p>GPT给的</p><h2 id="📌-第-1-阶段：环境搭建"><a href="#📌-第-1-阶段：环境搭建" class="headerlink" title="📌 第 1 阶段：环境搭建"></a>📌 <strong>第 1 阶段：环境搭建</strong></h2><table><thead><tr><th>任务</th><th>推荐资源</th></tr></thead><tbody><tr><td>安装 Kali Linux（VMware&#x2F;VirtualBox）</td><td><a href="https://www.kali.org/">Kali 官方网站</a></td></tr><tr><td>配置 Web 渗透工具（Burp Suite, sqlmap）</td><td><a href="https://portswigger.net/burp">Burp Suite 文档</a>, <a href="https://github.com/sqlmapproject/sqlmap">sqlmap GitHub</a></td></tr><tr><td>安装 pwn 调试工具（gdb, pwndbg, ropper）</td><td><a href="https://github.com/pwndbg/pwndbg">pwndbg GitHub</a>, <a href="https://github.com/sashs/Ropper">Ropper 工具</a></td></tr></tbody></table><hr><h2 id="🔥-第-2-阶段：Web-渗透基础"><a href="#🔥-第-2-阶段：Web-渗透基础" class="headerlink" title="🔥 第 2 阶段：Web 渗透基础"></a>🔥 <strong>第 2 阶段：Web 渗透基础</strong></h2><table><thead><tr><th>任务</th><th>推荐资源</th></tr></thead><tbody><tr><td>在 DVWA 练习 SQL 注入，使用 sqlmap</td><td><a href="http://www.dvwa.co.uk/">DVWA 靶场</a>, <a href="https://github.com/sqlmapproject/sqlmap/wiki">sqlmap 教程</a></td></tr><tr><td>学习 XSS（反射型、存储型、DOM XSS）</td><td><a href="https://xsshunter.com/">XSS 平台 xsshunter</a>, <a href="https://owasp.org/www-community/attacks/xss/">OWASP XSS Guide</a></td></tr><tr><td>练习 Webshell 上传绕过</td><td><a href="https://www.hackthebox.com/">Hack The Box Webshell 题目</a></td></tr><tr><td>学习 SSRF（服务器端请求伪造）</td><td><a href="https://portswigger.net/web-security/ssrf">SSRF 实战教程</a></td></tr><tr><td>在 HackTheBox 里尝试一个 Web 靶机</td><td><a href="https://www.hackthebox.com/">HackTheBox 入口</a></td></tr></tbody></table><hr><h2 id="💀-第-2-阶段：Pwn-漏洞利用"><a href="#💀-第-2-阶段：Pwn-漏洞利用" class="headerlink" title="💀 第 2 阶段：Pwn 漏洞利用"></a>💀 <strong>第 2 阶段：Pwn 漏洞利用</strong></h2><table><thead><tr><th>任务</th><th>推荐资源</th></tr></thead><tbody><tr><td>学习基础缓冲区溢出（Buffer Overflow）</td><td><a href="http://pwnable.kr/">pwnable.kr 官网</a></td></tr><tr><td>使用 gdb 调试 pwnable.kr 的基础题</td><td><a href="https://sourceware.org/gdb/">GDB 使用手册</a></td></tr><tr><td>学习格式化字符串漏洞（Format String）</td><td><a href="https://ctftime.org/writeups">格式化字符串漏洞 CTF 题解</a></td></tr><tr><td>练习 ROP，利用返回地址执行 shell</td><td><a href="https://ropemporium.com/">ROP Emporium 练习</a></td></tr></tbody></table><hr><h2 id="🚀-第-3-阶段：真实漏洞研究"><a href="#🚀-第-3-阶段：真实漏洞研究" class="headerlink" title="🚀 第 3 阶段：真实漏洞研究"></a>🚀 <strong>第 3 阶段：真实漏洞研究</strong></h2><table><thead><tr><th>任务</th><th>推荐资源</th></tr></thead><tbody><tr><td>在 Exploit-DB 找一个 CVE 漏洞复现</td><td><a href="https://www.exploit-db.com/">Exploit-DB</a></td></tr><tr><td>学习 CVE 漏洞利用的 PoC 编写</td><td><a href="https://www.cvedetails.com/">CVE Details</a></td></tr><tr><td>尝试写自己的简单 Exploit</td><td><a href="https://www.offensive-security.com/metasploit-unleashed/exploit-development/">Python 编写 Exploit 教程</a></td></tr><tr><td>挑战 HackTheBox 里的真实靶机</td><td><a href="https://www.hackthebox.com/">HackTheBox 挑战列表</a></td></tr></tbody></table><hr><h2 id="🎯-学习方法建议"><a href="#🎯-学习方法建议" class="headerlink" title="🎯 学习方法建议"></a>🎯 <strong>学习方法建议</strong></h2><ul><li><strong>每个阶段至少完成 3-5 个任务后再进入下一阶段</strong></li><li><strong>遇到问题时，优先查找 Writeup（题解），然后自己尝试</strong></li><li><strong>可以在博客或笔记中记录每个阶段的收获</strong></li><li><strong>如果有不懂的，去 CTFHub &#x2F; XCTF 社区交流</strong></li><li><strong>最重要的是，动手实操，不只是看理论！</strong></li></ul><hr>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 计划 </tag>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>存个利息代码</title>
       <link href="/2025/01/19/cun-ge-li-xi-dai-ma/"/>
       <url>/2025/01/19/cun-ge-li-xi-dai-ma/</url>
@@ -14,9 +35,9 @@
       
         <tags>
             
-            <tag> 编程 </tag>
-            
             <tag> 生活 </tag>
+            
+            <tag> 编程 </tag>
             
         </tags>
       
@@ -35,9 +56,9 @@
       
         <tags>
             
-            <tag> 期末 </tag>
-            
             <tag> 编程 </tag>
+            
+            <tag> 期末 </tag>
             
             <tag> 杂谈 </tag>
             
