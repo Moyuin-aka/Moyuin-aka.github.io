@@ -1,1073 +1,197 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/MyIcon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/MyIcon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/MyIcon.png">
-  <link rel="mask-icon" href="/images/MyIcon.png" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"moyuin-aka.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
-<meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Moyuin's Blog - 一个随笔记录的地方</title><meta name="author" content="Moyuin"><meta name="copyright" content="Moyuin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="在这里记录我的技术栈和生活点滴... 好像一个飘渺的人在游荡...">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="website">
 <meta property="og:title" content="Moyuin&#39;s Blog">
 <meta property="og:url" content="https://moyuin-aka.github.io/index.html">
 <meta property="og:site_name" content="Moyuin&#39;s Blog">
-<meta property="og:description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
+<meta property="og:description" content="在这里记录我的技术栈和生活点滴... 好像一个飘渺的人在游荡...">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moyuin-aka.github.io/img/MyIcon.png">
 <meta property="article:author" content="Moyuin">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://moyuin-aka.github.io/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>Moyuin's Blog</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Moyuin's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">一个随笔记录的地方</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
+<meta name="twitter:image" content="https://moyuin-aka.github.io/img/MyIcon.png"><link rel="shortcut icon" href="/img/MyIcon.png"><link rel="canonical" href="https://moyuin-aka.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
       
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://moyuin-aka.github.io/2025/02/18/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Moyuin">
-      <meta itemprop="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moyuin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/18/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/" class="post-title-link" itemprop="url">数据结构课程注意事项</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-02-18 10:42:59 / 修改时间：10:52:20" itemprop="dateCreated datePublished" datetime="2025-02-18T10:42:59+08:00">2025-02-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">日常学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>161</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据结构课程注意事项"><a href="#数据结构课程注意事项" class="headerlink" title="数据结构课程注意事项"></a>数据结构课程注意事项</h1><h2 id="课程考核总览"><a href="#课程考核总览" class="headerlink" title="课程考核总览"></a>课程考核总览</h2><p><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%BE%E7%A8%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/%E6%80%BB%E8%A7%88.jpg"></p>
-<h2 id="小组作业："><a href="#小组作业：" class="headerlink" title="小组作业："></a><strong>小组作业：</strong></h2><p>· 个人小主题<br>· 双匿名评分<br>· ppt转pdf<br>· 评分量表</p>
-<h2 id="小班讨论："><a href="#小班讨论：" class="headerlink" title="小班讨论："></a><strong>小班讨论</strong>：</h2><p><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%BE%E7%A8%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/%E8%AE%A8%E8%AE%BA.jpg" alt="讨论"></p>
-<h3 id="个人资料"><a href="#个人资料" class="headerlink" title="个人资料"></a><strong>个人资料</strong></h3><p>需要表达清楚，涉及算法用人能看懂的东西来写，像论文一样写。<br>文字越多看的懂的人越少，善用图表，语言简练清晰。<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%BE%E7%A8%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99.jpg"></p>
-<h3 id="小组报告："><a href="#小组报告：" class="headerlink" title="小组报告："></a>小组报告：</h3><p>讨论课需要录音嵌入。<br><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%BE%E7%A8%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/%E5%B0%8F%E7%BB%84%E6%8A%A5%E5%91%8A.jpg"></p>
-<h2 id="线上学习："><a href="#线上学习：" class="headerlink" title="线上学习："></a><strong>线上学习：</strong></h2><p>· 刷够时长500分钟<br>· 有线上测试，拍照上传</p>
-<h2 id="实验："><a href="#实验：" class="headerlink" title="实验："></a><strong>实验：</strong></h2><p><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%BE%E7%A8%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/%E5%AE%9E%E9%AA%8C.jpg"></p>
-<p><strong>在超星平台上提交</strong>。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://moyuin-aka.github.io/2025/02/09/jia/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Moyuin">
-      <meta itemprop="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moyuin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/09/jia/" class="post-title-link" itemprop="url">家</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-09 15:17:36" itemprop="dateCreated datePublished" datetime="2025-02-09T15:17:36+08:00">2025-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-18 10:38:04" itemprop="dateModified" datetime="2025-02-18T10:38:04+08:00">2025-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="家"><a href="#家" class="headerlink" title="家"></a>家</h1><h2 id="回家"><a href="#回家" class="headerlink" title="回家"></a>回家</h2><p><strong>奶奶得去看病，明天我要陪她去爸妈家。</strong><br>奶奶脖颈痛很久了，耳朵也痛，声带又渐渐嘶哑起来，一点音都没有了。很不乐观。奶奶笑着说自己要变成聋哑人了，我不肯，拉着她去看病，姑妈说先去长沙看看。<br>父亲失业后有了空闲，正好可以开车带奶奶去长沙湘雅。但这意味着，我要先在爸妈家住一晚，第二天让父亲开车去湘雅。看完病后，还要回去几天，给外婆外公们拜年啊这类。  </p>
-<p>不过我不太想回去。我对父母没有很亲的关系，再加上之前发生的种种不快，我怕在那里多呆几天又滋生我对父母的厌恶感。<br>想少待一天是一天，忙完快点回校吧，也快开学了。</p>
-<hr>
-<p><strong>突然很想吐露一下自己的不快。浅浅抱怨一下吧。</strong></p>
-<h2 id="生日"><a href="#生日" class="headerlink" title="生日"></a>生日</h2><p><strong>我想起去年的生日。</strong><br><strong>提前预告，满怀期待，专程回家，结果得到的却是——</strong>  </p>
-<blockquote>
-<p>“你生日不代表今天你优先。”  </p>
-</blockquote>
-<p><strong>无人在意，无人在乎。</strong><br>我自己掏钱买了生日蛋糕，一个人躺在没有铺床的“我的房间”里，被寒冷包裹，一个人打车去高铁站回学校。</p>
-<p>我不想去。<br>那里，不是家。  </p>
-<p>我理解成年人忙碌，我理解生活的现实。<br>但我也想，哪怕一次，成为一个可以<strong>随意撒娇的孩子</strong>。<br>我也想，在生日这一天，自己可以被优先考虑。<br>我知道，生日并不是重要的东西，我理解一切，但那天，我想做个孩子。  </p>
-<p><strong>我想收到他们的礼物，一起吃蛋糕，唱生日歌，戴生日帽，吹蜡烛，许愿。</strong><br>那一刻，哪怕是假象，也让我有希望，哪怕是短暂的梦，也让我相信愿望会实现。<br><strong>毕竟，他们曾经说过，生日这天，我优先。</strong>  </p>
-<p>但实际的情景是，所有人都不在意。<br><strong>那我回去，又有什么意义呢？</strong><br>我早已习惯独立，冷漠，孤独，疲惫。<br>我理解成年人的利益交换，也知道公理不是靠嘴说就能实现的。<br><strong>但就生日这一天，我想任性。</strong>  </p>
-<hr>
-<h2 id="高三"><a href="#高三" class="headerlink" title="高三"></a>高三</h2><p><strong>我想起高三的时候。</strong><br>我每天都被压力压得喘不过气，看着数学物理的试卷毫无起色，化学生物成绩不尽人意，语文英语停滞不前，<strong>与梦校之间的距离，越来越远。</strong>  </p>
-<p>我依旧撑着自己。  </p>
-<p>我跟奶奶说，<strong>每天骑单车回家太累，能不能租个房子？</strong><br>又担心一个人住会错过上课时间，不想带电子产品干扰学习，<strong>于是让奶奶来陪我，给我做饭，叫我起床。</strong>  </p>
-<p>可是在学校里，看着别人的父母给他们送饭，带他们出去吃好吃的，打电话嘘寒问暖……<br>我心里总是有些悲伤。  </p>
-<blockquote>
-<p><strong>爸爸妈妈什么时候会给我打电话？</strong><br><strong>爸爸妈妈会不会给我发零花钱，让我多吃点好的？</strong><br><strong>爸爸妈妈会不会抽空开车来看我，给我一个惊喜？</strong>  </p>
-</blockquote>
-<p>答案是——<strong>没有。</strong>  </p>
-<p>甚至，后来我才知道，他们一直在研究，我到底能不能考上本科。<br><strong>一本的学校？他们甚至怀疑我是否考得上。</strong>  </p>
-<p>我只觉得<strong>荒谬，又悲哀。</strong><br>我在笑自己，<strong>为什么要把感情托付给两个从未主动了解过我的人？</strong>  </p>
-<p>他们甚至不知道我喜欢吃什么，穿什么，用什么，连我的成绩都不了解，连我的兴趣爱好都一无所知。<br><strong>那这，所谓父母和陌生人有什么区别…</strong>  </p>
-<p>我一直安慰自己，<strong>他们工作忙，他们要养家，他们要照顾弟弟。</strong><br>可是，现在我上了大学，<strong>我还是在安慰自己。</strong><br>他们从没给我发过生活费，零花钱都没有，甚至没问过我缺什么，有没有受委屈。<br>他们还拿走了我的升学红包，甚至<strong>还在觊觎我的比赛奖金，说是“补贴家用”。</strong>  </p>
-<hr>
-<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p><strong>奶奶总是让我理解父母。</strong><br>我爱奶奶，我听奶奶的话。<br>但这一点，<strong>我很难听下去。</strong>  </p>
-<p>奶奶说，<strong>以后有困难，找爸妈。</strong><br>可我宁愿去找姑妈，也不想找他们。  </p>
-<p><strong>我小时候就对去父母家有抵触感了。</strong><br>回爷爷奶奶家，我很开心，因为那里是家。<br>去姑妈家，我也很开心，因为姑妈家很好很好。<br>但去爸妈家……我知道自己“应该”去，可心里总是有种说不出的抵触感。  </p>
-<p>奶奶总是想去父母家，说是想<strong>照顾弟弟，看看爸爸</strong>。<br>可我知道，<strong>弟弟对奶奶很生疏，他只是把奶奶当作一个能让他玩手机的“提手机机器”而已。</strong><br>奶奶在意的爸爸，也没怎么真正关心过她，没有主动给奶奶打过电话，回家也只是自顾自的打魔兽，不和奶奶说说话。<br><strong>那为什么她总是要去“照顾”他们？</strong>  </p>
-<p>或许是我太在乎奶奶。<br>不过我不喜欢待在那里。<strong>从那一刻的失望起，我确定了而已。</strong>  </p>
-<hr>
-<h2 id="我不想回家…"><a href="#我不想回家…" class="headerlink" title="我不想回家…"></a>我不想回家…</h2><p><strong>我其实想一直不去。</strong>  </p>
-<p>我宁愿假期去姑妈家、爷爷奶奶家，<strong>都不想待在父母家。</strong>  </p>
-<p>那里离学校最近，坐高铁只要<strong>10分钟</strong>，但却是离我最远的地方。  </p>
-<p>奶奶总是问我什么时候去父母家，我很想告诉她——  </p>
-<blockquote>
-<p><strong>我不想回那里，一刻都不想停留。</strong>  </p>
-<p><strong>假期结束前，我只想直接回学校。</strong>  </p>
-</blockquote>
-<p>只是，我不想再睡在那个<strong>没有收拾的床，发黄的枕头，冰冷的薄被子，乱放杂物的“我的房间”了。</strong></p>
-<hr>
-<h2 id="只是…"><a href="#只是…" class="headerlink" title="只是…"></a>只是…</h2><p>虽然那里很冷。<br><strong>但是毕竟那一直是家。虽然冷，但那毕竟是一个住的地方</strong>。</p>
-<h2 id="后日谈"><a href="#后日谈" class="headerlink" title="后日谈"></a>后日谈</h2><h3 id="确诊"><a href="#确诊" class="headerlink" title="确诊"></a>确诊</h3><p>奶奶最终被确诊为早期喉癌，在湘雅诊断后转去南华住院了，在那里有我姑母照顾也比在长沙住院好一些。</p>
-<p><img src="/images/home/%E7%BB%93%E6%9E%9C.jpg" alt="结果"><br>父亲也开车，当周转司机，当一个尽职尽责的儿子。这几天一直在株洲和长沙周转，每天早上就开车，还给奶奶送饭送菜，陪奶奶做完检查后又晚上开车回去。<br>我就做呆在长沙的陪护，父亲去忙检查的事情的时候，我就陪着奶奶，给奶奶做个翻译。之前是奶奶说话声音太小做扩声器，现在就是看手语和比划做转译器。父亲说有我在奶奶身边他会安心很多，这也是罕见的<strong>父亲对我说我让他安心的时候。</strong></p>
-<p>我也开始觉得父亲挺辛苦的。我的性格与习性和父亲很相似，虽然没有一起生活超过一个月过吧，但是我还是借着基因遗传了很多他的性格，比如懒惰，拖拉，悲观，利己。哦对了，最重要的还是重视亲情，至少对待亲情方面不会无所谓。</p>
-<p>或许是长大了一点吧？…也许吧。之前还是失望太多，导致一点点夸奖都显得弥足珍贵。又或许是父亲也长大了一些，我能理解他，那些事情换我去做，估计我表现的和父亲应该大差不差。有时候我也觉得，<strong>父亲是我长大后的一个幻影。</strong></p>
-<h3 id="返校"><a href="#返校" class="headerlink" title="返校"></a>返校</h3><p>诊断结果出来后，和医生聊了治疗方案，鉴于奶奶的特殊情况加二次癌症，在原癌症区域做放化疗还是不可能的，于是说了考虑靶向治疗。<br>啊哈，高中生物的时候学的那么多东西，靶向治疗，单克隆抗体，细胞免疫什么的算是终于有了一些实感。<br>交流完后打算转院去衡阳了，南华那边给出的治疗方案也是靶向治疗，而且衡阳那边还有姑妈照应着，我和父亲就没有那么累了。</p>
-<p>恰好也快开学了，我让父亲把我丢到长沙，过了几天单人寝的日子。<br>单人寝是很爽，也很孤独。我倒不是那种没人聊天就特别无聊的E人，只是感觉一个人的寝室就算开了空调也冷得很。我的寝室关系不错，目前我在大学里能说得上话的朋友也就舍友了。<br>离开学的日子越近，学校的人也越来越多。或许很快我就会怀念现在的这份孤独了。<br><strong>抱怨到这里。我们新学期见吧</strong>。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://moyuin-aka.github.io/2025/02/06/shen-tou-xue-xi-ji-hua/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Moyuin">
-      <meta itemprop="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moyuin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/02/06/shen-tou-xue-xi-ji-hua/" class="post-title-link" itemprop="url">渗透学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-02-06 22:11:25" itemprop="dateCreated datePublished" datetime="2025-02-06T22:11:25+08:00">2025-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-18 10:49:05" itemprop="dateModified" datetime="2025-02-18T10:49:05+08:00">2025-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">CTF学习</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>785</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="🛡-CTF-学习计划"><a href="#🛡-CTF-学习计划" class="headerlink" title="🛡 CTF 学习计划"></a>🛡 CTF 学习计划</h1><p>GPT给的</p>
-<h2 id="📌-第-1-阶段：环境搭建"><a href="#📌-第-1-阶段：环境搭建" class="headerlink" title="📌 第 1 阶段：环境搭建"></a>📌 <strong>第 1 阶段：环境搭建</strong></h2><table>
-<thead>
-<tr>
-<th>任务</th>
-<th>推荐资源</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>安装 Kali Linux（VMware&#x2F;VirtualBox）</td>
-<td><a target="_blank" rel="noopener" href="https://www.kali.org/">Kali 官方网站</a></td>
-</tr>
-<tr>
-<td>配置 Web 渗透工具（Burp Suite, sqlmap）</td>
-<td><a target="_blank" rel="noopener" href="https://portswigger.net/burp">Burp Suite 文档</a>, <a target="_blank" rel="noopener" href="https://github.com/sqlmapproject/sqlmap">sqlmap GitHub</a></td>
-</tr>
-<tr>
-<td>安装 pwn 调试工具（gdb, pwndbg, ropper）</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg">pwndbg GitHub</a>, <a target="_blank" rel="noopener" href="https://github.com/sashs/Ropper">Ropper 工具</a></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="🔥-第-2-阶段：Web-渗透基础"><a href="#🔥-第-2-阶段：Web-渗透基础" class="headerlink" title="🔥 第 2 阶段：Web 渗透基础"></a>🔥 <strong>第 2 阶段：Web 渗透基础</strong></h2><table>
-<thead>
-<tr>
-<th>任务</th>
-<th>推荐资源</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>在 DVWA 练习 SQL 注入，使用 sqlmap</td>
-<td><a target="_blank" rel="noopener" href="http://www.dvwa.co.uk/">DVWA 靶场</a>, <a target="_blank" rel="noopener" href="https://github.com/sqlmapproject/sqlmap/wiki">sqlmap 教程</a></td>
-</tr>
-<tr>
-<td>学习 XSS（反射型、存储型、DOM XSS）</td>
-<td><a target="_blank" rel="noopener" href="https://xsshunter.com/">XSS 平台 xsshunter</a>, <a target="_blank" rel="noopener" href="https://owasp.org/www-community/attacks/xss/">OWASP XSS Guide</a></td>
-</tr>
-<tr>
-<td>练习 Webshell 上传绕过</td>
-<td><a target="_blank" rel="noopener" href="https://www.hackthebox.com/">Hack The Box Webshell 题目</a></td>
-</tr>
-<tr>
-<td>学习 SSRF（服务器端请求伪造）</td>
-<td><a target="_blank" rel="noopener" href="https://portswigger.net/web-security/ssrf">SSRF 实战教程</a></td>
-</tr>
-<tr>
-<td>在 HackTheBox 里尝试一个 Web 靶机</td>
-<td><a target="_blank" rel="noopener" href="https://www.hackthebox.com/">HackTheBox 入口</a></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="💀-第-2-阶段：Pwn-漏洞利用"><a href="#💀-第-2-阶段：Pwn-漏洞利用" class="headerlink" title="💀 第 2 阶段：Pwn 漏洞利用"></a>💀 <strong>第 2 阶段：Pwn 漏洞利用</strong></h2><table>
-<thead>
-<tr>
-<th>任务</th>
-<th>推荐资源</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>学习基础缓冲区溢出（Buffer Overflow）</td>
-<td><a target="_blank" rel="noopener" href="http://pwnable.kr/">pwnable.kr 官网</a></td>
-</tr>
-<tr>
-<td>使用 gdb 调试 pwnable.kr 的基础题</td>
-<td><a target="_blank" rel="noopener" href="https://sourceware.org/gdb/">GDB 使用手册</a></td>
-</tr>
-<tr>
-<td>学习格式化字符串漏洞（Format String）</td>
-<td><a target="_blank" rel="noopener" href="https://ctftime.org/writeups">格式化字符串漏洞 CTF 题解</a></td>
-</tr>
-<tr>
-<td>练习 ROP，利用返回地址执行 shell</td>
-<td><a target="_blank" rel="noopener" href="https://ropemporium.com/">ROP Emporium 练习</a></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="🚀-第-3-阶段：真实漏洞研究"><a href="#🚀-第-3-阶段：真实漏洞研究" class="headerlink" title="🚀 第 3 阶段：真实漏洞研究"></a>🚀 <strong>第 3 阶段：真实漏洞研究</strong></h2><table>
-<thead>
-<tr>
-<th>任务</th>
-<th>推荐资源</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>在 Exploit-DB 找一个 CVE 漏洞复现</td>
-<td><a target="_blank" rel="noopener" href="https://www.exploit-db.com/">Exploit-DB</a></td>
-</tr>
-<tr>
-<td>学习 CVE 漏洞利用的 PoC 编写</td>
-<td><a target="_blank" rel="noopener" href="https://www.cvedetails.com/">CVE Details</a></td>
-</tr>
-<tr>
-<td>尝试写自己的简单 Exploit</td>
-<td><a target="_blank" rel="noopener" href="https://www.offensive-security.com/metasploit-unleashed/exploit-development/">Python 编写 Exploit 教程</a></td>
-</tr>
-<tr>
-<td>挑战 HackTheBox 里的真实靶机</td>
-<td><a target="_blank" rel="noopener" href="https://www.hackthebox.com/">HackTheBox 挑战列表</a></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="🎯-学习方法建议"><a href="#🎯-学习方法建议" class="headerlink" title="🎯 学习方法建议"></a>🎯 <strong>学习方法建议</strong></h2><ul>
-<li><strong>每个阶段至少完成 3-5 个任务后再进入下一阶段</strong></li>
-<li><strong>遇到问题时，优先查找 Writeup（题解），然后自己尝试</strong></li>
-<li><strong>可以在博客或笔记中记录每个阶段的收获</strong></li>
-<li><strong>如果有不懂的，去 CTFHub &#x2F; XCTF 社区交流</strong></li>
-<li><strong>最重要的是，动手实操，不只是看理论！</strong></li>
-</ul>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://moyuin-aka.github.io/2025/01/19/cun-ge-li-xi-dai-ma/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Moyuin">
-      <meta itemprop="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moyuin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/01/19/cun-ge-li-xi-dai-ma/" class="post-title-link" itemprop="url">存个利息代码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-01-19 01:50:16" itemprop="dateCreated datePublished" datetime="2025-01-19T01:50:16+08:00">2025-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-18 10:54:18" itemprop="dateModified" datetime="2025-02-18T10:54:18+08:00">2025-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">日常学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%94%9F%E6%B4%BB%E4%BB%A3%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">生活代码</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="这只是一个存档，用来存储我的支付宝的小荷包的计划收益"><a href="#这只是一个存档，用来存储我的支付宝的小荷包的计划收益" class="headerlink" title="这只是一个存档，用来存储我的支付宝的小荷包的计划收益"></a>这只是一个存档，用来存储我的支付宝的小荷包的计划收益</h1><p>目前想的是一天1元开始0.03元累加的稳定存储，先这样开始吧，运行代码看看一年后200元&#x2F;分的收益+每个月200的固定存储+每日存储看看一年后能存多少钱。<br>啊，如果有什么奖金啊我也会存进去的，看看能不能攒出一个switch2或者其他电子产品什么的…<br>或者明年买GTA6的钱？或者下一张GIDLE专辑的钱？<br>先一年开始吧，留点钱比什么都有用。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;chcp 65001&quot;</span>);<br>    <span class="hljs-type">double</span> initial_input = <span class="hljs-number">1</span>; <span class="hljs-comment">// 初始存入金额</span><br>    <span class="hljs-type">double</span> total_sum = <span class="hljs-number">0</span>;     <span class="hljs-comment">// 总存款</span><br>    <span class="hljs-type">int</span> month = <span class="hljs-number">1</span>;            <span class="hljs-comment">// 当前月份</span><br>    <span class="hljs-type">double</span> monthly_input = <span class="hljs-number">0</span>; <span class="hljs-comment">// 本月存款</span><br>    <span class="hljs-type">double</span> remain = <span class="hljs-number">0</span>;        <span class="hljs-comment">// 剩余余额</span><br>    <span class="hljs-type">double</span> per_rate = <span class="hljs-number">0.03</span>;   <span class="hljs-comment">// 每月递增比例</span><br>    <span class="hljs-type">double</span> package_interest = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">double</span> monthly_expense = <span class="hljs-number">2000</span> - <span class="hljs-number">150</span> - <span class="hljs-number">200</span>;      <span class="hljs-comment">// 每月固定支出（生活费、订阅费等）</span><br>    <span class="hljs-type">double</span> daily_food_expense = (<span class="hljs-number">5</span> + <span class="hljs-number">18</span> + <span class="hljs-number">20</span>) * <span class="hljs-number">30</span>; <span class="hljs-comment">// 每月餐费支出</span><br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;初始存入金额为 %.2f, 每月递增比率为 %.2f\n&quot;</span>, initial_input, per_rate);<br>    cout &lt;&lt; endl;<br><br>    <span class="hljs-type">bool</span> remain_decreases = <span class="hljs-literal">false</span>; <span class="hljs-comment">// 用于标记remain是否开始减少</span><br>    <span class="hljs-type">bool</span> negative_remain = <span class="hljs-literal">false</span>;  <span class="hljs-comment">// 用于标记是否出现负余额</span><br><br>    <span class="hljs-comment">// 模拟365天</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">365</span>; i++)<br>    &#123;<br>        total_sum += initial_input;     <span class="hljs-comment">// 总存款累计</span><br>        monthly_input += initial_input; <span class="hljs-comment">// 本月存款累计</span><br>        initial_input += per_rate;      <span class="hljs-comment">// 增加递增金额</span><br>        <span class="hljs-comment">// 计算收益：每200元存款产生0.01元收益</span><br>        <span class="hljs-type">double</span> current_interest = <span class="hljs-built_in">floor</span>(total_sum / <span class="hljs-number">200</span>) * <span class="hljs-number">0.01</span>; <span class="hljs-comment">// 满200元的部分计算收益</span><br>        total_sum += current_interest;                           <span class="hljs-comment">// 收益加到存款里</span><br>        monthly_input += current_interest;<br>        package_interest+=current_interest;<br><br>        <span class="hljs-comment">// 每个月结束后，计算剩余余额</span><br>        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">30</span> == <span class="hljs-number">0</span> &amp;&amp; i != <span class="hljs-number">0</span>)<br>        &#123;<br>            total_sum += <span class="hljs-number">200</span>;                                                             <span class="hljs-comment">// 每月存入两百</span><br>            <span class="hljs-type">double</span> current_remain = monthly_expense - monthly_input - daily_food_expense; <span class="hljs-comment">// 当前月剩余金额</span><br>            remain += current_remain;                                                     <span class="hljs-comment">// 累计剩余余额</span><br><br>            <span class="hljs-comment">// 检查剩余余额是否减少</span><br>            <span class="hljs-keyword">if</span> (!remain_decreases &amp;&amp; remain &gt; <span class="hljs-number">0</span> &amp;&amp; current_remain &lt; <span class="hljs-number">0</span>)<br>            &#123;<br>                remain_decreases = <span class="hljs-literal">true</span>;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;从第 %d 个月开始，剩余余额开始减少。\n&quot;</span>, month);<br>            &#125;<br><br>            <span class="hljs-comment">// 检查余额是否变为负数</span><br>            <span class="hljs-keyword">if</span> (!negative_remain &amp;&amp; remain &lt; <span class="hljs-number">0</span>)<br>            &#123;<br>                negative_remain = <span class="hljs-literal">true</span>;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;第 %d 个月，剩余余额变为负数。\n&quot;</span>, month);<br>            &#125;<br><br>            cout &lt;&lt; <span class="hljs-string">&quot;第 &quot;</span> &lt;&lt; month &lt;&lt; <span class="hljs-string">&quot; 个月的存入金额为: &quot;</span> &lt;&lt; initial_input &lt;&lt; <span class="hljs-string">&quot; 本月所有存入总额为: &quot;</span> &lt;&lt; monthly_input &lt;&lt; endl;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;本月餐费为 %.2f\n&quot;</span>, monthly_expense - monthly_input);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;剩余余额为 %.2f\n&quot;</span>, remain);<br><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;目前存入总金额为 %.2f\n&quot;</span>, total_sum + <span class="hljs-number">0.04</span>);<br>            cout &lt;&lt; endl;<br><br>            month++;<br>            monthly_input = <span class="hljs-number">0</span>; <span class="hljs-comment">// 重置本月存款</span><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// printf(&quot;总存款金额为: %.2f\n&quot;, total_sum);</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;小荷包带来的收益为： %.2f\n&quot;</span>,package_interest);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;本年度未存款的可支配的支出为: %.2f\n&quot;</span>, <span class="hljs-number">2000</span> * <span class="hljs-number">12</span> - total_sum);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;每日存入金额最终为: %.2f\n&quot;</span>, initial_input);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;最终剩余余额为: %.2f\n&quot;</span>, remain);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://moyuin-aka.github.io/2025/01/13/pi-bei/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Moyuin">
-      <meta itemprop="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moyuin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/01/13/pi-bei/" class="post-title-link" itemprop="url">疲惫</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-01-13 22:03:45" itemprop="dateCreated datePublished" datetime="2025-01-13T22:03:45+08:00">2025-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-18 10:54:03" itemprop="dateModified" datetime="2025-02-18T10:54:03+08:00">2025-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="大一上期末！！"><a href="#大一上期末！！" class="headerlink" title="大一上期末！！"></a><strong>大一上期末！！</strong></h1><h2 id="程序设计喜被卡绩点，但是…-程序设计"><a href="#程序设计喜被卡绩点，但是…-程序设计" class="headerlink" title="程序设计喜被卡绩点，但是… 程序设计"></a><strong>程序设计喜被卡绩点，但是…</strong> 程序设计</h2><p><em>88，哈哈，总评 88….</em></p>
-<p>虽然期末一考完就知道自己错了两个概念类的选择题，就知道自己程序设计这分数完蛋了，但是一看到程序设计88的总评我还是破防了…难过一天。<br>但又怎么样呢，我能说什么呢？。。。。<br><img src="/images/tired/c++_design.png" alt="成绩分布"><br>才大一，无所谓了…吗？</p>
-<p>或许我沿袭着高中的思路，成为了所谓优绩主义裹挟的大学生…<br><strong>没满绩点但又怎样呢</strong>？我一直在这样问自己…..<br>我已经来到了大学，按道理来说，成绩应当不成为评价自己的方式啊。…况且已经有人告诉我，88分已经是很高的成绩了…<br>我的完美主义总是在这个时候作祟。在评价体系中，当我发现我不是前排，或者不是顶尖那一批，即便我总是呆在那个中上的等级，但我总觉得自己好像，不够好，不够完美啊….<br><strong>我在安慰自己</strong>，我说，我才大一，这点差距完全可以追平，又不是天堑，一切都还有可能。<br><strong>但我又感觉，我其实不需要安慰自己</strong>。我完全可以考完试后，丢掉这一切考试，专心做一些我感兴趣的事情…大学不是高中初中，我不需要再进行一次高考中考了，我没必要因为成绩而难过呀。就算追不平又怎样？保研不行我就考研，考研不想就去走选调考公，考公不感兴趣就直接去找工作赚钱去，只是想说，<strong>我为什么要拘泥于成绩里，我为什么还为没考到好成绩，甚至只是因为没有满绩点而难过啊？</strong></p>
-<p>程序设计我的大作业拿到了最高分（92分的那一项，其实应该是96分，我把我的4分分享给了我的组员），那个东西才是我收获最大的。就这个<a target="_blank" rel="noopener" href="https://github.com/Moyuin-aka/LibrarySystem_HNU_InformationSecurity2024_2401">自己学着写的图书管理系统，AI写框架，自己填功能修bug</a>。这个项目我学到的东西，我学会了git怎么用，自己知道了markdown写报告，我还学了点cmake，甚至我想去尝试一下sql数据库，搞懂了不同环境下的潜在的中文不兼容性，然后自己凭着兴趣创了这个博客…虽然微不足道，但这些东西比起拿着电脑迷迷糊糊去坐在那里上课看着老师讲一大坨东西发呆，然后刷着oj去自学,在实践意义上，有用的多得多了。<br>我已经收获到了我要学的东西，我只是在反问自己：<strong>我为什么因为成绩要难过啊？</strong><br>我只是想告诉自己吧，我很优秀。但我应该自己也要知道我已经很优秀了…<strong>不需要靠着满绩</strong>来证明自己优秀…我没必要受着优绩主义的压力下，<strong>没必要也不应该</strong>将大学又过成一个为分数焦虑的高中，编程是我一直想学的东西，兴趣会驱动我继续向前走的。</p>
-<p>一切尘埃落定了。<br>又不是挂科。又不用重新考。我学完了，我可以去学下一门了。<br>专心，下一门吧。心定。</p>
-<h2 id="期末复习好累！！-高数"><a href="#期末复习好累！！-高数" class="headerlink" title="期末复习好累！！ 高数"></a><strong>期末复习好累！！</strong> 高数</h2><p><em>哈哈，但是！我考完了！！</em></p>
-<p>高数好难，我会的东西我还算错了！！我连设微分方程特解都下意识设错了！！积分我还漏项了！！（那个积分好难！！）我第一题求渐近线都忘记怎么求了！！那个破伪装成积分题的物理题我也受够了！！我列出了算式，但我算式好像有点问题呀！！</p>
-<p><em>虽然考成了依托构式，但是已经考完了！！</em></p>
-<p><strong>已经考完了，就代表着一切结束了！对吧！！！！</strong><br>大家都说高数难我就放心了，这一门心平气和吧。</p>
-<p>虽然我知道我的数学一直都是这样，<strong>从初中开始我的数学就是一坨</strong>…但感觉大学的高数理解了概念后写东西刷题其实都差不多，甚至因为没有很多思维拓展类的东西反而还更简单点，唯一难点可能就是积分你不知道怎么凑吧…</p>
-<p>我也不知道自己是数学分析思维薄弱还是咋，我很难把问题数学化，除非我自己刷过很多题然后顺着题来就着写思路…还好，大学这样写应付期末考试也够了。<br>我自己认为我绝对不是数学强的人，就是因为这一点…但不代表我数学弱啊，会写的计算题我还是推的出思路的，这次大家都说难的不定积分和定积分我都求出来了（虽然不定积分漏了一个常数项，被自己无语到了），我不知道这属于什么方面的数学能力….<br>不太适合数学实践和做题创新，但当个做题的计算器还是很不错的！</p>
-<p>就这样吧，群里大家都在发<em>老师菜菜捞捞</em>，我没发，算了算，其实写对的也应该有60分了…也没必要为了分数去求情啥的，没有哪个老师会看到学生59分不捞捞多给点平时分吧？（毕竟学生不及格那麻烦事可太多了…）<br>静候。</p>
-<h2 id="纯自学到期末发现啥也不会怎么办！-线代"><a href="#纯自学到期末发现啥也不会怎么办！-线代" class="headerlink" title="纯自学到期末发现啥也不会怎么办！ 线代"></a><strong>纯自学到期末发现啥也不会怎么办！</strong> 线代</h2><p><em>没关系，线代速成课救你狗命…<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ey4y147xn/">推荐框框老师…</a></em></p>
-<h3 id="关于线代期末"><a href="#关于线代期末" class="headerlink" title="关于线代期末"></a>关于线代期末</h3><p>学期开头线代老师的浓厚湖南农村口音就给我来了当头一棒，这是<strong>导火索</strong>。<br>线代教材编的一坨根本看不懂在讲什么，这是<strong>直接原因</strong>。<br>然后我就走上了线代纯自学的道路…上课？周四的早八，本来就不想去上课，还是早八，非常没有激情…<br>每天周三晚上都要绝望地想到明天是<strong>线代周四早八</strong>。</p>
-<p>本来看的是<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Et421E7jk/">一高数</a>老师的自学课，老师讲的非常好，<small><em>为我的4小时速成打下了坚实的基础…</em></small>，唯一的缺点可能就是涉及题型比较少，导致我大多数是懂了公式怎么用…<br>后来实在觉得我不理解线性代数这玩意，特别是向量空间那一章节，我又尝试用<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16Z4y1U7oU">Gilbert Strang</a>这位MIT教授的课来辅助我理解…嗯，理解了，结合Geogebra的3D计算器，我倒是知道那一堆莫名其妙的公式是怎么来的了…也对线代是个几何的东西有了一点点模糊的概念，更能理解矩阵了…<br><strong>然后我开始做往年期末题，然后悲伤地发现，这对我的期末考试不太有作用。</strong><br>我只是在理解线代，但是期末考试告诉我，我需要做题，需要记得那些东西来做题，需要变换成我熟悉的形式做题。<br><strong>然后我投降了…像无数个抱佛脚的学生一样，我打开了4小时速成课程，开始看题型，解题技巧…</strong> <a target="_blank" rel="noopener" href="https://1drv.ms/o/c/710350be48682818/EuYPgNiLM95FmpclHifiq_MBPq2eDeFJHwAVrwKt7TJOKw?e=SwqLuM">这是我的做题笔记狼狈痕迹</a><br>还好，结局是好的。也许我确实幸运，线代考的很简单，我甚至提前一小时就写完了（都是我看的速成课的题目，做的相当快），然后剩下一小时就是反复重新算行列式和矩阵乘法，生怕算错…最后实在算了十遍后确认无误后，提前十分钟交卷了。</p>
-<p>或许这线代中我的表现就像我之前看到的那一句话一样吧。“中国大学生的期末，就是一个学期的努力，考前几天的焦虑，考前一天的速记和考场上的看运气。”<br>哈哈，又看到一句“前十七周告诉你我是大学生，第十八周告诉你我为什么是大学生。”</p>
-<p>不过一天复习一门还是特别累的…十一点高数考完，睡到下午两点<small>(<em>大学生特有的特爱睡觉</em>)</small>。然后打开手机，焦虑刷手机，看到有人推荐课程，然后下午四点开始看，走走停停学到晚上十一点…<br>还是很奇妙的，短短五小时的课程知识量吸收那么多，学之前是线性方程组都不知道怎么求解的菜鸡，学之后我都可以提醒室友复习遗漏的东西了…压力果然还是足以驱动懒人的不可或缺的力啊。</p>
-<h3 id="关于线代老师…"><a href="#关于线代老师…" class="headerlink" title="关于线代老师…"></a>关于线代老师…</h3><h4 id="恶"><a href="#恶" class="headerlink" title="恶"></a>恶</h4><p>其实一开学我听着老师<em>亲切的</em>乡音我还是很抵触的…班上外省的同学立马反馈根本听不懂老师讲课，我倒是听得懂，但是他让我想起我小学一位数学老师，用方言讲课…然后那一次小学的数学成绩就开始急转直下，又如蝴蝶效应一般影响到了以后的数学学习兴趣…加上老师开学第一课就是念ppt，也不讲原理，我也看不懂线代教材的开局行列式怎么来的…学完一节课我感觉跟没学一样，让我内心还是很抵触的。厌屋及乌一般，对线代不感冒了，觉得学线代是一件很痛苦的事情…然后也觉得老师怎么这样，然后对老师也有了偏见…<br><strong>其实不仅我这样，大家似乎也是这样。</strong><br>我经常看校园集市，能看到很多人的求助帖，其中很常见的就是关于老师选择的求助帖。<strong>我看见有人询问线代老师推荐</strong>，我本来想回复一位我觉得教学水平很高超，讲解很容易理解的老师<small>（给来HNU的学生推荐一下，是朱郁森老师）</small>,但是看见评论区像乐子人一般推荐我的这位线代老师的时候…其实内心很复杂。一方面，是我觉得他们很坏，给一个求助帖推荐这位讲话都让人听不懂的老师…另一方面，我也心里默认了，这位老师&#x3D;&#x3D;差老师。<br><strong>人是会被舆论一直影响下去的，这是一件很恐怖的事情。</strong><br>我一开始只是对老师有一点点的不信任，但无伤大雅，这不影响我来上课的心情。<strong>但是看到大家都说这个老师极差的时候，我还是被舆论牵着走了。</strong><br>我也加入了评价的大众里，我对老师的恶意进一步了。<br>我也开始随波逐流，一同攻击这位老师。我向室友明里暗里地抱怨老师实在是太差，影响了我的线代学习…甚至我上课的动力也被影响，一看到那位老师的名字就感觉不舒服…</p>
-<p><strong>但是，真的是这样吗？这位老师，实在是不堪吗？这位老师，是我期末线代不会写的元凶吗？</strong></p>
-<p><strong><big>傲慢催生退步，这是个很简单的道理。</big></strong></p>
-<h4 id="清醒"><a href="#清醒" class="headerlink" title="清醒"></a>清醒</h4><p>一切只是发生在一个上午。元旦之后，我的（非同专业）室友突然问我：“你知道你每天抱怨的那个线代老师去世了吗？”<br>一切太突然，我根本没有思想准备。在我的认识里，老师只是请了两周的假，我根本不知道，也没有去在乎老师的身体的身体状态。<br>和我一起上课的室友告诉我，她发现老师上一次的课就很不对劲了，平时说话一惊一乍的很大声的老师，那一次上课却一直坐在讲台旁的凳子上，声音也很小，她根本听不清。大家都以为老师只是在这流感多发的季节生了流感，这一切很正常，我们都知道，老师在感冒好了之后就会回来继续教学的，然后<strong>我们会继续过着自学听线代的日子</strong>。</p>
-<p>但是不可能了。助教正式发来通知。<br><img src="/images/tired/%E7%BA%BF%E4%BB%A3%E5%8A%A9%E6%95%99%E9%80%9A%E7%9F%A5.png" alt="助教说"><br><img src="/images/tired/%E5%91%A8%E8%80%81%E5%B8%88%E5%8E%BB%E4%B8%96.jpg" alt="学生与另一位老师的聊天记录"></p>
-<p>其实知道的那一瞬间，我就清醒起来了。<br>我想到我的室友跟我说的话。“我觉得周老师其实没有那么差，他很好的。”过去我被傲慢的认知给蒙蔽，没把这句话当回事，但现在我却能清晰想起来这句话。<br><strong>为什么？</strong><br>我这么问自己。<br>或许，是清醒了吧。<br>犹如被浇上一盆冷水，所有人都开始审视自己了。也许是死者为大带来的影响，也许是真的认识到了自己过去的错误…<br>但不管怎么样，大家都清醒了。<br><strong>但不管怎么样，周老师已经不在了。</strong></p>
-<p>人总是被舆论牵着走，打破这个局面的，往往是像这样，死生一般重大的事情。<br><strong>人，要有自己的判断。人，要清醒下去。</strong><br>这也是周老师真正给我上的，我在线代老师中唯一真正学到的，也是我一生中或许学到的最重要的道理。</p>
-<p>最后，附上一位周老师学生的悼唁吧。<br><img src="/images/tired/%E5%91%A8%E8%80%81%E5%B8%88%E5%AD%A6%E7%94%9F.png" alt="一位周老师的学生"><br>愿大家都平安顺遂，愿癌症不再带去任何一个人的生命。<br>周老师，一路走好。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://moyuin-aka.github.io/2025/01/11/di-yi-pian/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Moyuin">
-      <meta itemprop="description" content="在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moyuin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/01/11/di-yi-pian/" class="post-title-link" itemprop="url">第一篇</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-01-11 02:13:25" itemprop="dateCreated datePublished" datetime="2025-01-11T02:13:25+08:00">2025-01-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-18 10:38:00" itemprop="dateModified" datetime="2025-02-18T10:38:00+08:00">2025-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>突发奇想，大半夜的，点开了一位学长的博客，然后想着自己也能不能写一个博客…然后就这样跟着教程开始了。</p>
-<p>可能有人说，我怎么半夜三点突然说要写个博客，还要搭个网站…，我只能说，有时候人就是这么无聊吧，一个人坐在可以通宵的自习室里，只有一个人的时候也因为环境而睡不着，就会做些对现在“没有意义”的事情…</p>
-<p>有人说，为什么不去期末复习？下一周就是期末周，有很多期末考试….只能说实在是没兴趣将时间花在复习上了，高三那个复习已经让我认清了，连靠着老师一轮二轮到三轮，我始终是：题目知识点会的都会写，不会的基本都不会写，更别提到了大学了…上课认真听应付那个高数题（我上课听高数听的认真些），期末基本都会…但线代实在是靠自学，加上自己没什么驱动力，线代学的一坨大便。倒也不至于挂科什么的，但就是写起来不是很爽，如此循环，没了兴趣。</p>
-<p>然后就开始做有兴趣的事情了。随手打开一篇之前打校CTF无意间搜到HNU信安学长的博客 “我为何想建立HNU信安交流群” 。见： <a target="_blank" rel="noopener" href="https://mo-xiaoxi.github.io/2016/05/30/HnuSec/">学长博客链接</a>，再看一遍，有了好多新的收获。</p>
-<p>就说里面简单的一例，学长说HNU的信安学习氛围不足，我也切身感受到了…不像ACM那边，校训队加吴昊老师作为金牌教练的气氛烘托还进了几次world final，在HNU信安的CTF我连校队都没见到消息过…大家都是大一，看HNU的ACM好像很厉害，大家都在往那边发展去了，刷算法，做程序题，打codeforces啊牛客啊什么的…就连程序设计这门课程，有好几次作业都不像是基础题，像是从算法题里面摘下来给我们做的，一看老师讲解，一看是oier才常用的知识…哎，理解信安本来人数基数就少，招生也很少，只是为了学计算机的，或者来不了计科电气调剂来信安的…都来了。然后就发现，大家都对信安好像…没有概念？不能说没有兴趣，提到网安大家都是想到黑客，黑客很酷，也有兴趣，但真正来参与行动的，一起讨论CTF的，真的太少太少了…打场校赛，赛事群里100多号人，来打的新生就20多个人…大家都不愿意尝试，因为没接触过，甚至没了解过…因为没了解过，所以更不敢尝试了。然后带来的是信安氛围更不足的萧瑟…</p>
-<p>有点迷茫。我想试试CTF，因为我觉得它真的很有趣…但我又不知道我下一步往哪里走。我是信息安全专业的大学生，但我首先是个大学生，我得先保证我的课程任务，我不能落下什么…除此之外，孤独也是我都迷雾…我在学校里也没找到什么同年级的同好，又胆怯于主动社交于学长学姐（我承认这是我的一个缺点，但从小到大都是这样…），又找不到可以指引我走的可以交流的老师，真的很迷茫…我只能一遍遍的自己私下做一些CTF的练习，对，练习，不是训练，一点一点啜饮一些知识…</p>
-<p>我有时候也在想，我才大一，甚至才大一上册，对一切迷茫很正常，不必要太追求什么东西，该来的总是会来的。但我也在想，我既然是大一，那我也要好好看看大一我能做什么吧，多做一点，这样以后的空闲就更多一点（虽然可能是个无底洞了哈哈哈），然后我可以把这些空闲的时间，用来发呆，用来看AI写故事，用来呼呼大睡去梦里玩，甚至像这样做有兴趣的事情，一点一点做些我舒适的事情…一点一点收集我自己的小快乐。</p>
-<p>我还是像过去一样期待着未来。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
       }
     }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 
-        </div>
-          
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Moyuin</p>
-  <div class="site-description" itemprop="description">在这里记录我的技术栈和生活点滴...好像一个飘渺的人在游荡...</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+          
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
         
-          <span class="site-state-item-count">6</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/Moyuin-aka" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Moyuin-aka" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Moyuin\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/MyIcon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Moyuin's Blog</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Moyuin's Blog</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/Moyuin-aka" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/" title="数据结构课程注意事项">数据结构课程注意事项</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-18T02:42:59.000Z" title="发表于 2025-02-18 10:42:59">2025-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">注意事项</a></span></div><div class="content">数据结构课程注意事项课程考核总览 小组作业：· 个人小主题· 双匿名评分· ppt转pdf· 评分量表 小班讨论： 个人资料需要表达清楚，涉及算法用人能看懂的东西来写，像论文一样写。文字越多看的懂的人越少，善用图表，语言简练清晰。 小组报告：讨论课需要录音嵌入。 线上学习：· 刷够时长500分钟· 有线上测试，拍照上传 实验： 在超星平台上提交。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/02/09/sheng-huo/ji-lu/jia/" title="家">家</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-09T07:17:36.000Z" title="发表于 2025-02-09 15:17:36">2025-02-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a></span></div><div class="content">家回家奶奶得去看病，明天我要陪她去爸妈家。奶奶脖颈痛很久了，耳朵也痛，声带又渐渐嘶哑起来，一点音都没有了。很不乐观。奶奶笑着说自己要变成聋哑人了，我不肯，拉着她去看病，姑妈说先去长沙看看。父亲失业后有了空闲，正好可以开车带奶奶去长沙湘雅。但这意味着，我要先在爸妈家住一晚，第二天让父亲开车去湘雅。看完病后，还要回去几天，给外婆外公们拜年啊这类。   不过我不太想回去。我对父母没有很亲的关系，再加上之前发生的种种不快，我怕在那里多呆几天又滋生我对父母的厌恶感。想少待一天是一天，忙完快点回校吧，也快开学了。  突然很想吐露一下自己的不快。浅浅抱怨一下吧。 生日我想起去年的生日。提前预告，满怀期待，专程回家，结果得到的却是——    “你生日不代表今天你优先。”    无人在意，无人在乎。我自己掏钱买了生日蛋糕，一个人躺在没有铺床的“我的房间”里，被寒冷包裹，一个人打车去高铁站回学校。 我不想去。那里，不是家。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/" title="渗透学习">渗透学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-06T14:11:25.000Z" title="发表于 2025-02-06 22:11:25">2025-02-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CTF%E5%AD%A6%E4%B9%A0/">CTF学习</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E8%AE%A1%E5%88%92/">计划</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CTF/">CTF</a></span></div><div class="content">🛡 CTF 学习计划GPT给的 📌 第 1 阶段：环境搭建   任务 推荐资源    安装 Kali Linux（VMware&#x2F;VirtualBox） Kali 官方网站   配置 Web 渗透工具（Burp Suite, sqlmap） Burp Suite 文档, sqlmap GitHub   安装 pwn 调试工具（gdb, pwndbg, ropper） pwndbg GitHub, Ropper 工具    🔥 第 2 阶段：Web 渗透基础   任务 推荐资源    在 DVWA 练习 SQL 注入，使用 sqlmap DVWA 靶场, sqlmap 教程   学习 XSS（反射型、存储型、DOM XSS） XSS 平台 xsshunter, OWASP XSS Guide   练习 Webshell 上传绕过 Hack The Box Webshell 题目   学习 SSRF（服务器端请求伪造） SSRF 实战教程   在 HackTheBox 里尝试一个 Web 靶机 HackTheBox 入口    💀 第 2 阶段：Pwn...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/01/19/sheng-huo/za-tan/cun-ge-li-xi-dai-ma/" title="存个利息代码">存个利息代码</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-01-18T17:50:16.000Z" title="发表于 2025-01-19 01:50:16">2025-01-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%94%9F%E6%B4%BB%E4%BB%A3%E7%A0%81/">生活代码</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">这只是一个存档，用来存储我的支付宝的小荷包的计划收益目前想的是一天1元开始0.03元累加的稳定存储，先这样开始吧，运行代码看看一年后200元&#x2F;分的收益+每个月200的固定存储+每日存储看看一年后能存多少钱。啊，如果有什么奖金啊我也会存进去的，看看能不能攒出一个switch2或者其他电子产品什么的…或者明年买GTA6的钱？或者下一张GIDLE专辑的钱？先一年开始吧，留点钱比什么都有用。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172int main()&#123;    system(&quot;chcp 65001&quot;);    double initial_input = 1; // 初始存入金额    double total_sum = 0;     // 总存款    int month = 1;            //...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/01/13/sheng-huo/ji-lu/pi-bei/" title="疲惫">疲惫</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-01-13T14:03:45.000Z" title="发表于 2025-01-13 22:03:45">2025-01-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%9C%9F%E6%9C%AB/">期末</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">大一上期末！！程序设计喜被卡绩点，但是… 程序设计88，哈哈，总评...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/01/11/sheng-huo/ji-lu/di-yi-pian/" title="第一篇">第一篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-01-10T18:13:25.000Z" title="发表于 2025-01-11 02:13:25">2025-01-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">突发奇想，大半夜的，点开了一位学长的博客，然后想着自己也能不能写一个博客…然后就这样跟着教程开始了。 可能有人说，我怎么半夜三点突然说要写个博客，还要搭个网站…，我只能说，有时候人就是这么无聊吧，一个人坐在可以通宵的自习室里，只有一个人的时候也因为环境而睡不着，就会做些对现在“没有意义”的事情… 有人说，为什么不去期末复习？下一周就是期末周，有很多期末考试….只能说实在是没兴趣将时间花在复习上了，高三那个复习已经让我认清了，连靠着老师一轮二轮到三轮，我始终是：题目知识点会的都会写，不会的基本都不会写，更别提到了大学了…上课认真听应付那个高数题（我上课听高数听的认真些），期末基本都会…但线代实在是靠自学，加上自己没什么驱动力，线代学的一坨大便。倒也不至于挂科什么的，但就是写起来不是很爽，如此循环，没了兴趣。 然后就开始做有兴趣的事情了。随手打开一篇之前打校CTF无意间搜到HNU信安学长的博客 “我为何想建立HNU信安交流群” 。见：...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/MyIcon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Moyuin</div><div class="author-info-description">在这里记录我的技术栈和生活点滴... 好像一个飘渺的人在游荡...</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Moyuin-aka" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/" title="数据结构课程注意事项">数据结构课程注意事项</a><time datetime="2025-02-18T02:42:59.000Z" title="发表于 2025-02-18 10:42:59">2025-02-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/09/sheng-huo/ji-lu/jia/" title="家">家</a><time datetime="2025-02-09T07:17:36.000Z" title="发表于 2025-02-09 15:17:36">2025-02-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/" title="渗透学习">渗透学习</a><time datetime="2025-02-06T14:11:25.000Z" title="发表于 2025-02-06 22:11:25">2025-02-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/19/sheng-huo/za-tan/cun-ge-li-xi-dai-ma/" title="存个利息代码">存个利息代码</a><time datetime="2025-01-18T17:50:16.000Z" title="发表于 2025-01-19 01:50:16">2025-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/13/sheng-huo/ji-lu/pi-bei/" title="疲惫">疲惫</a><time datetime="2025-01-13T14:03:45.000Z" title="发表于 2025-01-13 22:03:45">2025-01-13</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <!-- hexo-inject:begin --><!-- hexo-inject:end --><i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CTF%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">CTF学习</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">日常学习</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="card-category-list-name">数据结构</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%94%9F%E6%B4%BB%E4%BB%A3%E7%A0%81/"><span class="card-category-list-name">生活代码</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9D%82%E8%B0%88/"><span class="card-category-list-name">杂谈</span><span class="card-category-list-count">3</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.5em; color: #99a9bf">生活</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 1.5em; color: #99a9bf">编程</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">学习</a> <a href="/tags/%E6%9C%9F%E6%9C%AB/" style="font-size: 1.1em; color: #999">期末</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">数学</a> <a href="/tags/CTF/" style="font-size: 1.1em; color: #999">CTF</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 1.5em; color: #99a9bf">杂谈</a> <a href="/tags/%E8%AE%A1%E5%88%92/" style="font-size: 1.1em; color: #999">计划</a> <a href="/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" style="font-size: 1.1em; color: #999">注意事项</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
   
-  &copy; 
-  <span itemprop="copyrightYear">2025</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Moyuin</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">11k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">10 分钟</span>
-</div>
-
-<!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>-->
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-</body>
-</html>
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/02/">
+            <span class="card-archive-list-date">
+              二月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/01/">
+            <span class="card-archive-list-date">
+              一月 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">6</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-02-18T14:42:47.607Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
