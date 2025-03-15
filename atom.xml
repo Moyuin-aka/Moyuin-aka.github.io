@@ -3,11 +3,11 @@
   <title>Moyuin&#39;s Blog</title>
   
   <subtitle>一个随笔记录的地方。</subtitle>
-  <link href="https://moyuin.top/atom.xml" rel="self"/>
+  <link href="https://origin.moyuin.top/atom.xml" rel="self"/>
   
-  <link href="https://moyuin.top/"/>
-  <updated>2025-03-05T05:13:51.000Z</updated>
-  <id>https://moyuin.top/</id>
+  <link href="https://origin.moyuin.top/"/>
+  <updated>2025-03-13T12:35:53.000Z</updated>
+  <id>https://origin.moyuin.top/</id>
   
   <author>
     <name>Moyuin</name>
@@ -17,9 +17,51 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>抱怨</title>
+    <link href="https://origin.moyuin.top/2025/03/13/sheng-huo/ji-lu/bao-yuan/"/>
+    <id>https://origin.moyuin.top/2025/03/13/sheng-huo/ji-lu/bao-yuan/</id>
+    <published>2025-03-13T12:35:53.000Z</published>
+    <updated>2025-03-13T12:35:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="抱怨"><a href="#抱怨" class="headerlink" title="抱怨"></a>抱怨</h1><h2 id="不易😭"><a href="#不易😭" class="headerlink" title="不易😭"></a>不易😭</h2><p>为什么 Obsidian 没有<strong>自动存放附件到指定位置+自动把粘贴图片改成 markdown 语法+支持插入格式修改</strong>的三合一插件？？？<br>第一个有 Custom Attachment Location<br>第二个 Obsidian 自带<br>第三个谁来救救我？？🥹<br>每次 paste 图片的时候，<strong>难道我一定要去手动修改我的粘贴格式，好让我的 hexo 识别到吗？</strong><br>我超级懒的….不想折腾太多了😫</p><h2 id="吹风机"><a href="#吹风机" class="headerlink" title="吹风机"></a>吹风机</h2><p>吹头发的时候吹风机喷火了，成了打火机。😭<br>我前几周把以前的吹风机扔了，换了这个功率大的…😐🤨😩<br>一举两得，浪费时间又浪费钱，谢谢教训。<br><em>其实糊味还挺香的。呃…再也不做不吃晚饭的事情了</em></p>]]></content>
+    
+    
+    <summary type="html">不想折腾的时候，记录一些小抱怨</summary>
+    
+    
+    
+    <category term="杂谈" scheme="https://origin.moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+    <category term="记录" scheme="https://origin.moyuin.top/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hack the box</title>
+    <link href="https://origin.moyuin.top/2025/03/11/xue-xi/ctf/hack-the-box/"/>
+    <id>https://origin.moyuin.top/2025/03/11/xue-xi/ctf/hack-the-box/</id>
+    <published>2025-03-11T15:03:18.000Z</published>
+    <updated>2025-03-11T15:03:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Hack-the-box"><a href="#Hack-the-box" class="headerlink" title="Hack the box"></a>Hack the box</h1><p>记录指令。</p><h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>起步的确很简单，连接了vpn然后就可以用kali玩玩渗透测试了。</p><h3 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h3><p><strong>基础流程</strong>：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token comment"># 看看ping是否通，确认一下网络</span><span class="token function">sudo</span> nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-p</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token comment"># 找开的端口，确认一下我们的方案</span><span class="token function">ls</span>flag.txt  snap<span class="token function">cat</span> flag.txtb40abdfe23665f766f9c61ecba8a4c19<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>提交第一个 flag！telnet弱凭证！</p><h3 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span><span class="token function">sudo</span> nmap <span class="token parameter variable">-sV</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span><span class="token comment"># 开21端口，用ftp连接</span><span class="token function">ftp</span> <span class="token parameter variable">-a</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token comment">#使用anonymous匿名登陆</span><span class="token function">ls</span> <span class="token operator">|</span> <span class="token function">dir</span>get flag.txt <span class="token operator">|</span> mget flag.txt <span class="token comment">#后者下载多个文件，可以用lcd先设置好目录</span>ctrl+z <span class="token comment">#退出</span><span class="token function">cat</span> flag.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+    
+    
+    <summary type="html">边玩边记录玩法，持续更新，每天玩一点</summary>
+    
+    
+    
+    <category term="CTF学习" scheme="https://origin.moyuin.top/categories/CTF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="CTF" scheme="https://origin.moyuin.top/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HNUCTF2024新生杯writeup</title>
-    <link href="https://moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/"/>
-    <id>https://moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/</id>
+    <link href="https://origin.moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/"/>
+    <id>https://origin.moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/</id>
     <published>2025-03-05T05:13:51.000Z</published>
     <updated>2025-03-05T05:13:51.000Z</updated>
     
@@ -30,27 +72,27 @@
     
     
     
-    <category term="CTF学习" scheme="https://moyuin.top/categories/CTF%E5%AD%A6%E4%B9%A0/"/>
+    <category term="CTF学习" scheme="https://origin.moyuin.top/categories/CTF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="记录" scheme="https://moyuin.top/tags/%E8%AE%B0%E5%BD%95/"/>
+    <category term="学习" scheme="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="学习" scheme="https://moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="CTF" scheme="https://origin.moyuin.top/tags/CTF/"/>
     
-    <category term="CTF" scheme="https://moyuin.top/tags/CTF/"/>
+    <category term="记录" scheme="https://origin.moyuin.top/tags/%E8%AE%B0%E5%BD%95/"/>
     
-    <category term="writeup" scheme="https://moyuin.top/tags/writeup/"/>
+    <category term="writeup" scheme="https://origin.moyuin.top/tags/writeup/"/>
     
   </entry>
   
   <entry>
     <title>记录与计划</title>
-    <link href="https://moyuin.top/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/"/>
-    <id>https://moyuin.top/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/</id>
+    <link href="https://origin.moyuin.top/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/"/>
+    <id>https://origin.moyuin.top/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/</id>
     <published>2025-03-03T15:10:19.000Z</published>
     <updated>2025-03-03T15:10:19.000Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="记录与计划"><a href="#记录与计划" class="headerlink" title="记录与计划"></a>记录与计划</h1><p>记录一些最近的小成就。🥳</p><h2 id="购买域名，实现国内浏览✅"><a href="#购买域名，实现国内浏览✅" class="headerlink" title="购买域名，实现国内浏览✅"></a>购买域名，实现国内浏览✅</h2><p>之前在github pages默认的.github.io实现博客部署，在国内访问也太困难了，本来一直很苦恼于这个问题。<br>但最近，于2025.3.1在namesilo购买了moyuin.top域名，并交给cloudflare托管，将github pages的网站转发到这个域名里，实现在国内也可以顺利浏览我的博客。<br><strong>可以更方便的给同学发笔记了</strong>。😎</p><hr><h2 id="实现自动部署✅"><a href="#实现自动部署✅" class="headerlink" title="实现自动部署✅"></a>实现自动部署✅</h2><h3 id="初步解决自动部署！"><a href="#初步解决自动部署！" class="headerlink" title="初步解决自动部署！"></a>初步解决自动部署！</h3><p>之前苦恼于hexo三部曲输入三个指令也太麻烦。并且在博客写的文章，无论是手机写的还是平板写的，都得通过局域网传输到电脑上，然后电脑整理分类后再进行hexo三部曲。<br><strong>现在记录笔记是Obsidian+Git+Sync方案</strong>，Obsidian把仓库插件整合到文件夹里也太好用了，我的git插件只要所有设备sync同步一下，文件夹里的东西直接互通，运行无障碍。<br>然后只要再Obsidian里面commit和push一下就可以直接自动放到代码仓库里面，交由远程的Github action进行hexo三部曲，极大地改善了写博文的舒适度。<br>并且放在vscode里面，只要点点点就可以实现git提交和同步，在电脑上整理代码笔记也更加方便了。<br>实现了懒人同步！🤪<br>了吗?😢</p><hr><h3 id="同步问题"><a href="#同步问题" class="headerlink" title="同步问题"></a>同步问题</h3><p>目前还有一个问题，为了节约手机和平板的内存和避免其他配置类文件与它进行冲突，所以我的共享文件夹都只是共享了含有博客文章管理的source文件夹。<br>😭导致我的git文件夹没有同步进来。<br><em>目前还得写好然后用一个电脑提交…</em><br><em>思考解决方法中。</em></p><blockquote><p>好像最佳方法是使用submodule去进行管理，得研究一下。<br>当然也有另一种方法，是直接Obsidian库迁移为博客源代码库，但是这样过于麻烦，并且我那配置仅仅是6+128g的小平板在说求放过，手机也在说不要增添一些莫名其妙的垃圾文件污染了。😔</p></blockquote><hr><h3 id="问题解决！"><a href="#问题解决！" class="headerlink" title="问题解决！"></a>问题解决！</h3><p>通过把source通过submodule连接博客仓库，实现了在source里面的git仓库与博客仓库的联动！顺便加入了新的github action，当检测到source文件夹变动并且推送到source仓库的时候，我的博客仓库自动commit和push，然后引发自动部署！<br>😋已经实现懒人部署！</p><hr><h2 id="远程桌面！⭐"><a href="#远程桌面！⭐" class="headerlink" title="远程桌面！⭐"></a>远程桌面！⭐</h2><p><strong>这绝对是目前最伟大的成就！</strong></p><h3 id="局域网初步"><a href="#局域网初步" class="headerlink" title="局域网初步"></a>局域网初步</h3><p>寒假买了平板，听说了moonlight+sunshine的局域网远程桌面方案，想着最大化利用平板，于是寒假开始了初步操作。<br>局域网连接很快，我的平板很顺利的连上了电脑！我将沉重的游戏本电脑丢到一边，抱着键盘鼠标和平板在床上玩了起来…<strong>只要连接同一个网络，我的平板就能连接电脑高画质流畅运行各大游戏</strong>，黑神话，大表哥，看门狗，应有尽有…<br>但我选择了每天在床上or烤火炉前玩解锁帧率的高帧率原神🤪…玩原神玩的。<br><strong>但局域网还是有一个缺陷</strong>，只要平板和电脑不连接同一网络，我的平板就识别不到电脑存在。<br>下一步考虑远程连接。</p><hr><h3 id="远程桌面初步"><a href="#远程桌面初步" class="headerlink" title="远程桌面初步"></a>远程桌面初步</h3><p>开学后背着电脑回了学校，在一个寒假轻量级平板的洗礼后，开始觉得我的游戏本很沉重了。（<em>明明买的时候特意买的最轻的游戏本</em>），于是开始钻研怎么在不同网络下实现远程桌面。</p><hr><h4 id="微软远程桌面RDP-❌"><a href="#微软远程桌面RDP-❌" class="headerlink" title="微软远程桌面RDP?❌"></a>微软远程桌面RDP?❌</h4><p>RDP是微软用windows的远程桌面，确实好用，但是开端口转发，没有路由器中转，也没有自己的服务器支持，只能考虑通过校园网的局域网来实现宿舍与教室的连接。<br>况且RDP在局域网内的表现也表现的不稳定。而且在Skywt的学长的<a href="https://skywt.cn/blog/wireshark-sniff#%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%9A%84-ap-%E9%9A%94%E7%A6%BB">一篇博客</a>里了解到HNU的校园网不同于普通局域网，<strong>校园网是AP隔离的</strong>，不同设备连接校园网是无法相互访问的，即便电脑和平板都连接的是宿舍区域的校园网，也无法通过moonlight找到电脑设备。<br>因此只能考虑其他软件提供的远程连接服务，或者是利用校园网进行局域网连接，内网穿透。</p><hr><h4 id="todesk等网络远程连接-❓"><a href="#todesk等网络远程连接-❓" class="headerlink" title="todesk等网络远程连接?❓"></a>todesk等网络远程连接?❓</h4><p><strong>流畅情况依赖于网速。</strong><br>校园网网速感人，望周知。且HNU的校园网面向全体师生，也不了解学校的网络是如何分配带宽的，对于远程桌面的实现，如果采用服务器中转，在校园网的给力下，甚至<strong>无法做到稳定60帧</strong>。<br>用Todesk等软件的确可以实现远程连接，不过设备兼容性并没有moonlight好（比如我键盘alt+tab在todesk里是给自己平板切换界面，非常反人类），不过也能正常使用它的锁屏和开机功能，可以做应急使用，故作保留。</p><hr><h4 id="申请公网ipv6连接-❌"><a href="#申请公网ipv6连接-❌" class="headerlink" title="申请公网ipv6连接?❌"></a>申请公网ipv6连接?❌</h4><p>呃，连接校园网，没有公网ipv6的可能性。且没有办理校园宽带（听说那个也浪费钱，速度慢，也不稳定），在宿舍只有随身wifi插着电话卡当路由器，更没有实现公网转发的可能性。</p><hr><h4 id="校园网-tailscale内网穿透，打破AP隔离，校园区域P2P直连✅"><a href="#校园网-tailscale内网穿透，打破AP隔离，校园区域P2P直连✅" class="headerlink" title="校园网+tailscale内网穿透，打破AP隔离，校园区域P2P直连✅"></a>校园网+tailscale内网穿透，打破AP隔离，校园区域P2P直连✅</h4><p>那在校园区域内，只有一种做法了，也就是转向校园网…既然校园网内不允许局域网设备互相访问，那就使用内网穿透进行直连吧，经检验，这个方法最流畅（可以做到2k120帧），并且在moonlight的给力设备兼容下，在平板键盘的操作与电脑键盘无异。<br>采用免费的tailscale做内网穿透，主要是给ip直接所有设备登陆同一账号就行，非常便利。<br>在设备同连接校园网的情况下，tailscale可以做到内网穿透，并且也支持sync的同步数据，非常贴合我的需求，暂时不想过多折腾它了，我已经非常满意它的表现。</p><hr><h4 id="但仍然有缺点…"><a href="#但仍然有缺点…" class="headerlink" title="但仍然有缺点…."></a>但仍然有缺点….</h4><p>基于tailscale的内网穿透，在设备连接不同网络下，tailscale就会走relay中转，毕竟是国外软件，中转服务器最近的是来自Tokyo的服务器…流畅度不言而喻。<br>这样的话，我只要一离开校园区域，也就是有校园网的地方，我的远程桌面几乎等于失效。<br>因此之后想要解决这个问题，目前来看必须有一个自己能用的国内服务器，拉过来做中转才可以…目前限制极多，且自己还是新手，对服务器的维护一无所知，万一哪一天服务器被攻击，现在的我是束手无策，因此只能潜心凝力…<br>这个方案的完美实现道阻且长。不过实现了的话，我也可以考虑换一台台式机放在宿舍里了…</p><h2 id="下一步想做的？"><a href="#下一步想做的？" class="headerlink" title="下一步想做的？"></a>下一步想做的？</h2><h3 id="拿到一个服务器"><a href="#拿到一个服务器" class="headerlink" title="拿到一个服务器"></a>拿到一个服务器</h3><h4 id="折腾一下科学上网"><a href="#折腾一下科学上网" class="headerlink" title="折腾一下科学上网"></a>折腾一下科学上网</h4><p>我也很想有个属于自己的流畅上网工具。<br>虽然说现在用的这个很稳定，而且也不用我掏钱维护（这时候还得看爹），但是我还是想尝试独立一下的，总得试试，不能总靠爹。万一哪天有了问题，还是自己维护的好。</p><hr><h4 id="迁移博客"><a href="#迁移博客" class="headerlink" title="迁移博客"></a>迁移博客</h4><p>将博客放在github pages里面部署确实方便，但是这样好像也会限制我的一些…自由性？给自己的博客网站备案什么的 。<em>（虽然我11月才成年….)</em></p><hr><h4 id="找一个能用的服务器做frp转发，完善远程桌面。"><a href="#找一个能用的服务器做frp转发，完善远程桌面。" class="headerlink" title="找一个能用的服务器做frp转发，完善远程桌面。"></a>找一个能用的服务器做frp转发，完善远程桌面。</h4><hr><h3 id="了解一下RSS订阅"><a href="#了解一下RSS订阅" class="headerlink" title="了解一下RSS订阅"></a>了解一下RSS订阅</h3><p>我看很多大佬上面都挂着一个RSS订阅，是什么东西，我能搞吗？<br>好像挺高级的，可是现在我连友链都没有，我需要去好好折腾一下。</p><hr><h3 id="拉到友链上的朋友"><a href="#拉到友链上的朋友" class="headerlink" title="拉到友链上的朋友"></a>拉到友链上的朋友</h3><p>我写博客大多数还是给自己留个记录，在网站上美观地看我的记录，换台设备只要浏览我的博客网站就可以随时随地的去获取信息，很方便。<br>但是我也希望有一个能挂在友链上的朋友…不是带有功利性的，只是想在这个小圈子里，多一个可以分享思考和感悟的人吧。</p><p><strong>未完待续…</strong></p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="记录与计划"><a href="#记录与计划" class="headerlink" title="记录与计划"></a>记录与计划</h1><p>记录一些最近的小成就。🥳</p><h2 id="购买域名，实现国内浏览✅"><a href="#购买域名，实现国内浏览✅" class="headerlink" title="购买域名，实现国内浏览✅"></a>购买域名，实现国内浏览✅</h2><p>之前在github pages默认的.github.io实现博客部署，在国内访问也太困难了，本来一直很苦恼于这个问题。<br>但最近，于2025.3.1在namesilo购买了moyuin.top域名，并交给cloudflare托管，将github pages的网站转发到这个域名里，实现在国内也可以顺利浏览我的博客。<br><strong>可以更方便的给同学发笔记了</strong>。😎</p><hr><h2 id="实现自动部署✅"><a href="#实现自动部署✅" class="headerlink" title="实现自动部署✅"></a>实现自动部署✅</h2><h3 id="初步解决自动部署！"><a href="#初步解决自动部署！" class="headerlink" title="初步解决自动部署！"></a>初步解决自动部署！</h3><p>之前苦恼于hexo三部曲输入三个指令也太麻烦。并且在博客写的文章，无论是手机写的还是平板写的，都得通过局域网传输到电脑上，然后电脑整理分类后再进行hexo三部曲。<br><strong>现在记录笔记是Obsidian+Git+Sync方案</strong>，Obsidian把仓库插件整合到文件夹里也太好用了，我的git插件只要所有设备sync同步一下，文件夹里的东西直接互通，运行无障碍。<br>然后只要再Obsidian里面commit和push一下就可以直接自动放到代码仓库里面，交由远程的Github action进行hexo三部曲，极大地改善了写博文的舒适度。<br>并且放在vscode里面，只要点点点就可以实现git提交和同步，在电脑上整理代码笔记也更加方便了。<br>实现了懒人同步！🤪<br>了吗?😢</p><hr><h3 id="同步问题"><a href="#同步问题" class="headerlink" title="同步问题"></a>同步问题</h3><p>目前还有一个问题，为了节约手机和平板的内存和避免其他配置类文件与它进行冲突，所以我的共享文件夹都只是共享了含有博客文章管理的source文件夹。<br>😭导致我的git文件夹没有同步进来。<br><em>目前还得写好然后用一个电脑提交…</em><br><em>思考解决方法中。</em></p><blockquote><p>好像最佳方法是使用submodule去进行管理，得研究一下。<br>当然也有另一种方法，是直接Obsidian库迁移为博客源代码库，但是这样过于麻烦，并且我那配置仅仅是6+128g的小平板在说求放过，手机也在说不要增添一些莫名其妙的垃圾文件污染了。😔</p></blockquote><hr><h3 id="问题解决！"><a href="#问题解决！" class="headerlink" title="问题解决！"></a>问题解决！</h3><p>通过把source通过submodule连接博客仓库，实现了在source里面的git仓库与博客仓库的联动！顺便加入了新的github action，当检测到source文件夹变动并且推送到source仓库的时候，我的博客仓库自动commit和push，然后引发自动部署！<br>😋已经实现懒人部署！</p><hr><h2 id="远程桌面！⭐"><a href="#远程桌面！⭐" class="headerlink" title="远程桌面！⭐"></a>远程桌面！⭐</h2><p><strong>这绝对是目前最伟大的成就！</strong></p><h3 id="局域网初步"><a href="#局域网初步" class="headerlink" title="局域网初步"></a>局域网初步</h3><p>寒假买了平板，听说了moonlight+sunshine的局域网远程桌面方案，想着最大化利用平板，于是寒假开始了初步操作。<br>局域网连接很快，我的平板很顺利的连上了电脑！我将沉重的游戏本电脑丢到一边，抱着键盘鼠标和平板在床上玩了起来…<strong>只要连接同一个网络，我的平板就能连接电脑高画质流畅运行各大游戏</strong>，黑神话，大表哥，看门狗，应有尽有…<br>但我选择了每天在床上or烤火炉前玩解锁帧率的高帧率原神🤪…玩原神玩的。<br><strong>但局域网还是有一个缺陷</strong>，只要平板和电脑不连接同一网络，我的平板就识别不到电脑存在。<br>下一步考虑远程连接。</p><hr><h3 id="远程桌面初步"><a href="#远程桌面初步" class="headerlink" title="远程桌面初步"></a>远程桌面初步</h3><p>开学后背着电脑回了学校，在一个寒假轻量级平板的洗礼后，开始觉得我的游戏本很沉重了。（<em>明明买的时候特意买的最轻的游戏本</em>），于是开始钻研怎么在不同网络下实现远程桌面。</p><hr><h4 id="微软远程桌面RDP-❌"><a href="#微软远程桌面RDP-❌" class="headerlink" title="微软远程桌面RDP?❌"></a>微软远程桌面RDP?❌</h4><p>RDP是微软用windows的远程桌面，确实好用，但是开端口转发，没有路由器中转，也没有自己的服务器支持，只能考虑通过校园网的局域网来实现宿舍与教室的连接。<br>况且RDP在局域网内的表现也表现的不稳定。而且在Skywt的学长的<a href="https://skywt.cn/blog/wireshark-sniff#%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%9A%84-ap-%E9%9A%94%E7%A6%BB">一篇博客</a>里了解到HNU的校园网不同于普通局域网，<strong>校园网是AP隔离的</strong>，不同设备连接校园网是无法相互访问的，即便电脑和平板都连接的是宿舍区域的校园网，也无法通过moonlight找到电脑设备。<br>因此只能考虑其他软件提供的远程连接服务，或者是利用校园网进行局域网连接，内网穿透。</p><hr><h4 id="todesk等网络远程连接-❓"><a href="#todesk等网络远程连接-❓" class="headerlink" title="todesk等网络远程连接?❓"></a>todesk等网络远程连接?❓</h4><p><strong>流畅情况依赖于网速。</strong><br>校园网网速感人，望周知。且HNU的校园网面向全体师生，也不了解学校的网络是如何分配带宽的，对于远程桌面的实现，如果采用服务器中转，在校园网的给力下，甚至<strong>无法做到稳定60帧</strong>。<br>用Todesk等软件的确可以实现远程连接，不过设备兼容性并没有moonlight好（比如我键盘alt+tab在todesk里是给自己平板切换界面，非常反人类），不过也能正常使用它的锁屏和开机功能，可以做应急使用，故作保留。</p><hr><h4 id="申请公网ipv6连接-❌"><a href="#申请公网ipv6连接-❌" class="headerlink" title="申请公网ipv6连接?❌"></a>申请公网ipv6连接?❌</h4><p>呃，连接校园网，没有公网ipv6的可能性。且没有办理校园宽带（听说那个也浪费钱，速度慢，也不稳定），在宿舍只有随身wifi插着电话卡当路由器，更没有实现公网转发的可能性。</p><hr><h4 id="校园网-tailscale内网穿透，打破AP隔离，校园区域P2P直连✅"><a href="#校园网-tailscale内网穿透，打破AP隔离，校园区域P2P直连✅" class="headerlink" title="校园网+tailscale内网穿透，打破AP隔离，校园区域P2P直连✅"></a>校园网+tailscale内网穿透，打破AP隔离，校园区域P2P直连✅</h4><p>那在校园区域内，只有一种做法了，也就是转向校园网…既然校园网内不允许局域网设备互相访问，那就使用内网穿透进行直连吧，经检验，这个方法最流畅（可以做到2k120帧），并且在moonlight的给力设备兼容下，在平板键盘的操作与电脑键盘无异。<br>采用免费的tailscale做内网穿透，主要是给ip直接所有设备登陆同一账号就行，非常便利。<br>在设备同连接校园网的情况下，tailscale可以做到内网穿透，并且也支持sync的同步数据，非常贴合我的需求，暂时不想过多折腾它了，我已经非常满意它的表现。</p><hr><h4 id="但仍然有缺点…"><a href="#但仍然有缺点…" class="headerlink" title="但仍然有缺点…."></a>但仍然有缺点….</h4><p>基于tailscale的内网穿透，在设备连接不同网络下，tailscale就会走relay中转，毕竟是国外软件，中转服务器最近的是来自Tokyo的服务器…流畅度不言而喻。<br>这样的话，我只要一离开校园区域，也就是有校园网的地方，我的远程桌面几乎等于失效。<br>因此之后想要解决这个问题，目前来看必须有一个自己能用的国内服务器，拉过来做中转才可以…目前限制极多，且自己还是新手，对服务器的维护一无所知，万一哪一天服务器被攻击，现在的我是束手无策，因此只能潜心凝力…<br>这个方案的完美实现道阻且长。不过实现了的话，我也可以考虑换一台台式机放在宿舍里了…</p><h2 id="下一步想做的？"><a href="#下一步想做的？" class="headerlink" title="下一步想做的？"></a>下一步想做的？</h2><h3 id="拿到一个服务器✅"><a href="#拿到一个服务器✅" class="headerlink" title="拿到一个服务器✅"></a>拿到一个服务器✅</h3><h4 id="折腾一下科学上网✅"><a href="#折腾一下科学上网✅" class="headerlink" title="折腾一下科学上网✅"></a>折腾一下科学上网✅</h4><p>我也很想有个属于自己的流畅上网工具。<br>虽然说现在用的这个很稳定，而且也不用我掏钱维护（这时候还得看爹），但是我还是想尝试独立一下的，总得试试，不能总靠爹。万一哪天有了问题，还是自己维护的好。</p><p><strong>有了有了</strong>，github学生认证拿到一台digitalocean的vps，做wireguard也够折腾了🥳，而且时间足够我撑到成年购买一台自己的。<br>问题是不太稳定，还没搞懂这个怎么搞，先放着。</p><hr><h4 id="迁移博客"><a href="#迁移博客" class="headerlink" title="迁移博客"></a>迁移博客</h4><p>将博客放在github pages里面部署确实方便，但是这样好像也会限制我的一些…自由性？给自己的博客网站备案什么的 。<em>（虽然我11月才成年….)</em></p><hr><h4 id="找一个能用的服务器做frp转发，完善远程桌面。"><a href="#找一个能用的服务器做frp转发，完善远程桌面。" class="headerlink" title="找一个能用的服务器做frp转发，完善远程桌面。"></a>找一个能用的服务器做frp转发，完善远程桌面。</h4><hr><h3 id="了解一下RSS订阅-✅"><a href="#了解一下RSS订阅-✅" class="headerlink" title="了解一下RSS订阅 ✅"></a><strong>了解一下RSS订阅</strong> ✅</h3><p>我看很多大佬上面都挂着一个RSS订阅，是什么东西，我能搞吗？<br>好像挺高级的，可是现在我连友链都没有，我需要去好好折腾一下。</p><p>成功搞了一个rss订阅…但应该只有我自己会订阅我自己吧，毕竟我的文章没有什么很含价值，引人思考的内容🤕</p><hr><h3 id="拉到友链上的朋友"><a href="#拉到友链上的朋友" class="headerlink" title="拉到友链上的朋友"></a>拉到友链上的朋友</h3><p>我写博客大多数还是给自己留个记录，在网站上美观地看我的记录，换台设备只要浏览我的博客网站就可以随时随地的去获取信息，很方便。<br>但是我也希望有一个能挂在友链上的朋友…不是带有功利性的，只是想在这个小圈子里，多一个可以分享思考和感悟的人吧。</p><p><strong>未完待续…</strong></p>]]></content>
     
     
       
@@ -63,21 +105,21 @@
     
     
     
-    <category term="杂谈" scheme="https://moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-    <category term="记录" scheme="https://moyuin.top/tags/%E8%AE%B0%E5%BD%95/"/>
+    <category term="计划" scheme="https://origin.moyuin.top/tags/%E8%AE%A1%E5%88%92/"/>
     
-    <category term="计划" scheme="https://moyuin.top/tags/%E8%AE%A1%E5%88%92/"/>
+    <category term="记录" scheme="https://origin.moyuin.top/tags/%E8%AE%B0%E5%BD%95/"/>
     
-    <category term="生活" scheme="https://moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="https://origin.moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
   <entry>
     <title>数据结构-线性表笔记</title>
-    <link href="https://moyuin.top/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/"/>
-    <id>https://moyuin.top/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/</id>
+    <link href="https://origin.moyuin.top/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/"/>
+    <id>https://origin.moyuin.top/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/</id>
     <published>2025-02-26T09:53:40.000Z</published>
     <updated>2025-02-26T09:53:40.000Z</updated>
     
@@ -94,23 +136,23 @@
     
     
     
-    <category term="日常学习" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="日常学习" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="数据结构" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="学习" scheme="https://moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="编程" scheme="https://moyuin.top/tags/%E7%BC%96%E7%A8%8B/"/>
+    <category term="编程" scheme="https://origin.moyuin.top/tags/%E7%BC%96%E7%A8%8B/"/>
     
-    <category term="数据结构" scheme="https://moyuin.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://origin.moyuin.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>Typora激活成功</title>
-    <link href="https://moyuin.top/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/"/>
-    <id>https://moyuin.top/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/</id>
+    <link href="https://origin.moyuin.top/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/"/>
+    <id>https://origin.moyuin.top/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/</id>
     <published>2025-02-24T14:05:11.000Z</published>
     <updated>2025-02-24T14:05:11.000Z</updated>
     
@@ -127,19 +169,19 @@
     
     
     
-    <category term="日常学习" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="日常学习" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="学习" scheme="https://moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="破解" scheme="https://moyuin.top/tags/%E7%A0%B4%E8%A7%A3/"/>
+    <category term="破解" scheme="https://origin.moyuin.top/tags/%E7%A0%B4%E8%A7%A3/"/>
     
   </entry>
   
   <entry>
     <title>书写真值表注意事项</title>
-    <link href="https://moyuin.top/2025/02/23/xue-xi/chi-san-shu-xue/shu-xie-zhen-zhi-biao-zhu-yi-shi-xiang/"/>
-    <id>https://moyuin.top/2025/02/23/xue-xi/chi-san-shu-xue/shu-xie-zhen-zhi-biao-zhu-yi-shi-xiang/</id>
+    <link href="https://origin.moyuin.top/2025/02/23/xue-xi/chi-san-shu-xue/shu-xie-zhen-zhi-biao-zhu-yi-shi-xiang/"/>
+    <id>https://origin.moyuin.top/2025/02/23/xue-xi/chi-san-shu-xue/shu-xie-zhen-zhi-biao-zhu-yi-shi-xiang/</id>
     <published>2025-02-23T14:58:50.000Z</published>
     <updated>2025-02-23T14:58:50.000Z</updated>
     
@@ -156,23 +198,23 @@
     
     
     
-    <category term="日常学习" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="日常学习" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="离散数学" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
+    <category term="离散数学" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
     
     
-    <category term="学习" scheme="https://moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="数学" scheme="https://moyuin.top/tags/%E6%95%B0%E5%AD%A6/"/>
+    <category term="数学" scheme="https://origin.moyuin.top/tags/%E6%95%B0%E5%AD%A6/"/>
     
-    <category term="注意事项" scheme="https://moyuin.top/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <category term="注意事项" scheme="https://origin.moyuin.top/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
     
   </entry>
   
   <entry>
     <title>数据结构课程注意事项</title>
-    <link href="https://moyuin.top/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/"/>
-    <id>https://moyuin.top/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/</id>
+    <link href="https://origin.moyuin.top/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/"/>
+    <id>https://origin.moyuin.top/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/</id>
     <published>2025-02-18T02:42:59.000Z</published>
     <updated>2025-02-18T02:42:59.000Z</updated>
     
@@ -189,52 +231,46 @@
     
     
     
-    <category term="日常学习" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="日常学习" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="数据结构" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-    <category term="学习" scheme="https://moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="注意事项" scheme="https://moyuin.top/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <category term="注意事项" scheme="https://origin.moyuin.top/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
     
-    <category term="数据结构" scheme="https://moyuin.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://origin.moyuin.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>忏悔录？</title>
-    <link href="https://moyuin.top/2025/02/09/sheng-huo/za-tan/chan-hui-lu/"/>
-    <id>https://moyuin.top/2025/02/09/sheng-huo/za-tan/chan-hui-lu/</id>
+    <link href="https://origin.moyuin.top/2025/02/09/sheng-huo/za-tan/chan-hui-lu/"/>
+    <id>https://origin.moyuin.top/2025/02/09/sheng-huo/za-tan/chan-hui-lu/</id>
     <published>2025-02-09T13:50:50.000Z</published>
     <updated>2025-02-09T13:50:50.000Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>最近很喜欢GD。</p>        <div id="aplayer-StYCWaZQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">            <pre class="aplayer-lrc-content"></pre>        </div>        <script>          var ap = new APlayer({            element: document.getElementById("aplayer-StYCWaZQ"),            narrow: false,            autoplay: false,            showlrc: false,            music: {              title: "니가 뭔데 (Who You?)",              author: "G-Dragon",              url: "/music/Who You.mp3",              pic: "/images/COUP D'ETAT.jpg",              lrc: ""            }          });          window.aplayers || (window.aplayers = []);          window.aplayers.push(ap);        </script><hr><p>小时候，父母问过我一个问题：“你是利己主义者，还是利他主义者？”</p><p>我知道这两个词的意思，一个是自私，一个是无私。但当时的我答不上来。课本里说，自私是坏的，我们应该无私奉献，成为一个好人。我也曾努力去做。我想过捐款，做到拾金不昧，把旧衣服送给贫困的孩子。可我发现，周围的人似乎并不是这样。</p><p>班长觉得我的玻璃星星很好看，便以“借去玩玩”为由拿走了这颗我表姐送给我的星星，几年过去也没还，似乎早已忘记这回事。但我一直记着。<br>老师不给我发三好学生奖状，因为她认定我是一年级就伤害同学的“坏孩子”。即使我后来考了全班第二，和第一名同分，她仍然不肯给我那张奖状。可我记得那次“伤害”，不过是因为一个同学不断问我重复的问题，我一遍遍回答，他却像听不懂一样，我气急之下用塑料管戳了他，没控制好力道，不小心戳到了他的眼睛。</p><p>奶奶责备我，为什么这个学期只拿了“优秀少先队员”，而不是三好学生。可是，我一年级就被选为少先队员，这本是一个优秀的证明。然而，看着那张被她揉成纸团的奖状，我开始思考——我明明很好，可为什么我不是呢？</p><p>世界并不无私，而我也学会了自私。</p><p>我向朋友倾诉秘密，决裂后，她在人最多的地方大喊我是个“没妈的孩子”。<br>大家找我玩，却总让我当“坏人”，因为我长得高大冷淡，适合做被“好人”抓捕的反派。<br>和朋友玩猜拳，输了要被打一巴掌。我被打了很多下，他们笑得很开心。</p><p>小时候，我不懂，长大了，我懂了一些。<br>我学会了编织谎言，让他们开心。<br>我学会了提前预测他们的反应，决定要不要告诉他们事情。<br>我学会了撒谎，让同学相信我有个双胞胎姐姐——那其实只是户口本上多余的一个登记名。<br>我学会了捏造故事，说自己捡到一百元拾金不昧，想得到夸奖，却换来一声“你真傻”的讥笑。<br>我学会了骗网友，说自己跳级了，和他现在是同一个年级。</p><p>我当了很多年的骗子，为了塑造一个更“完美”的自己。<br>自私，是个坏词，而我就是这样的人。</p><hr><p>可是，现在的我累了。</p><p>谎言说出口很简单，维护却很累。<br>这种疲惫让我选择了说实话。<br>于是，我成了最诚实的人，因为我只说实话。<br>现在的人不知道，我曾是个满口谎言的自私鬼。</p><p>但内核并没有变。<br>利己主义只是被包裹起来，成为我成长的横向根基。<br>我变得沉默，对周围的一切多了些不信任。<br>或许只是因为，我觉得大家本就是自私的吧。<br>多说无益，沉默是金。</p><p>自私，是教材里的坏词。无私，是我们该推崇的美德。<br>但我没有那么伟大。<br>当我发现大家都是这样想的时候，反而感到安心。<br>既然所有人都是坏人，那我也当个坏人，当个最黑暗的坏人，这样也挺酷的。</p><hr><p>都说童年决定了一个人的一生。<br>我清醒地度过了我的童年。</p><p>我一直想做与众不同的那一个，但我知道，这个世界上有很多人和我一样。<br>所以我尽量避免喜欢热门的东西，避免成为大多数。</p><p>可是谁会看看我呢？<br>爸爸妈妈把目光放在弟弟身上，姑妈关注着表妹，奶奶关心爸爸和姑妈。<br>我太自私了，我想要独属于我的爱。</p><p>可我的爱，像是拼凑起来的。<br>他们在爱别人的时候，顺便拿一点分给我。<br>但我想要的是一颗完整的、只属于我的爱啊……</p><p>我知道你会说“很多人都爱你”。<br>可我就是这么恶劣。<br>我想要一颗完整的，独一无二的。<br>毕竟，我从来都不喜欢别人剩下的东西。<br>毕竟，我一直是自私的孩子，利己主义至上的人。</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误，请重新输入。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="5b4c8af0a34c71eb17ea0c010c6f30877101e29a74c56ca004a287d5532692e8">40412719f44a109e2f549f667d8e6e1e3ed422460c4b93c1061685afffe2eae30367e4b0e8fd627fd11b32770163668726051a632c47c2764a2f96e36ab620b879330679450964b5678e73fdaac0156ea6086d50417b8d2592d866dd44ba44fad14cca944567b792d8ae141cc0eb2b3086511383c38d2a71ec8905fbe378d92a069d77adb1323e7634181cb9353aeeb69289a7eb145cc857dd5ff52e8aeb0f1882f4180c7b09c2ad7a9e0bbebb48dca8ed2d6a04e2114c35e418689e6fd44f452b7ca50caa32c53bc45a6f69a5f490a1d28803f95fe49b349b60f318316cd09fc9f705c27820cba94d62b2888fe3d395f15f72975b4463e429e8ad4a4f23a6e02a6e5f4700110bc3bedb2668c522e345fe3c06db97a40748ab76fbc44bfd1529ee32a9c286a176c8476b957f464dea1af8b0a49322e69f7517c5b0245ba8a5992f411dbadc405b7188a6daeb4100d190ab106b1853b11bbd0c9cccccda39fc72a208baa5b358395f117c604092aafa755d2bb96b651115365954e3919dd6263834a543cd2298caf8e8725e1fb43c06aac3196c55e7af084808591999f8fad3d05d7a89904eaa2b4050e6a3721f5c9134dec8acf0f68bbc76d6cebdcc67f40b937ee48926c18b65f183ea1d1c5b703bf0f0d6a7e671879268f902ef8fedad8a7cd88230d69dad7c15fa17955b82a9f1abdabbb7b904497854400aee53a32a1ad20fde4670300750d3202b627f34cae506e3e2f7bce9bccaab9d0a290d55e3a71b7972125dee62d4a642d52a615d150bff992756c766342e711f97d246702ea009ae7aaf9ce85270ac303288cfcb9a75bd8df2d01450f5711dbe86a1ec3134a4c21d10bd111950ec09bed1e5b3f493553ca409dc47d482c8c1981c209272224c66a3c185ebbf8504c57ccab4198bc94b35eea4b59a9016125a0fe4a78c64e782500c71d28bc8db7fccc373accbe26af807fa9bf770495d13f4b1f621323a4a3d5af13055442e9c568d94a521bb1cbb12413f0a0655aa92142d77c67c3b2db2fd4a770d29cf74af565e931aca4c6e5f6234b6c5eed976d1a8887cb3d566492c7fd7e7d26c2a9bb92c477d3bd444965d038e558c06c6c521db3f6413c77c68e08875cef0cf048f41123cd66677777462cb38149e7c77eeb3dff43dc4fde1ce77e824049502c77748f5d675391ea0201256795401d00b357c9257bd3a12b8d3266ce5afa51ecb24c5218d39c0fd70e606d6fb76d80aaaacc589126a1dd05ce0e355c329888da3cb58f6cdcd1c6faeab339ca143fbc8a9804ee310231f79b848b66510ee2d14a0369f102aec3cd262dafb0b73e1ecb9eb3097a39c4192bb15474c0b481591790dec23315f0bae46a20f97eca3e5883c3db1adbd8f73673e1e1a7aa33231a85cbe6a1b4b0a733c2536cedfc0ba826d0500272eff034efdf7e1f791cbc25d30259cf5f11b2065ea017d8ecf22520d515183d6db5d5ffe30eaa4008ade01829d66131bf3ba260737d20a62b738d62ef96db04baa8741d1a9e0981b6e01ffa1e662a06879e24e10a0251e2298ba6c0f4f53f498e2d9e9a4b6d84bbc80ad5d11458c3876862a5bb962163ee101a012bd17d7c130d6d910f78d683b80816ada358d996d354bd8e96f7ede5be459e150deac4fe620b424ff3d1b54e8721a72e61f12fae94a295948da83d0f1e70c24a439fda926c1570008b350984f61623bb2c0d64eeb6174ee819944762b3c60c39248cd16eb46f22a8c4d7b142c789e0438f6e1ceab69efcafbf1a7eb6515a202582910c6069e1592b8bbe07fcc4993bd5577cfefa8013dd36d0b989f20cb40b2ceb1875aa66cf0e7a4995e7335d71b6de7b80707b36a67bd731014af830f790f95ffe8cf3d9529b6d57e6234100aef88ede214f65de5ebbfc5932ef74f0401e7f39c691d8acfc2492e0b7bd33707984a9655ec0bbac447ee7524067b76ac521d57b7ed4d9320a46814e80377ca3768c2d70952ec9ddb73d34c02b4c03e0a01391d5ecccdaffceebe0c4d3cbd0a462c42a815deaf6bfa3f1ef5e62afcd0bf14e39f495d7cd40d342b5e44c39650d12f0737fd9f0a1ad24bb6124e7475e751c6ba03aeb05d86a4031750a354448833407d15742a16786e589a591257078e7202f04b2fc59e26fd3cc13765fd1ef7344bdbcda361434cc323521a87c967a81ab1c0f4cef33cc7b0136b6ea93d3c16299d36734f09608e9e6ee6b2f00952dae7942550053f59d152d75eb77feade4ed07259a23538b0b3e73f4a50aa24750190b938f00c5746560708b96bbc1591092b290629f38fc8301d701e0e34e128dcf35f2d64577914b93af6ee94b88e0c3477ab0b8b5bee77cff20f4445d3b5450428ce361d8cdb3eba6618f089d27f544630ea8c7267a32757ae94146bad26c56dc9a70d4cb12cad1d7f13f4ac4b45fce99db8c0c5a6756d0756b918054592ee65896b1c857caa77e77a5c5e5775ac7557f3ca5c04c21e478259bca94527bea4996e60087593d36810569b1f40f6d13779eb5767f5ea7d7eda90d5f4d6d12072bcd67bc4e8cbd78b317f44b0936244c501240e586df7cfdc2fc195ff95d243f9aa5e9775a30cfad27942dbc41cc0a03b77d00343bf092cfb483a026f08363bed1badb3935301abcc1745a996ba467ca2e16db4b37f3dc535f60cf431dea872774bb7d3e273dfb6119ef5c265b40d410b4c48ee36fceb3e3c88867025b7bfa589aa78b06edaef1ef69d23360ba4ff9d84d31b3622452ff6e4231c7b1092a9427c6cde7e7f0d851e0a758f6b33c0b3ba8fc846db9d4f35d86b47c85d19b5f647b5e35fb93d074baeed78d83ee4df71e3fd67fb14a621ca3c358468834d21a1a2d7c7187e68fcc2ee4d65564561046a053cdce9c4897277435e59e0c0a13ac049557a6ad821d65f2ee68ffdb162bfc55f8433de2c4203f5d477c0d414a6c70639a9591d44ca8c79c22a2d8cf4c26649f90950491fc590d1581bf5ed41083c5dcf729e5c4cb3ca51be8d8a6ae1b70e8fbe4890a77f926e10a90e1c9bec15228b4158485d03206e5368a4924a92b2451c46f370b4de10af2b0f14119f62f2db7c70145a9d71aa48b0a5caf7b2bb52e50eb71e4972c15076b2207167951016f7d2fc1e71b58af222aef9ab781ff0110241b2c4410b1910ec11746646511a01b91632a7d01b098ed98ec4de5b9baba5996adb7e53674beb5ca8b075bb6daef245116550fb1870b1af7340cebe9bf224768534d732762a7787b42ab7be98e30afc1ece4a1068f2ad51c84f3cd4566d23554bc26601b319ce7fb26779912f6660398dc36dd5cdd71f423cdfd5ee7e67d342bdee091e90eab3f7f00c1802b3779d4a4a9a5c03efc44c282c9982c6490aad72323d1458e517d6a078770a069600cb25bdab63bf253d93e1b4dbeb2eecc75a555e7e589280672958c023f9d2e4c48ae4ad625f306db7255577ae85984748c241181889c4fa96b49afe5291429da63b57040a72fd5a924273e5e99882a5a4bc02c40f1afdac325d919c12e1f5b9362a55538ba941f32410a1f99cdd82b3957a750b92b999cf50f8cc9745ff4493734ec231fffd8c87d6a92b557f0f7ac1915a78359b7e96a2d387740d00b9a3e819ba2237d143d759673d4b5f42eba70ef6074416f190538ce3b0ede7b45edd3718b2f028b3cabbe71d4cfef529cf7561fe7080389208a5a3e8de8878a7863179a05572c850ab74d75f312de83759d71899afca9779aee292571f8dc5332606d05e3c1c5acff681f34cb442417118864bbf8a9b2d359cebdad0f910f0ec1d363c83ea9cb2fa32cce8184ba04ab93fd25f60521703ba238e982249c6b4e7e0d5f689032219891162f61302811a092bf928910ccb17bffebd11a0ea4587facc8a4c6f0c79942bfb68722a693bca43e5442e65f25821d21553749f9e075cb9c86eeee19da314c8aa44b5e529afaa6e367e2bae9c618dc8e6ad5b77df368cc7c00e0b0a94e28b725321e61e3313fbdb95a30d60377cc3cb91e947ed9524d1848ecb78bbd489c4f8170bc8c714c8b4b661fb24370d78664103d4e9ccbd80b4b8051d4d11639c36235af9db076c9c18908754e950590f1131cdafa8795788129ec4f30f5e3f51ca5b569a5713a6fb60915a3bdb5d7fa6266bc310579c25db25219ffdd0e57a17b4f9482c3c1a0d1948b00536c943431fc223846cc28c8715cfd26e91f0e330654a6b67281e8dc88473f175d138220b04ef3e4561455a0ee9439f3d074b7e78b3062471a22992e7a822fe9786909ba8761c39ce59cb14a8af91f63c18cd11adc102f3c887726d608f03117f7a7cc4e08aa4a0dbd4936c940a7053fff67b22875783f6f4eb67f1efb9630670284ce781004884581beed0cdb2dbdf8db3b63f58c03a00f4d29fe207be0402ceaefa71dac9aa2867d37992a2ac513c8a72a8028e688a1fb349930979b577359508477c21bc8f50dda80ae52466e652268a9b3c4481c06745fb1e41a552fa82e5b4f1faf6fc32b1eba64a35134d0c06fabe254b161905a1569805f0a6daa31332bba5eef99b87667139f935c135bbe30292cd8c42764d4c1888170be2133db40540746f5d34ef0eb4b7f6960f6c4a5d2fa8340eb4b84769639cd092fe16c2a3cfadbd9ebf76bd1b8d45804401fd7a5af7ed31a304004b7e75fe41e596eb38659d95a01b5ce8d68cb05faf7f1c48ff39a7537bf43ccfd24badba2a30744b9dcc4d95f9f4c021989a7fc9534167bbec9fc8121a008e9ac505e8a81a9422a2cbf696e2141ede014bb9dd2140a9f1f6d02b506b5a5faadf63057a65013c5e55eb5f25772e7b5f1d6de9843216a70f542c148c1a5e9398d6761c2ff37a7b53631add10c9e6045aad94d7dd4cb047da06fabbfd3843255a1c6deb625a8f69f6f83b88cc5de40dd52d937573861283b49cc6830dcecbe2a565311404770b6439bb64c793d2374d237062acd819a2864c3d737684c60a2542921876295f6999022e0ecb0793d587ec85279f0279b207262e9816b146dbc5ce7710188ab946bacd333170ec740b4d84a8ca08a47c05527da52461543af806b3d5fef7b0f4335a0d08fa608b802dcc085b439a66204511ee5157bb374986c4e653b4db9b1d98f0a5f8abe425a8af87691820391e7d67f9502c5a12be77b919953e87493cc8bb918a0819ab14f3d874fb80859628eabbc7350c42a7ee92f3a27e8bf989cbf352b0ff11cbfa21404dc81c25e7d72679519412bf6a4cd8960776eae8031a6b3f9ad6b72b34fc17f81238d839498dec45ac0bd503c57de3e48c5491f1ba8d0b6b613b502835a98d0f2b0578eba3925c55b941555c41399a0bde1e246b7b95e728d150f67588d82266414a074fb576ed4848290ebf1d9f169151f6eb8236f67297c46e12e67485332167d145b61a8b7f58448804fd29f16107d4805c9e63d8c59f6fc653285d8002097b024b7f0ef8c0e5fd8b0279bc1dabd4c7b521587b7905a2cb2516a485542d4b95be2e9b1d9e3b2df9bbe130261589560a074ad7e1b64d61d0b922e8c2fa8602b87eca16172a24a711dc37abffe088bc6937b3101c231b4e3ad88fc71259c8e9198ea85d3f1631403ba6b24064aa58a0bf56f6d533a42c126f732cb0d3d139ace410b1f9718b044cce177ebc9dffa0641c4dcd1d739a5b9b65a2d46c6961b1ecc52412075a98d9bfa70f3716d703721ffa826cc0534bf5d58200528d7782350b26fe0a38160110fe174deb1fb83d2be8a1ef9197bcb1c152f368943ddf14fa41b4c90df99ef2de65237ddc6ae388f7801e2bc6657fcbba93d1dbf5640984c57e42d652f79d7f1b82d89bf818c7038a756a39d4224c5a83afbd6309c040a9223d0238bb559444995ff00e51b8e25ea507ec1b806232b5a1d398e38a1ae26f9cb5a8cd282c0765f881f8efae9d1e00f0b9d008944e2937fb871d3d57b6aada9e48db366f8fbc47ade91f69b15a6d3525e0137979012060f2520b91069714c3cd94cc888e237e7befc771ec3da755f72595ef020fec27a5b776329d862cde5de68c1e47d1b9b60218e9c9df1fd74320ae62993e3f4eabd8211f1e7a10334ca6a58977181bd04bc57dc76d361f636b4f08863c5b5b79ac7bd8b7a43cafe21f55c8827180abc8738d3e3a13497b072ca1c39c42dc21721210703b28b8872f7697dc0e7e2f3b87a03e941d150e7015603cd5faa6213b932b0d964b46605f627e5962513654745781e9290cb9a035d34305f7bb7b4307537975a0ae3930fbd0f9a9128de03dba1b8ce93d11fe887df299340be8d56b4becb1f3bd8aec9b640802d5b83cfd249c0993ef8e962cc8f1d0f092f916dbbf3970368d8e60fee7a0e8ad8a657bef3bac7151e1e7c0719cc8132a2769ee1b15b57d24b1bb1cadbb805f4cad24fbd73951e2d650f8355f689ceff9852e75c2de7c1e49462fd4f731e625a758aaec29aa331cf4758c0d5886226ce6aefe3fff2872dbdf6c395ea35a9816d482606cd2d164bceec326f90301196f815bf1b56643d49636805627d0e5e388992bab64224a2f24a7414761e39a03dda82877098d492100fbdd8c3cc99d9294167c81aa795a25a613c63f5d7acdd2658dfe81a0bcff4b47e7bc8bc9adb9e39591672da24dcf4326d691177589d44ebb62685bac5ed566dc59cb57d5ac0da7be150c00c5ef4b7da9ec2bdd68017d1e8425506d684a5430a4265e2e7015ecbd773a0d59c79d5835a55d8e6d46ccfc996c0702d1de5afff72eb73926cfce4f07e8eed1d412b8b458c022115b1c0204615510d17c4ba4b87ba732e84c77418167814b25def033ac387cca299720d9e9e4be7d53b8a35d591dc7c8a78506b92dda5d3ff4711d9a119ce6bbb985c603951bcbb6039e3b9fae29066c5486aa650e7f7b639759e983aa351bc3e7a2b1fb9643aa9fe4b4cd53f85f1cf19868fdadcf9d0d2caf0fc5e475de604e9bd1c08e7b7cab681fa8fbd6be61edc6191fc62a007a01</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码解锁：</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;&#92;assets&#92;css&#92;APlayer.min.css&quot;&gt;&lt;script src=&quot;&#92;assets&#92;js&#92;APlayer.min.js&quot;</summary>
-        
-      
+    <summary type="html">这篇文章已经加密。</summary>
     
     
     
-    <category term="杂谈" scheme="https://moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-    <category term="生活" scheme="https://moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/tags/%E6%9D%82%E8%B0%88/"/>
     
-    <category term="杂谈" scheme="https://moyuin.top/tags/%E6%9D%82%E8%B0%88/"/>
+    <category term="生活" scheme="https://origin.moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
   <entry>
     <title>家</title>
-    <link href="https://moyuin.top/2025/02/09/sheng-huo/ji-lu/jia/"/>
-    <id>https://moyuin.top/2025/02/09/sheng-huo/ji-lu/jia/</id>
+    <link href="https://origin.moyuin.top/2025/02/09/sheng-huo/ji-lu/jia/"/>
+    <id>https://origin.moyuin.top/2025/02/09/sheng-huo/ji-lu/jia/</id>
     <published>2025-02-09T07:17:36.000Z</published>
     <updated>2025-02-09T07:17:36.000Z</updated>
     
@@ -245,17 +281,17 @@
     
     
     
-    <category term="杂谈" scheme="https://moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-    <category term="生活" scheme="https://moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="https://origin.moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
   <entry>
     <title>渗透学习</title>
-    <link href="https://moyuin.top/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/"/>
-    <id>https://moyuin.top/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/</id>
+    <link href="https://origin.moyuin.top/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/"/>
+    <id>https://origin.moyuin.top/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/</id>
     <published>2025-02-06T14:11:25.000Z</published>
     <updated>2025-02-06T14:11:25.000Z</updated>
     
@@ -272,21 +308,21 @@
     
     
     
-    <category term="CTF学习" scheme="https://moyuin.top/categories/CTF%E5%AD%A6%E4%B9%A0/"/>
+    <category term="CTF学习" scheme="https://origin.moyuin.top/categories/CTF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="学习" scheme="https://moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="CTF" scheme="https://moyuin.top/tags/CTF/"/>
+    <category term="计划" scheme="https://origin.moyuin.top/tags/%E8%AE%A1%E5%88%92/"/>
     
-    <category term="计划" scheme="https://moyuin.top/tags/%E8%AE%A1%E5%88%92/"/>
+    <category term="CTF" scheme="https://origin.moyuin.top/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>存个利息代码</title>
-    <link href="https://moyuin.top/2025/01/19/sheng-huo/za-tan/cun-ge-li-xi-dai-ma/"/>
-    <id>https://moyuin.top/2025/01/19/sheng-huo/za-tan/cun-ge-li-xi-dai-ma/</id>
+    <link href="https://origin.moyuin.top/2025/01/19/sheng-huo/za-tan/cun-ge-li-xi-dai-ma/"/>
+    <id>https://origin.moyuin.top/2025/01/19/sheng-huo/za-tan/cun-ge-li-xi-dai-ma/</id>
     <published>2025-01-18T17:50:16.000Z</published>
     <updated>2025-01-18T17:50:16.000Z</updated>
     
@@ -303,21 +339,21 @@
     
     
     
-    <category term="日常学习" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="日常学习" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="生活代码" scheme="https://moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%94%9F%E6%B4%BB%E4%BB%A3%E7%A0%81/"/>
+    <category term="生活代码" scheme="https://origin.moyuin.top/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%94%9F%E6%B4%BB%E4%BB%A3%E7%A0%81/"/>
     
     
-    <category term="编程" scheme="https://moyuin.top/tags/%E7%BC%96%E7%A8%8B/"/>
+    <category term="生活" scheme="https://origin.moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
-    <category term="生活" scheme="https://moyuin.top/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="编程" scheme="https://origin.moyuin.top/tags/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>疲惫</title>
-    <link href="https://moyuin.top/2025/01/13/sheng-huo/ji-lu/pi-bei/"/>
-    <id>https://moyuin.top/2025/01/13/sheng-huo/ji-lu/pi-bei/</id>
+    <link href="https://origin.moyuin.top/2025/01/13/sheng-huo/ji-lu/pi-bei/"/>
+    <id>https://origin.moyuin.top/2025/01/13/sheng-huo/ji-lu/pi-bei/</id>
     <published>2025-01-13T14:03:45.000Z</published>
     <updated>2025-01-13T14:03:45.000Z</updated>
     
@@ -328,21 +364,21 @@
     
     
     
-    <category term="杂谈" scheme="https://moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-    <category term="编程" scheme="https://moyuin.top/tags/%E7%BC%96%E7%A8%8B/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/tags/%E6%9D%82%E8%B0%88/"/>
     
-    <category term="杂谈" scheme="https://moyuin.top/tags/%E6%9D%82%E8%B0%88/"/>
+    <category term="编程" scheme="https://origin.moyuin.top/tags/%E7%BC%96%E7%A8%8B/"/>
     
-    <category term="期末" scheme="https://moyuin.top/tags/%E6%9C%9F%E6%9C%AB/"/>
+    <category term="期末" scheme="https://origin.moyuin.top/tags/%E6%9C%9F%E6%9C%AB/"/>
     
   </entry>
   
   <entry>
     <title>第一篇</title>
-    <link href="https://moyuin.top/2025/01/11/sheng-huo/ji-lu/di-yi-pian/"/>
-    <id>https://moyuin.top/2025/01/11/sheng-huo/ji-lu/di-yi-pian/</id>
+    <link href="https://origin.moyuin.top/2025/01/11/sheng-huo/ji-lu/di-yi-pian/"/>
+    <id>https://origin.moyuin.top/2025/01/11/sheng-huo/ji-lu/di-yi-pian/</id>
     <published>2025-01-10T18:13:25.000Z</published>
     <updated>2025-01-10T18:13:25.000Z</updated>
     
@@ -359,10 +395,10 @@
     
     
     
-    <category term="杂谈" scheme="https://moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-    <category term="杂谈" scheme="https://moyuin.top/tags/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="https://origin.moyuin.top/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
