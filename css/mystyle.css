@@ -1,0 +1,65 @@
+.nav-fixed #nav {
+    transform: translateY(58px) !important;
+}
+
+/* 文章的整体背景，渐变色设置 */
+#web_bg {
+    background-image: url("/source/img/title/albedo.jpg"), 
+    linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+}
+
+/* 侧边栏个人信息卡片动态渐变色 */
+#aside-content > .card-widget {
+    background: #F0F2F0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #000C40, #F0F2F0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #000C40, #F0F2F0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    box-shadow: 0 0 5px rgb(66, 68, 68);
+    background-size: 400% 400%;
+    animation: Gradient 30s ease infinite;
+}
+
+/* 动态渐变动画 */
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 个人信息 Follow me 按钮 */
+/*#aside-content > .card-widget.card-info > #card-info-btn {
+    background-color: #3eb8be;
+    border-radius: 8px;
+}
+
+/* 文章页面背景 */
+.layout > #post {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* 分类页面背景 */
+.layout > #page {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/*时间轴页面背景*/
+.layout > #archive {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+    body, 
+    #post,
+    .post-body,
+    .layout>#post
+    h1, h2, h3, h4, h5, h6{
+      color: #696767 !important;  /* 文章字体 & 多级标题变为黑色 */
+    }
+  }
+  

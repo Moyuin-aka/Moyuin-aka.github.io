@@ -1,0 +1,475 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>HNUCTF2024新生杯writeup | Moyuin's Blog</title><meta name="author" content="Moyuin"><meta name="copyright" content="Moyuin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0E0E0E"><meta name="description" content="我的第一场CTF。">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="HNUCTF2024新生杯writeup">
+<meta property="og:url" content="https://origin.moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/index.html">
+<meta property="og:site_name" content="Moyuin&#39;s Blog">
+<meta property="og:description" content="我的第一场CTF。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://origin.moyuin.top/img/title/umshojo.jpg">
+<meta property="article:published_time" content="2025-03-05T05:13:51.000Z">
+<meta property="article:modified_time" content="2025-03-05T05:13:51.000Z">
+<meta property="article:author" content="Moyuin">
+<meta property="article:tag" content="记录">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="writeup">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://origin.moyuin.top/img/title/umshojo.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HNUCTF2024新生杯writeup",
+  "url": "https://origin.moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/",
+  "image": "https://origin.moyuin.top/img/title/umshojo.jpg",
+  "datePublished": "2025-03-05T05:13:51.000Z",
+  "dateModified": "2025-03-05T05:13:51.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Moyuin",
+      "url": "https://origin.moyuin.top/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/MyIcon.png"><link rel="canonical" href="https://origin.moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0E0E0E')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#E0E0E0')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+          
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HNUCTF2024新生杯writeup',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/fontSetting.css"><link rel="stylesheet" href="/css/mystyle.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Moyuin's Blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/catavatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://moyuin.top/"><i class="fa-fw fas fa-home"></i><span> 家</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-archive"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-list"></i><span> 推荐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://blog.moyuin.top/"><i class="fa-fw fas fa-star"></i><span> 新站</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/title/umshojo.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Moyuin's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">HNUCTF2024新生杯writeup</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://moyuin.top/"><i class="fa-fw fas fa-home"></i><span> 家</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-archive"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-list"></i><span> 推荐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://blog.moyuin.top/"><i class="fa-fw fas fa-star"></i><span> 新站</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">HNUCTF2024新生杯writeup</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-05T05:13:51.000Z" title="发表于 2025-03-05 13:13:51">2025-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-05T05:13:51.000Z" title="更新于 2025-03-05 13:13:51">2025-03-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="HNUCTF2024新生杯writeup"><a href="#HNUCTF2024新生杯writeup" class="headerlink" title="HNUCTF2024新生杯writeup"></a>HNUCTF2024新生杯writeup</h1><p><strong>HNUCTF</strong>新生杯——来自不睡觉的新生<strong>MOMOsleeping</strong>的wirteup<br>这是一篇留档，为HNU2024年12月的一场新生杯writeup。<br>也是我的第一场CTF。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><blockquote>
+<p><strong>平台id：Moyuin</strong><br><strong>排名：第8名</strong></p>
+</blockquote>
+<h2 id="解题情况"><a href="#解题情况" class="headerlink" title="解题情况"></a><strong>解题情况</strong></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/%E8%A7%A3%E9%A2%98%E6%83%85%E5%86%B5.png"></p>
+<h3 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h3><h4 id="1-Misc-签到"><a href="#1-Misc-签到" class="headerlink" title="1.Misc 签到"></a>1.Misc <strong>签到</strong></h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc1.png"><br>复制粘贴即可。</p>
+<blockquote>
+<p><strong>HNUCTF{Welcome_to_HNUCTF2024!}</strong></p>
+</blockquote>
+<h4 id="2-Misc-网络鲨鱼"><a href="#2-Misc-网络鲨鱼" class="headerlink" title="2.Misc 网络鲨鱼"></a>2.Misc <strong>网络鲨鱼</strong></h4><p>上网搜索后发现是一个网络嗅探包，使用<strong>Wireshark</strong>打开文件，在一堆files not found中发现这个http流量get的有点特别。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc2.png"><br>猜测是base64加密，解码后得到。</p>
+<blockquote>
+<p><strong>HNUCTF{w1r3sh4rk_4n4lys1s}</strong>  </p>
+</blockquote>
+<h4 id="3-Misc-bob-traffic"><a href="#3-Misc-bob-traffic" class="headerlink" title="3.Misc bob_traffic"></a>3.Misc <strong>bob_traffic</strong></h4><p>同样是网络嗅探包。<br>利用wireshark直接去分析tcp和http的get，发现有一个特殊流量（唯一的，显示f！ag，打开看看发现）<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc3.png"><br>得到flag。<br>与上一题解题思路重复了，也许上一题的各大http流量里面藏有所玄机？</p>
+<blockquote>
+<p><strong>HNUCTF{pcapng_Zcpuatre_traffic}</strong></p>
+</blockquote>
+<h4 id="4-Misc-新佛经"><a href="#4-Misc-新佛经" class="headerlink" title="4.Misc 新佛经"></a>4.Misc <strong>新佛经</strong></h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc4.png"><br>打开txt是一个hex编码，使用cyberchef解密得到</p>
+<pre class="line-numbers language-none"><code class="language-none">TFJZR1hKe2E2blIzaWdfcTBWM19JcmcwZ01yOX0&#x3D;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>拖过去base64解密，得到</p>
+<pre class="line-numbers language-none"><code class="language-none">LRYGXJ&#123;a6nR3ig_q0V3_Irg0gMr9&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>什么玩意儿？<br>迷茫中看到题目说：</p>
+<blockquote>
+<p>听闻凯撒贝斯。知晓16与string的轮回。</p>
+</blockquote>
+<p>贝斯是指base64，那么凯撒就是….<br>凯撒密码？尝试凯撒密码一步一步解决。<br>遍历4个加密位移后得到想要的结果。</p>
+<blockquote>
+<p><strong>HNUCTF{w6jN3ec_m0R3_Enc0cIn9}</strong></p>
+</blockquote>
+<h4 id="5-Misc-Tetris"><a href="#5-Misc-Tetris" class="headerlink" title="5.Misc Tetris"></a>5.Misc <strong>Tetris</strong></h4><p>经典本地游戏CE修改器刷分咯。<br>用ce修改这个游戏，跟着网上教程来。<br>先得几分然后next scan最终得到这两个address。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc5_1.png"><br>Change一下变成10000，得到题目要求“10000分得到flag”。<br>把value改到10000以上的数，然后让乱玩让gameover，之后弹出来:<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc5_2.png"><br>得到flag。</p>
+<blockquote>
+<p><code>HNUCTF&#123;#31c0m3_t0_HN#CtF_2024_eX1JT0O1&#125;</code><br><em>这里使用非代码块会出渲染问题….{和#的组合太恐怖</em></p>
+</blockquote>
+<h4 id="6-Misc-git-leak"><a href="#6-Misc-git-leak" class="headerlink" title="6.Misc git_leak"></a>6.Misc <strong>git_leak</strong></h4><p>打开下载的文件，看见flag.txt打开:<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-1.png"><br>那我就下一个Typora吧。学长有心了，给新生这样的小建议。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-2.png"><br>说里有个flag，开找“这里”，题目也说了是“git leak”。<br>刚好，打开.git翻找，发现有一个文件叫flag，说明git里面有有关flags的记录！<br>打开得到:<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-3.png"><br>刚好vscode里面有一个git插件，就导入进去看看记录吧。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-4.png">Flag在git里面leak咯。</p>
+<blockquote>
+<p><strong>HNUCTF{y0u_h4ve_f1nd_th3_g1t_l34k}</strong></p>
+</blockquote>
+<h3 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h3><h4 id="1-Cypto-Buddha"><a href="#1-Cypto-Buddha" class="headerlink" title="1.Cypto Buddha"></a>1.Cypto <strong>Buddha</strong></h4><p><strong>佛曰解密为base64</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto1-1.png"><br>Base64解密即可<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto1-2.png"></p>
+<blockquote>
+<p><strong>HNUCTF{buddha_2c5f12b7-a95f-4c22-9372-1e320b297f49}</strong></p>
+</blockquote>
+<h4 id="2-Crypto-ebg13"><a href="#2-Crypto-ebg13" class="headerlink" title="2.Crypto ebg13"></a>2.Crypto <strong>ebg13</strong></h4><p><strong>Base64</strong>解密<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto2-1.png"><br>加凯撒密码<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto2-2.png"></p>
+<blockquote>
+<p><strong>HNUCTF{rot_is_fun_e8057890-1e42-4c61-9e57-4ad8c218e4c3}</strong></p>
+</blockquote>
+<h4 id="3-Crypto-ezrsa"><a href="#3-Crypto-ezrsa" class="headerlink" title="3.Crypto ezrsa"></a>3.Crypto <strong>ezrsa</strong></h4><p>让ai写一个解密rsa的python ,再不断装库之后得到。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto3-1.png"></p>
+<blockquote>
+<p><strong>HNUCTF{rsa_is_fun_8e4b49fd-070c-473f-a510-ff891b95f56b}</strong></p>
+</blockquote>
+<h3 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h3><h4 id="1-Web-ez-sqli"><a href="#1-Web-ez-sqli" class="headerlink" title="1.Web ez_sqli"></a>1.Web <strong>ez_sqli</strong></h4><p>经典sql注入。<br>经典的用户名：admin’ OR ‘1’&#x3D;’1<br>密码：输入啥都行<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web1.png"></p>
+<blockquote>
+<p><strong>HNUCTF{SQL_iNJECTor_4059a701-61a6-4f11-96bd-e6b01e3a3186}</strong></p>
+</blockquote>
+<h4 id="2-Web-ez-cmdi"><a href="#2-Web-ez-cmdi" class="headerlink" title="2.Web ez_cmdi"></a>2.Web <strong>ez_cmdi</strong></h4><p>现学curl，理解一下get和post。<br>看ip，ip后的输入可以当作命令，直接cat flag。<br>那我们给ip后发送command即可。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web2.png"></p>
+<blockquote>
+<p><strong>HNUCTF{ping_command_091ae904-c702-4b02-9bf6-9d377aa382c6}</strong></p>
+</blockquote>
+<h4 id="3-Web-md5"><a href="#3-Web-md5" class="headerlink" title="3.Web md5:"></a>3.Web <strong>md5:</strong></h4><p>经典md5&#x3D; &#x3D;比较。<br>根据if条件可以判断要找两个不同但md5相同的字符串<br>找个md5碰撞对相同的密码和用户名就ok了，这个得去网上找一下。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web3.png"><br>随便挑一个curl一下输入post传参即可。<br>输入：</p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST -d &quot;password&#x3D;QNKCDZO&quot; &quot;http:&#x2F;&#x2F;129.204.78.34:20703?name&#x3D;240610708&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>得到Flag:</p>
+<blockquote>
+<p><strong>HNUCTF{easy_md5_2b34686e-50b2-45e8-9757-e28a94fece1f}</strong></p>
+</blockquote>
+<h4 id="4-Web-md5-again"><a href="#4-Web-md5-again" class="headerlink" title="4.Web md5_again:"></a>4.Web <strong>md5_again:</strong></h4><p>以为是Name从get变成post，改一下输入curl就行<br>发现不对！<br>转头一看发现是严格相等。为&#x3D;&#x3D;&#x3D;<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web4.png"><br>由于题目还限定了强制转化字符串比较，因此不能使用数组来绕过，我们需要构造一对md5相同而不同字符的字符串。我们只能使用md5碰撞来实现。<br>去网上找一下符合要求的，复制粘贴形成post要传的参数。<br>curl post记得urlencode，把特殊字符传出去。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web4-2.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST &quot;http:&#x2F;&#x2F;x.x.x.x:xxxx&quot; \
+     -H &quot;Content-Type: application&#x2F;x-www-form-urlencoded&quot; \
+     -d &quot;name&#x3D;M%9C9h%FF%E0%E3%5C%20%9...%93%D8&amp;password&#x3D;M%9C9h%FF%E0%E3%5C%20%9...%93%D8&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>powershell传入。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web4-3.png"><br>得到flag</p>
+<blockquote>
+<p><strong>HNUCTF{md5_again_bcf8de06-3aa5-4c09-9120-4bfeccf0b5a1}</strong></p>
+</blockquote>
+<h4 id="5-Web-ez-serialize"><a href="#5-Web-ez-serialize" class="headerlink" title="5.Web ez_serialize"></a>5.Web <strong>ez_serialize</strong></h4><p>看得懂那个网站的php：<br>传入post的参数为base64可以转化为command指令，那我们直接先ls看看有没有flag，然后cat一下就出来了。<br>先将命令转化为base64，然后curl传进去。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web5-1.png"><br>获取ls：</p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST -d
+&quot;data&#x3D;Tzo10iJteWNtZCI6MTp7cz0z0iJjbWQ103M6NDoibHMgLyI7fQ&#x3D;&#x3D;&quot;
+http:&#x2F;&#x2F;129.204.78.34:20738&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>cat flag：</p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST -d
+&quot;data&#x3D;Tzo10iJtewNtZCI6MTp7cz0z0iJjbwQi03M60ToiY2F0Ic9mbGFnIjt9&quot; http:&#x2F;&#x2F;129.204.78.34:20738&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>HNUCTF{easy_serialize_af79f24b-7638-4e49-b60d-08ac1431d690}</strong></p>
+</blockquote>
+<h3 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h3><h4 id="1-Pwn-command-injection"><a href="#1-Pwn-command-injection" class="headerlink" title="1.Pwn command injection"></a>1.Pwn <strong>command injection</strong></h4><p>nc连接到ip，这不用说。<br>获取command权限后，但是发现ls和cat没反应。<br>但是看了看规则后，显示&#x3D;&#x3D;;&#x3D;&#x3D;后的命令会进行。<br>诶，那是不是说明 ；前面的指令无法执行，后面的指令可以进行？然后就尝试 ;cat flag了一下，结果就出来了<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/PWN1.png"></p>
+<blockquote>
+<p><strong>HNUCTF{u_have_completed_the_command_injection_28918ec949db}</strong></p>
+</blockquote>
+<h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><h4 id="1-Reverse-ez-reverse1"><a href="#1-Reverse-ez-reverse1" class="headerlink" title="1.Reverse: ez_reverse1"></a>1.Reverse: <strong>ez_reverse1</strong></h4><p>签到题就要有签到题的样子，在网上看看reverse签到题一般什么样，然后学习。<br><strong>先下载神器ida pro,再跟着做</strong></p>
+<ul>
+<li>将文件导入到IDA里</li>
+<li>按F5进行反编译</li>
+<li>观察反编译后的C语言源码，找到flag<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/reverse1-1.png"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/reverse1-2.png"><blockquote>
+<p> <strong>HNUCTF{W3lcome_t0_HNUCTF}</strong></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="OSINT"><a href="#OSINT" class="headerlink" title="OSINT"></a>OSINT</h3><h4 id="1-Osint-here-is"><a href="#1-Osint-here-is" class="headerlink" title="1.Osint here is"></a>1.Osint <strong>here is</strong></h4><p>照片里可以看到：<br><strong>虎踞龙盘在此间；灵秀聚钟人莫识</strong><br>在bing搜索一下发现一篇介绍韶山滴水洞引用这句诗的新闻。<em>（顺便感慨一下bing的强悍爬虫….已经把这个博客的文章给爬取了）</em><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint1-1.png"><br>结合这里的山环境，可以合理猜测一下这个地点就是滴水洞景区，搜索一下它的票价。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint1-2.png"><br>根据flag所给规则，写入正确：</p>
+<blockquote>
+<p><strong>HNUCTF{dishuidong_O3!nT_40.00}</strong></p>
+</blockquote>
+<h4 id="2-Osint-where-are-i"><a href="#2-Osint-where-are-i" class="headerlink" title="2.Osint where_are_i"></a>2.Osint <strong>where_are_i</strong></h4><p>关键词 <strong>云巴，磁悬浮，空旷，十字路口</strong>。打开百度地图搜索就看得见一个<strong>云巴旅游磁悬浮线</strong>，观察附近街景直接确定。<br>并且周围还有相同的建筑物，更加笃定了。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint2-1.png"><br>找到街景最近的十字路口。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint2-2.png"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint2-3.png"><br>得到flag。</p>
+<blockquote>
+<p><strong>HNUCTF{112.924_28.096_Os!nT}</strong></p>
+</blockquote>
+<h4 id="3-Osint-where-are-i-again"><a href="#3-Osint-where-are-i-again" class="headerlink" title="3.Osint where_are_i_again!"></a>3.Osint <strong>where_are_i_again!</strong></h4><p>通过12306查询D3009这辆车 ，对比时间，粗略判断这一站是<strong>南京南</strong>。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint3-1.png"><br>然后从南京南找到75为末尾号，终点站为合肥南，始发站为XX南的列车，恰好就这一个：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint3-2.png"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint3-3.png"><br>注意flag是始发站的车次号就ok，G7675始发站为G7674，得到flag。</p>
+<blockquote>
+<p><strong>HNUCTF{0siN7_G7674_nanjingnan}</strong></p>
+</blockquote>
+<h4 id="4-Osint-see-see-need"><a href="#4-Osint-see-see-need" class="headerlink" title="4.Osint see_see_need"></a>4.Osint <strong>see_see_need</strong></h4><p>去bing搜搜信安协会会长<a target="_blank" rel="noopener" href="https://github.com/L1uYun/l1uyun_blog">L1uYun</a> 找到了他的github！<br>然后在他的blog里看他最近的submit的文件 发现了<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint4-1.png"><br>交上去发现不对，很怪，结合聊天记录说有干扰项，另辟思路看看其他大佬的。<br>发现了一个健身学长<a target="_blank" rel="noopener" href="https://github.com/yulv706/blog/blob/main/src/site/notes/blog/%E5%AE%89%E5%85%A8/%E5%B7%A5%E5%85%B7/Hydra_%E5%AD%97%E5%85%B8%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3.md">yulv706</a>的github仓库！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint4-2.png"><br>其实还有一个派大星学长的，但是派大星学长直接说是HNUCTF{fake_flag}，故直接提交可用的flag。<br>因为健身佬的blog好久没更新了，所以我只要看最新的更新一直点一直点，然后看到HNUCTF复制粘贴就好了。或者直接去他的博客检索HNUCTF，也可以得到含有这个flag的博客文章。<em>顺便学到了一些ctf知识</em><br>提交成功。<br><strong>大家平时也要注意自己的个人信息能不能直接被搜索引擎搜到哦…😑</strong></p>
+<blockquote>
+<p><strong>HNUCTF{OSINT_leads_to_flag}</strong></p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>作为新生打这场ctf还是很开心的！这一次新生杯严格来说算是自己的第一次网安的比赛，感觉和acm很不一样，也更好玩一些，像一系列趣味游戏！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/summary.png"><br>前面的大佬还是超级多！！有ak的！太强了，和前一名的这位新生大佬差快800分了，但是作为新生，第一次尝试这场比赛我已经很知足，边打边学新知识，实践出真知！<br>虽然reverse和pwn没写出来几个哈哈哈，但是web和misc做了很多，还是很感兴趣的，以后要选比赛方向的话，这两个很有趣，可能会选。<br>但是pwn的操作很像 《<strong>Hacknet</strong>》的玩法，这个更符合我对hacker的印象了，超级酷，reverse有点难难的，涉及到编译基础，也激励着我在之后的学习中多多了解。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/blanket.png"></p>
+<p><strong>收获很多，期待以后的前行路。</strong></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%B0%E5%BD%95/">记录</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/writeup/">writeup</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/" title="记录与计划"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/skygirl.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">记录与计划</div></div><div class="info-2"><div class="info-item-1">记录与计划记录一些最近的小成就。🥳 购买域名，实现国内浏览✅之前在github pages默认的.github.io实现博客部署，在国内访问也太困难了，本来一直很苦恼于这个问题。但最近，于2025.3.1在namesilo购买了moyuin.top域名，并交给cloudflare托管，将github...</div></div></div></a><a class="pagination-related" href="/2025/03/11/xue-xi/ctf/hack-the-box/" title="Hack the box"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/31746234?v=4" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Hack the box</div></div><div class="info-2"><div class="info-item-1">边玩边记录玩法，持续更新，每天玩一点</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/" title="渗透学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/catwalking.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-06</div><div class="info-item-2">渗透学习</div></div><div class="info-2"><div class="info-item-1">🛡 CTF 学习计划GPT给的 📌 第 1 阶段：环境搭建   任务 推荐资源    安装 Kali Linux（VMware&#x2F;VirtualBox） Kali 官方网站   配置 Web 渗透工具（Burp Suite, sqlmap） Burp Suite 文档, sqlmap GitHub   安装 pwn 调试工具（gdb, pwndbg,...</div></div></div></a><a class="pagination-related" href="/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/" title="记录与计划"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/skygirl.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-03</div><div class="info-item-2">记录与计划</div></div><div class="info-2"><div class="info-item-1">记录与计划记录一些最近的小成就。🥳 购买域名，实现国内浏览✅之前在github pages默认的.github.io实现博客部署，在国内访问也太困难了，本来一直很苦恼于这个问题。但最近，于2025.3.1在namesilo购买了moyuin.top域名，并交给cloudflare托管，将github...</div></div></div></a><a class="pagination-related" href="/2025/03/13/sheng-huo/ji-lu/bao-yuan/" title="抱怨"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/catandgirl.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-13</div><div class="info-item-2">抱怨</div></div><div class="info-2"><div class="info-item-1">不想折腾的时候，记录一些小抱怨</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup"><span class="toc-text">HNUCTF2024新生杯writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-text">基本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%83%85%E5%86%B5"><span class="toc-text">解题情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc"><span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Misc-%E7%AD%BE%E5%88%B0"><span class="toc-text">1.Misc 签到</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Misc-%E7%BD%91%E7%BB%9C%E9%B2%A8%E9%B1%BC"><span class="toc-text">2.Misc 网络鲨鱼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Misc-bob-traffic"><span class="toc-text">3.Misc bob_traffic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Misc-%E6%96%B0%E4%BD%9B%E7%BB%8F"><span class="toc-text">4.Misc 新佛经</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Misc-Tetris"><span class="toc-text">5.Misc Tetris</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Misc-git-leak"><span class="toc-text">6.Misc git_leak</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Crypto"><span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Cypto-Buddha"><span class="toc-text">1.Cypto Buddha</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Crypto-ebg13"><span class="toc-text">2.Crypto ebg13</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Crypto-ezrsa"><span class="toc-text">3.Crypto ezrsa</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB"><span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Web-ez-sqli"><span class="toc-text">1.Web ez_sqli</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Web-ez-cmdi"><span class="toc-text">2.Web ez_cmdi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Web-md5"><span class="toc-text">3.Web md5:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Web-md5-again"><span class="toc-text">4.Web md5_again:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Web-ez-serialize"><span class="toc-text">5.Web ez_serialize</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWN"><span class="toc-text">PWN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Pwn-command-injection"><span class="toc-text">1.Pwn command injection</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reverse"><span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Reverse-ez-reverse1"><span class="toc-text">1.Reverse: ez_reverse1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSINT"><span class="toc-text">OSINT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Osint-here-is"><span class="toc-text">1.Osint here is</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Osint-where-are-i"><span class="toc-text">2.Osint where_are_i</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Osint-where-are-i-again"><span class="toc-text">3.Osint where_are_i_again!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Osint-see-see-need"><span class="toc-text">4.Osint see_see_need</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Moyuin</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countElement = document.getElementById('twikoo-count')
+    if (!countElement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.moyuin.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countElement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const getDeviceInfo = (userAgent) => {
+    if (/Windows NT 10/.test(userAgent)) return "Windows 10"
+    if (/Macintosh/.test(userAgent)) return "MacOS"
+    if (/iPhone/.test(userAgent)) return "iPhone"
+    if (/Android/.test(userAgent)) return "Android"
+    return "未知设备"
+  }
+
+  const getIPInfo = async (ip) => {
+    try {
+      let res = await fetch(`https://api.ip.sb/geoip/${ip}`)
+      let data = await res.json()
+      return `${data.country} · ${data.city}`
+    } catch (e) {
+      return "未知位置"
+    }
+  }
+
+  const updateTwikooMeta = async () => {
+    document.querySelectorAll('.tk-meta').forEach(async (meta) => {
+      let ip = meta.getAttribute('data-ip')
+      let userAgent = meta.getAttribute('data-ua')
+      
+      let ipInfo = ip ? await getIPInfo(ip) : "未知位置"
+      let deviceInfo = userAgent ? getDeviceInfo(userAgent) : "未知设备"
+
+      meta.innerHTML += ` | ${ipInfo} | ${deviceInfo}`
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo.moyuin.top/',
+      region: '',
+      onCommentLoaded: () => {
+        updateTwikooMeta()
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+    
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="117, 117, 235" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
