@@ -1,0 +1,817 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数据结构-线性表笔记 | Moyuin's Note</title><meta name="author" content="Moyuin"><meta name="copyright" content="Moyuin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0E0E0E"><meta name="description" content="数据结构-线性表笔记 普通的数组与出入栈在STL很好用，但是涉及链表进行指针操作较为薄弱，因此记录一下链表的操作。  链表的创建 单向链表的创建 struct Node &#x2F;&#x2F; 创建单向链表 &#123;     int data; &#x2F;&#x2F;数据     Node *next; &#x2F;&#x2F;指向下一元素 &#125;; 单向链表的操作的时间复杂度，插入和删除的时间复杂度为O(n)(n为链表长度)，查找的时间复杂">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-线性表笔记">
+<meta property="og:url" content="https://origin.moyuin.top/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/index.html">
+<meta property="og:site_name" content="Moyuin&#39;s Note">
+<meta property="og:description" content="数据结构-线性表笔记 普通的数组与出入栈在STL很好用，但是涉及链表进行指针操作较为薄弱，因此记录一下链表的操作。  链表的创建 单向链表的创建 struct Node &#x2F;&#x2F; 创建单向链表 &#123;     int data; &#x2F;&#x2F;数据     Node *next; &#x2F;&#x2F;指向下一元素 &#125;; 单向链表的操作的时间复杂度，插入和删除的时间复杂度为O(n)(n为链表长度)，查找的时间复杂">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://origin.moyuin.top/img/title/catandgirl.jpg">
+<meta property="article:published_time" content="2025-02-26T09:53:40.000Z">
+<meta property="article:modified_time" content="2025-02-26T09:53:40.000Z">
+<meta property="article:author" content="Moyuin">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://origin.moyuin.top/img/title/catandgirl.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "数据结构-线性表笔记",
+  "url": "https://origin.moyuin.top/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/",
+  "image": "https://origin.moyuin.top/img/title/catandgirl.jpg",
+  "datePublished": "2025-02-26T09:53:40.000Z",
+  "dateModified": "2025-02-26T09:53:40.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Moyuin",
+      "url": "https://origin.moyuin.top/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/MyIcon.png"><link rel="canonical" href="https://origin.moyuin.top/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0E0E0E')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#E0E0E0')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+          
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构-线性表笔记',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/fontSetting.css"><link rel="stylesheet" href="/css/mystyle.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Moyuin's Note" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/catavatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-list"></i><span> 推荐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://moyuin.top/"><i class="fa-fw fas fa-star"></i><span> 家</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/title/catandgirl.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Moyuin's Note</span></a><a class="nav-page-title" href="/"><span class="site-name">数据结构-线性表笔记</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-list"></i><span> 推荐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://moyuin.top/"><i class="fa-fw fas fa-star"></i><span> 家</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">数据结构-线性表笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-26T09:53:40.000Z" title="发表于 2025-02-26 17:53:40">2025-02-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-26T09:53:40.000Z" title="更新于 2025-02-26 17:53:40">2025-02-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1>数据结构-线性表笔记</h1>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>普通的数组与出入栈在STL很好用，但是涉及链表进行指针操作较为薄弱，因此记录一下链表的操作。</p>
+<hr>
+<h2 id="链表的创建">链表的创建</h2>
+<h3 id="单向链表的创建">单向链表的创建</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token comment">// 创建单向链表</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span> <span class="token comment">//数据</span>
+    Node <span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">//指向下一元素</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>单向链表的操作的时间复杂度，插入和删除的时间复杂度为O(n)(n为链表长度)，查找的时间复杂度为O(n)(n为链表长度)</strong></p>
+<hr>
+<h3 id="双向链表的创建">双向链表的创建</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token comment">// 创建双向链表</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span>
+    Node <span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">// 指向下一元素</span>
+    Node <span class="token operator">*</span>prev<span class="token punctuation">;</span><span class="token comment">// 指向上一元素</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>双向链表的操作的时间复杂度与单向链表类似，只是在插入和删除时需要更改指针的指向，所以时间复杂度为O(n)(n为链表长度)</strong></p>
+<hr>
+<h3 id="块状链表-循环链表的创建">块状链表,循环链表的创建</h3>
+<p>都与基本链表的创建有关。</p>
+<ul>
+<li>
+<p>循环链表将末尾元素的next指针指向首元素，构建循环。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 循环链表的构建</span>
+<span class="token keyword">struct</span> <span class="token class-name">CircularNode</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span>
+    CircularNode<span class="token operator">*</span> next<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token comment">// 在插入数据时候，末尾进行</span>
+newNode<span class="token operator">-></span>next <span class="token operator">=</span> head<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p>块状链表是由多个链表拼接，存储的数据（data）是不同链表的指针。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 块状链表的构建</span>
+<span class="token keyword">struct</span> <span class="token class-name">Block</span> <span class="token punctuation">&#123;</span>
+    vector<span class="token operator">&lt;</span>Node<span class="token operator">*</span><span class="token operator">></span> nodes<span class="token punctuation">;</span>
+    Block<span class="token operator">*</span> next<span class="token punctuation">;</span>
+    Block<span class="token operator">*</span> prev<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>双向链表与指针结合，构建连接不同双向链表的块状链表，存储数据的同时，还存储了指向前后块的指针，这样就可以在O(sqrt(n))的时间内找到任意一个元素。使用块状链表，可以减少查找的时间复杂度，为O(sqrt(n))。</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="链表的基本操作">链表的基本操作</h2>
+<h3 id="链表的插入">链表的插入</h3>
+<p><strong>（这里以单向链表为例)</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span>Node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    Node <span class="token operator">*</span>newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 创建一个新的结点</span>
+    newNode<span class="token operator">-></span>data <span class="token operator">=</span> value<span class="token punctuation">;</span>    <span class="token comment">// 赋值</span>
+    newNode<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>  <span class="token comment">// 初始化next指针</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>head <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        head <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token comment">// 如果链表为空，直接插入</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        Node <span class="token operator">*</span>temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>next <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token comment">// 遍历链表，找到最后一个结点</span>
+        <span class="token punctuation">&#123;</span>
+            temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        temp<span class="token operator">-></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>逻辑很简单。</p>
+<ul>
+<li>
+<p>先创一个新结点（因为是指针形式的，所以用new形式建立）。</p>
+</li>
+<li>
+<p>然后给data赋值。</p>
+</li>
+<li>
+<p>再看看它要插入的地方是不是head，是head就简单，直接把它的next设立为head。</p>
+<blockquote>
+<p><em>如果是双向链表就再注意一下head的prev改成新结点</em></p>
+</blockquote>
+</li>
+<li>
+<p>不是head的话，直接while找到要插入的位置（这里自己设定while的循环条件），然后改要插入位置的前者next为它的next，然后把前者的next改为它。</p>
+<blockquote>
+<p>如果是双向链表的话注意一下前者的next的prev也要改成它，它的prev改成前者。</p>
+</blockquote>
+ <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">while</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>id <span class="token operator">!=</span> k<span class="token punctuation">)</span><span class="token comment">//k为要插入的位置，这里做个示范</span>
+      <span class="token punctuation">&#123;</span>
+          temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>next <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#123;</span>
+          temp<span class="token operator">-></span>next<span class="token operator">-></span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      newNode<span class="token operator">-></span>next <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+     temp<span class="token operator">-></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p>然后改完了就完事，插入一个结点嘛。</p>
+<p><strong>不过这个方法的时间复杂度为O(n)，在进行大数据的遍历的时候和有可能耗时巨大，之后的学习生活中会学习二叉树，哈希表等方法来优化</strong>。</p>
+<hr>
+</li>
+</ul>
+<h3 id="链表的结点删除">链表的结点删除</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">deleteData</span><span class="token punctuation">(</span>Node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    Node <span class="token operator">*</span>temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    Node <span class="token operator">*</span>prev <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> temp<span class="token operator">-></span>data <span class="token operator">==</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        head <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token keyword">delete</span> temp<span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token comment">// 删除头结点</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> temp<span class="token operator">-></span>data <span class="token operator">!=</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        prev <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token comment">// 找到要删除的结点，遍历</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token comment">// 没找到要删除的结点，没有值对应的链表节点</span>
+    prev<span class="token operator">-></span>next <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> temp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>首先最重要的，head的函数引用为&amp;head！因为head很有可能也是删除结点！</strong></p>
+<p><strong>否则退出函数后head并没有进行改变操作，将会造成RE即运行时错误。</strong></p>
+<ul>
+<li>
+<p>先建立一个temp结点，给它先变成head结点，这样可以解决head因为是引用形式的不能轻易去改变值的问题，利于后续while循环来查找值。</p>
+</li>
+<li>
+<p>在写之前要考虑三种情况</p>
+<ol>
+<li>链表是空的，那删什么？</li>
+<li>链表找不到我要删掉的值，那删什么？</li>
+<li>链表要删掉头，那遍历什么？</li>
+</ol>
+</li>
+<li>
+<p>然后用if来判断一下情况。</p>
+<ul>
+<li>
+<p>先考虑如果是链表是空的，那我们就可以什么都不做了。</p>
+<p><code> if (temp == nullptr) return;</code></p>
+</li>
+<li>
+<p>再想想如果删掉头，那我们就不用遍历了。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> temp<span class="token operator">-></span>data <span class="token operator">==</span> value<span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+      head <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+      <span class="token keyword">delete</span> temp<span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p>然后就可以开始愉快地遍历了。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">while</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> temp<span class="token operator">-></span>data <span class="token operator">!=</span> value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        prev <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token comment">// 找到要删除的结点，遍历</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p>找到的话，我们需要把这个结点的前者连接到下一结点。如果是双向链表很方便，直接<code>temp-&gt;prev-&gt;next=temp-&gt;next</code>了，不需要prev的参与。</p>
+<p>但这里是单向链表，我们还是要有一个临时指针指向temp的前者的，也塞进去循环里就可以了，然后进行一样的操作。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">prev<span class="token operator">-></span>next <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>
+<p>没找到的话，那我们这个while的操作一直运行，直到temp变成了链表尾部的next，即就是空指针NULL。</p>
+<p><strong>那prev指向的结点就是原链表尾部，temp为nullptr的话，那temp就没有next的值。这样的话进行最后一步就会报错，注意这里的内存管理。</strong></p>
+<p>这里选择用语句直接包揽1和2情况。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+   <span class="token punctuation">&#123;</span>
+       <span class="token keyword">return</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p>这里体现删除的操作的时间复杂度为O(n)。</p>
+</li>
+</ul>
+<hr>
+</li>
+</ul>
+<h3 id="链表的显示输出">链表的显示输出</h3>
+<p>很简单，从头开始while循环输出值即可。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">printList</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>head<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    Node <span class="token operator">*</span>temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span> temp<span class="token operator">-></span>data <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>也是从头遍历到尾部，时间复杂度为O(n)。</p>
+<h2 id="链表的操作实战">链表的操作实战</h2>
+<h3 id="实战题目">实战题目</h3>
+<p>题目源于洛谷数据结构题单【数据结构1-1】线性表p1160<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1160">队列安排</a>。</p>
+<hr>
+<h3 id="非AC代码"><strong>非AC代码</strong></h3>
+<p><strong>采用基础的遍历来解决问题</strong>，在数据较小的时候可以满足结果，而数据较大时候因为O(n^2)的时间复杂度而导致TLE，解决方法见注释。</p>
+<details>
+  <summary>点击查看代码 </summary>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token comment">//面对大数据来写直接插入排序，时间复杂度为O(n^2)。</span>
+<span class="token comment">//插入排序与删除的优点是不需要额外的空间，缺点是查找时间复杂度较高。</span>
+<span class="token comment">//优化的话可以考虑利用哈希表，查找时间复杂度为O(1)，空间复杂度为O(n)</span>
+<span class="token comment">//另外一种方法是利用二叉搜索树，查找时间复杂度为O(nlogn)，空间复杂度为O(n)</span>
+<span class="token keyword">struct</span> <span class="token class-name">node</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>prev<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>next<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">bool</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">deleteValue</span><span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">printList</span><span class="token punctuation">(</span>node <span class="token operator">*</span>head<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    head<span class="token operator">-></span>id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    head<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    head<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token comment">// 重整顺序</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> k<span class="token punctuation">,</span> p<span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> k <span class="token operator">>></span> p<span class="token punctuation">;</span>
+        <span class="token keyword">bool</span> left <span class="token operator">=</span> <span class="token punctuation">(</span>p <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">insert</span><span class="token punctuation">(</span>head<span class="token punctuation">,</span> k<span class="token punctuation">,</span> i<span class="token punctuation">,</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// printList(head);</span>
+    <span class="token punctuation">&#125;</span>
+    cin <span class="token operator">>></span> m<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> id<span class="token punctuation">;</span>
+        <span class="token function">deleteValue</span><span class="token punctuation">(</span>head<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// printList(head);</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printList</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token comment">// 链表手写数据结构版本</span>
+
+<span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">bool</span> left<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    node <span class="token operator">*</span>newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    newNode<span class="token operator">-></span>id <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    newNode<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    newNode<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    node <span class="token operator">*</span>temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>left<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>id <span class="token operator">!=</span> k<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>next <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            temp<span class="token operator">-></span>next<span class="token operator">-></span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        newNode<span class="token operator">-></span>next <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        temp<span class="token operator">-></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        newNode<span class="token operator">-></span>prev <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>id <span class="token operator">!=</span> k<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>prev <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            head <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            temp<span class="token operator">-></span>prev<span class="token operator">-></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        newNode<span class="token operator">-></span>prev <span class="token operator">=</span> temp<span class="token operator">-></span>prev<span class="token punctuation">;</span>
+        temp<span class="token operator">-></span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        newNode<span class="token operator">-></span>next <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">deleteValue</span><span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> id<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    node <span class="token operator">*</span>temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>prior <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> temp<span class="token operator">-></span>id <span class="token operator">==</span> id<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        head <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        head<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span> <span class="token comment">// 这里可要可不要</span>
+        <span class="token keyword">delete</span> temp<span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token comment">// 删除头节点</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> temp<span class="token operator">-></span>id <span class="token operator">!=</span> id<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        prior <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    prior<span class="token operator">-></span>next <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    prior<span class="token operator">-></span>prev <span class="token operator">=</span> temp<span class="token operator">-></span>prev<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token operator">-></span>next <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+        temp<span class="token operator">-></span>next<span class="token operator">-></span>prev <span class="token operator">=</span> prior<span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> temp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">printList</span><span class="token punctuation">(</span>node <span class="token operator">*</span>head<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    node <span class="token operator">*</span>temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span> temp<span class="token operator">-></span>id <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</details>
+<hr>
+<h3 id="附经典解法哈希-双向链表AC代码。">附经典解法哈希+双向链表AC代码。</h3>
+<p><strong>优化代码，哈希将查找与删除的时间复杂度优化为O(1)，用空间换时间</strong>。</p>
+<details><summary>点击查看代码 </summary>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unordered_map></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>prev<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>next<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> k_id<span class="token punctuation">,</span> <span class="token keyword">int</span> new_id<span class="token punctuation">,</span> <span class="token keyword">bool</span> left<span class="token punctuation">,</span> unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> node<span class="token operator">*</span><span class="token operator">></span> <span class="token operator">&amp;</span>nodes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    node <span class="token operator">*</span>target <span class="token operator">=</span> nodes<span class="token punctuation">[</span>k_id<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    node <span class="token operator">*</span>newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    newNode<span class="token operator">-></span>id <span class="token operator">=</span> new_id<span class="token punctuation">;</span>
+    newNode<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    newNode<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    nodes<span class="token punctuation">[</span>new_id<span class="token punctuation">]</span> <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>left<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 插入到右侧</span>
+        newNode<span class="token operator">-></span>prev <span class="token operator">=</span> target<span class="token punctuation">;</span>
+        newNode<span class="token operator">-></span>next <span class="token operator">=</span> target<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>target<span class="token operator">-></span>next <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            target<span class="token operator">-></span>next<span class="token operator">-></span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        target<span class="token operator">-></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 插入到左侧</span>
+        newNode<span class="token operator">-></span>next <span class="token operator">=</span> target<span class="token punctuation">;</span>
+        newNode<span class="token operator">-></span>prev <span class="token operator">=</span> target<span class="token operator">-></span>prev<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>target<span class="token operator">-></span>prev <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            target<span class="token operator">-></span>prev<span class="token operator">-></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            head <span class="token operator">=</span> newNode<span class="token punctuation">;</span> <span class="token comment">// 更新头节点</span>
+        <span class="token punctuation">&#125;</span>
+        target<span class="token operator">-></span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">deleteNode</span><span class="token punctuation">(</span>node <span class="token operator">*</span><span class="token operator">&amp;</span>head<span class="token punctuation">,</span> <span class="token keyword">int</span> id<span class="token punctuation">,</span> unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> node<span class="token operator">*</span><span class="token operator">></span> <span class="token operator">&amp;</span>nodes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nodes<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token operator">==</span> nodes<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    node <span class="token operator">*</span>target <span class="token operator">=</span> nodes<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 更新前驱节点</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>target<span class="token operator">-></span>prev <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        target<span class="token operator">-></span>prev<span class="token operator">-></span>next <span class="token operator">=</span> target<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        head <span class="token operator">=</span> target<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">// 删除的是头节点</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 更新后继节点</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>target<span class="token operator">-></span>next <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        target<span class="token operator">-></span>next<span class="token operator">-></span>prev <span class="token operator">=</span> target<span class="token operator">-></span>prev<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    nodes<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> target<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">printList</span><span class="token punctuation">(</span>node <span class="token operator">*</span>head<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    node <span class="token operator">*</span>temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>temp <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span> temp<span class="token operator">-></span>id <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> temp<span class="token operator">-></span>id <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        temp <span class="token operator">=</span> temp<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    head<span class="token operator">-></span>id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    head<span class="token operator">-></span>prev <span class="token operator">=</span> head<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> node<span class="token operator">*</span><span class="token operator">></span> nodes<span class="token punctuation">;</span>
+    nodes<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> head<span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> k<span class="token punctuation">,</span> p<span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> k <span class="token operator">>></span> p<span class="token punctuation">;</span>
+        <span class="token function">insert</span><span class="token punctuation">(</span>head<span class="token punctuation">,</span> k<span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> p <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">,</span> nodes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    cin <span class="token operator">>></span> m<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>m<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> id<span class="token punctuation">;</span>
+        <span class="token function">deleteNode</span><span class="token punctuation">(</span>head<span class="token punctuation">,</span> id<span class="token punctuation">,</span> nodes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">printList</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 释放内存</span>
+    node <span class="token operator">*</span>current <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>current<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        node <span class="token operator">*</span>next <span class="token operator">=</span> current<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token keyword">delete</span> current<span class="token punctuation">;</span>
+        current <span class="token operator">=</span> next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</details>
+<hr>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/" title="Typora激活成功"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/skygirl.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Typora激活成功</div></div><div class="info-2"><div class="info-item-1">Typora激活成功 记录typora激活，参考教程是CSDN。 苦于一些2022教程里面一些大佬的脚本被Ban掉无法git...</div></div></div></a><a class="pagination-related" href="/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/" title="记录与计划"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/umshojo.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">记录与计划</div></div><div class="info-2"><div class="info-item-1">记录与计划 记录一些最近的小成就。🥳 购买域名，实现国内浏览✅ 之前在github pages默认的.github.io实现博客部署，在国内访问也太困难了，本来一直很苦恼于这个问题。 但最近，于2025.3.1在namesilo购买了moyuin.top域名，并交给cloudflare托管，将github...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/03/19/xue-xi/shu-ju-jie-gou/kmp-suan-fa/" title="KMP算法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/umshojo.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-03-19</div><div class="info-item-2">KMP算法</div></div><div class="info-2"><div class="info-item-1">记录KMP算法的一些知识，先记录一些模板话，之后理解了后修改一通。</div></div></div></a><a class="pagination-related" href="/2025/03/20/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-shu/" title="树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/catwalking.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-03-20</div><div class="info-item-2">树</div></div><div class="info-2"><div class="info-item-1">树的知识，概念为重</div></div></div></a><a class="pagination-related" href="/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/" title="数据结构课程注意事项"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/umshojo.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="fas fa-history fa-fw"></i> 2025-02-18</div><div class="info-item-2">数据结构课程注意事项</div></div><div class="info-2"><div class="info-item-1">数据结构课程注意事项 课程考核总览  小组作业： · 个人小主题 · 双匿名评分 · ppt转pdf · 评分量表 小班讨论：  个人资料 需要表达清楚，涉及算法用人能看懂的东西来写，像论文一样写。 文字越多看的懂的人越少，善用图表，语言简练清晰。  小组报告： 讨论课需要录音嵌入。  线上学习： · 刷够时长500分钟 · 有线上测试，拍照上传 实验：  在超星平台上提交。 </div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">数据结构-线性表笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-text">链表的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-text">单向链表的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-text">双向链表的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8-%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-text">块状链表,循环链表的创建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5"><span class="toc-text">链表的插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E7%BB%93%E7%82%B9%E5%88%A0%E9%99%A4"><span class="toc-text">链表的结点删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%98%BE%E7%A4%BA%E8%BE%93%E5%87%BA"><span class="toc-text">链表的显示输出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C%E5%AE%9E%E6%88%98"><span class="toc-text">链表的操作实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E9%A2%98%E7%9B%AE"><span class="toc-text">实战题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9EAC%E4%BB%A3%E7%A0%81"><span class="toc-text">非AC代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E7%BB%8F%E5%85%B8%E8%A7%A3%E6%B3%95%E5%93%88%E5%B8%8C-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8AC%E4%BB%A3%E7%A0%81%E3%80%82"><span class="toc-text">附经典解法哈希+双向链表AC代码。</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Moyuin</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getCount = () => {
+    const countElement = document.getElementById('twikoo-count')
+    if (!countElement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.moyuin.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countElement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const getDeviceInfo = (userAgent) => {
+    if (/Windows NT 10/.test(userAgent)) return "Windows 10"
+    if (/Macintosh/.test(userAgent)) return "MacOS"
+    if (/iPhone/.test(userAgent)) return "iPhone"
+    if (/Android/.test(userAgent)) return "Android"
+    return "未知设备"
+  }
+
+  const getIPInfo = async (ip) => {
+    try {
+      let res = await fetch(`https://api.ip.sb/geoip/${ip}`)
+      let data = await res.json()
+      return `${data.country} · ${data.city}`
+    } catch (e) {
+      return "未知位置"
+    }
+  }
+
+  const updateTwikooMeta = async () => {
+    document.querySelectorAll('.tk-meta').forEach(async (meta) => {
+      let ip = meta.getAttribute('data-ip')
+      let userAgent = meta.getAttribute('data-ua')
+      
+      let ipInfo = ip ? await getIPInfo(ip) : "未知位置"
+      let deviceInfo = userAgent ? getDeviceInfo(userAgent) : "未知设备"
+
+      meta.innerHTML += ` | ${ipInfo} | ${deviceInfo}`
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo.moyuin.top/',
+      region: '',
+      onCommentLoaded: () => {
+        updateTwikooMeta()
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+    
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="117, 117, 235" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
