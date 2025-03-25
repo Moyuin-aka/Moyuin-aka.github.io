@@ -1,0 +1,250 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>标签: 学习 | Moyuin's Note</title><meta name="author" content="Moyuin"><meta name="copyright" content="Moyuin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0E0E0E"><meta name="description" content="这里记录我的技术栈和生活点滴。">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="website">
+<meta property="og:title" content="Moyuin&#39;s Note">
+<meta property="og:url" content="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Moyuin&#39;s Note">
+<meta property="og:description" content="这里记录我的技术栈和生活点滴。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://origin.moyuin.top/img/catavatar.jpg">
+<meta property="article:author" content="Moyuin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://origin.moyuin.top/img/catavatar.jpg"><link rel="shortcut icon" href="/img/MyIcon.png"><link rel="canonical" href="https://origin.moyuin.top/tags/%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0E0E0E')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#E0E0E0')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+          
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '标签: 学习',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'tag'
+}</script><link rel="stylesheet" href="/css/fontSetting.css"><link rel="stylesheet" href="/css/mystyle.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/runtime.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Moyuin's Note" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/catavatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-list"></i><span> 推荐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://moyuin.top/"><i class="fa-fw fas fa-star"></i><span> 家</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/title/fukas.jpg&quot;);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Moyuin's Note</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-list"></i><span> 推荐</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://moyuin.top/"><i class="fa-fw fas fa-star"></i><span> 家</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">学习</h1></div></header><main class="layout hide-aside" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2025/03/25/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-tu/" title="数据结构-图"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/starfalls.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构-图"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/03/25/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-tu/" title="数据结构-图">数据结构-图</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-25T02:39:49.000Z" title="发表于 2025-03-25 10:39:49">2025-03-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">图的笔记</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/03/25/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-shu-yu-dui/" title="树与堆"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/zhuoya.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="树与堆"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/03/25/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-shu-yu-dui/" title="树与堆">树与堆</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-25T01:10:59.000Z" title="发表于 2025-03-25 09:10:59">2025-03-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">树与堆的知识，懂了就写实现</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/03/19/xue-xi/shu-ju-jie-gou/kmp-suan-fa/" title="KMP算法"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/umshojo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="KMP算法"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/03/19/xue-xi/shu-ju-jie-gou/kmp-suan-fa/" title="KMP算法">KMP算法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-19T14:34:44.000Z" title="发表于 2025-03-19 22:34:44">2025-03-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">记录KMP算法的一些知识，先记录一些模板话，之后理解了后修改一通。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/03/16/xue-xi/shu-xue/gao-shu-duo-yuan-wei-fen/" title="高数"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/skygirl.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高数"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/03/16/xue-xi/shu-xue/gao-shu-duo-yuan-wei-fen/" title="高数">高数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-16T15:47:25.000Z" title="发表于 2025-03-16 23:47:25">2025-03-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/">高等数学</a></span></div><div class="content">高数笔记，多元微分</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/" title="HNUCTF2024新生杯writeup"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/catwalking.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HNUCTF2024新生杯writeup"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/" title="HNUCTF2024新生杯writeup">HNUCTF2024新生杯writeup</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-05T05:13:51.000Z" title="发表于 2025-03-05 13:13:51">2025-03-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CTF%E5%AD%A6%E4%B9%A0/">CTF学习</a></span></div><div class="content">我的第一场CTF。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/" title="数据结构-线性表笔记"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/walking.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构-线性表笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/26/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-xian-xing-biao-bi-ji/" title="数据结构-线性表笔记">数据结构-线性表笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-26T09:53:40.000Z" title="发表于 2025-02-26 17:53:40">2025-02-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">数据结构-线性表笔记 普通的数组与出入栈在STL很好用，但是涉及链表进行指针操作较为薄弱，因此记录一下链表的操作。  链表的创建 单向链表的创建 struct Node // 创建单向链表 &#123;     int data; //数据     Node *next;...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/" title="Typora激活成功"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/catandgirl.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Typora激活成功"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/" title="Typora激活成功">Typora激活成功</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-24T14:05:11.000Z" title="发表于 2025-02-24 22:05:11">2025-02-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a></span></div><div class="content">Typora激活成功 记录typora激活，参考教程是CSDN。 苦于一些2022教程里面一些大佬的脚本被Ban掉无法git...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/23/xue-xi/shu-xue/shu-xie-zhen-zhi-biao-zhu-yi-shi-xiang/" title="书写真值表注意事项"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/umshojo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="书写真值表注意事项"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/23/xue-xi/shu-xue/shu-xie-zhen-zhi-biao-zhu-yi-shi-xiang/" title="书写真值表注意事项">书写真值表注意事项</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-23T14:58:50.000Z" title="发表于 2025-02-23 22:58:50">2025-02-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></span></div><div class="content">书写真值表注意事项 G老师给的  1. 书写真值表的格式 一般来说，真值表的格式是 表格状，每一列对应一个变量或计算结果，每一行代表一种可能情况： | A | B | 计算结果 | |:-:|:-:|:-:| | 0 | 0 | ? | | 0 | 1 | ? | | 1 | 0 | ? | | 1 | 1 | ?...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/" title="数据结构课程注意事项"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/zhuoya.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构课程注意事项"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/" title="数据结构课程注意事项">数据结构课程注意事项</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-18T02:42:59.000Z" title="发表于 2025-02-18 10:42:59">2025-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content">数据结构课程注意事项 课程考核总览  小组作业： · 个人小主题 · 双匿名评分 · ppt转pdf · 评分量表 小班讨论：  个人资料 需要表达清楚，涉及算法用人能看懂的东西来写，像论文一样写。 文字越多看的懂的人越少，善用图表，语言简练清晰。  小组报告： 讨论课需要录音嵌入。  线上学习： · 刷够时长500分钟 · 有线上测试，拍照上传 实验：  在超星平台上提交。 </div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/" title="渗透学习"><img class="post-bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/title/starfalls.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="渗透学习"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/" title="渗透学习">渗透学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-02-06T14:11:25.000Z" title="发表于 2025-02-06 22:11:25">2025-02-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CTF%E5%AD%A6%E4%B9%A0/">CTF学习</a></span></div><div class="content">🛡 CTF 学习计划 GPT给的 📌 第 1 阶段：环境搭建    任务 推荐资源     安装 Kali Linux（VMware/VirtualBox） Kali 官方网站   配置 Web 渗透工具（Burp Suite, sqlmap） Burp Suite 文档, sqlmap GitHub   安装 pwn 调试工具（gdb, pwndbg, ropper） pwndbg...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By Moyuin</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="117, 117, 235" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => <!-- hexo-inject:begin --><!-- hexo-inject:end -->{
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
