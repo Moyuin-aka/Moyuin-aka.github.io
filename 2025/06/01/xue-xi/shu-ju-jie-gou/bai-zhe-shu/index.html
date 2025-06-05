@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>败者树 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="败者树 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/06/01/xue-xi/shu-ju-jie-gou/bai-zhe-shu/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-06-01T12:06:46.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/数据结构/">数据结构</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>June</span>
+            <span>1,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">败者树</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">多路归并外排序: 败者树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E6%8E%92%E5%BA%8F%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="toc-number">1.1.</span> <span class="toc-text">外排序基本思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%B7%AF%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">多路归并排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A5%E8%80%85%E6%A0%91%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.</span> <span class="toc-text">败者树结构与实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A5%E8%80%85%E6%A0%91%E7%9A%84%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="toc-number">1.3.1.</span> <span class="toc-text">败者树的结构图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E6%A0%91%E4%B8%8E%E7%BB%B4%E6%8A%A4%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">建树与维护过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%B4%A5%E8%80%85%E6%A0%91"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">建立败者树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%B4%E6%8A%A4%E8%B4%A5%E8%80%85%E6%A0%91"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">维护败者树</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%A4%9A%E8%B7%AF%E5%BD%92%E5%B9%B6%E6%96%87%E4%BB%B6%E6%B5%81"><span class="toc-number">1.4.</span> <span class="toc-text">代码实现与多路归并文件流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E5%9E%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E2%80%9C%E7%BD%91%E9%A1%B5%E6%8E%92%E5%90%8D%E5%BD%92%E5%B9%B6%E2%80%9D"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">大型搜索引擎的“网页排名归并”</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E7%9B%98-%E7%BD%91%E7%9B%98%E7%9A%84%E5%A4%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">云盘&#x2F;网盘的多服务器文件同步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E2%80%9C%E5%A4%9A%E8%B7%AF%E4%B8%AA%E6%80%A7%E5%8C%96%E5%80%99%E9%80%89%E9%9B%86%E5%BD%92%E5%B9%B6%E2%80%9D"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">视频推荐系统的“多路个性化候选集归并”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">性能优缺点分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.6.1.</span> <span class="toc-text">时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E6%A0%91%EF%BC%88%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%89"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">建树（初始化）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%93%8D%E4%BD%9C%EF%BC%88%E6%AF%8F%E6%AC%A1%E8%BE%93%E5%87%BA%E6%9C%80%E5%B0%8F%E5%80%BC%EF%BC%89"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">归并操作（每次输出最小值）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.6.2.</span> <span class="toc-text">空间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E5%BD%92%E5%B9%B6%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-number">1.6.3.</span> <span class="toc-text">与其他归并方法对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.6.4.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">1.6.5.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.7.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>多路归并外排序: 败者树</h1>
+<h2 id="外排序基本思想">外排序基本思想</h2>
+<p><strong>外排序</strong>是指数据量太大，无法一次性全部装入内存时，借助外存（磁盘）进行排序。<br>
+常用方法是<strong>多路归并排序</strong>，即先将数据分成若干“归并段”，每次归并时只将部分数据读入内存。<br>
+一般来说它的优点有这三种：</p>
+<ul>
+<li>
+<p>处理大规模数据集：当数据集太大，无法在计算机的内存中完全装入时，外部排序算法是一个很好的选择。例如，在<strong>处理大型数据库或超大规模文件</strong>时，通常需要使用外部排序算法。</p>
+</li>
+<li>
+<p>节约内存：当内存受限时，外部排序算法也是很有用的。例如，在移动设备等资源受限的计算机上运行排序操作时，使用外部排序算法可以避免占用过多的内存。</p>
+</li>
+<li>
+<p>并行处理：外部排序算法还可以通过将数据集分成多个块并对每个块进行并行处理来进一步提高性能。这意味着可以使用多个处理器或计算机来同时处理数据集，从而加快排序速度。</p>
+</li>
+</ul>
+<p><strong>败者树就是为了并行处理，而构造的一种树。</strong></p>
+<hr>
+<h2 id="多路归并排序">多路归并排序</h2>
+<p>想象一下，家里突然来了一大堆快递包裹，每个包裹里装着不同年代的明信片。<br>
+我想把所有明信片按时间顺序排列，但家里的桌子太小，没办法一次性摊开全部包裹。怎么办？<br>
+只能<strong>分批处理</strong>——这就是“外排序”的现实版，没法直接一次性处理好这些数据。</p>
+<p><strong>多路归并排序</strong>的套路就像开 k 个快递包裹，每次从每个包裹里抽一张<strong>最特殊的明信片</strong>（最年代久远的，或者是最年轻的），摆成一排，不断重复，直到所有包裹都拆完。最后我们就得到了一个基于特殊程度顺序的，明信片排列。我们把所有的拆开，一步一步组合，最后得到归并顺序，这就是<strong>k路归并</strong>。<br>
+<img src="https://pic.moyuin.top/2025/06/01/683c1f85dc62e.png" alt=""></p>
+<p>一开始我们只有使用堆来完成多路归并，但是人们发现堆每次取出最小值之后，把最后一个数放到堆顶，调整堆的时候，<strong>每次都要选出父节点的两个孩子节点的最小值</strong>，<strong>然后再用孩子节点的最小值和父节点进行比较，所以每调整一层需要比较两次</strong>。</p>
+<p>这时人们想能否简化比较过程，这时就有了<strong>胜者树</strong>：<br>
+<img src="https://pic.moyuin.top/2025/06/01/683c1c9c998fd.png" alt=""><br>
+这样<strong>每次比较只用跟自己的兄弟节点进行比较</strong>就好，所以用胜者树可以比堆少一半的比较次数。</p>
+<p>而胜者树在节点上升的时候，需要获得父节点，然后再获得兄弟节点，然后再比较，判断要不要上升。<br>
+这时人们又想能否再次减少读取节点的次数，于是就有了<strong>败者树</strong>。<br>
+<img src="https://pic.moyuin.top/2025/06/01/683c1de998f2e.png" alt=""></p>
+<p>在使用败者树的时候，每个新元素上升时，只需要获得父节点并比较即可。</p>
+<p>那么胜者树，败者树到底有什么区别呢？</p>
+<blockquote>
+<p>败者树是胜者树的一种变体，它也是一棵完全二叉树。和胜者树不同的是，败者树的节点存储的是败者。<br>
+一般采用数组模拟胜者树或败者树的结构，所以胜者树、败者树选哪一个都行，胜者树相比败者树要少维护一个冠军项。<br>
+败者树便于查找、更新和归并输出胜者。</p>
+</blockquote>
+<hr>
+<h2 id="败者树结构与实现">败者树结构与实现</h2>
+<h3 id="败者树的结构图">败者树的结构图</h3>
+<p>基础图形，特殊于树顶有一个唯一值胜者：</p>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TD
+	W<span class="token text string">["🥇胜者的索引 i"]</span>
+    A<span class="token text string">["🥈败者第1名的索引 i"]</span>
+    B1<span class="token text string">["败者索引 i"]</span>
+    B2<span class="token text string">["败者索引 i"]</span>
+    C1<span class="token text string">["选手1"]</span>
+    C2<span class="token text string">["选手2"]</span>
+    C3<span class="token text string">["选手3"]</span>
+    C4<span class="token text string">["选手4"]</span>
+    W <span class="token arrow operator">--></span> A
+    A <span class="token arrow operator">--></span> B1
+    A <span class="token arrow operator">--></span> B2
+    B1 <span class="token arrow operator">--></span> C1
+    B1 <span class="token arrow operator">--></span> C2
+    B2 <span class="token arrow operator">--></span> C3
+    B2 <span class="token arrow operator">--></span> C4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基础分析（定最小者赢）：<br>
+<img src="https://pic.moyuin.top/2025/06/01/683c207f36868.png" alt=""></p>
+<h3 id="建树与维护过程">建树与维护过程</h3>
+<h4 id="建立败者树">建立败者树</h4>
+<p>让我们建立一个败者树，<code>ls[0]</code>,<code>ls[1]</code>, <code> ls[2]</code>, <code> ls[3]</code>, <code>ls[4]</code> 是败者树的内部节点（即非叶子节点），存储每一轮败者的索引，b0~b4是败者树的叶子节点。<br>
+败者树的每个节点存储的都是两两比较的败者（数大者败，我们先要求出的是各归并路中的最小嘛）在原数组中的索引。</p>
+<ol>
+<li>
+<p><code>b3</code> 和 <code>b4</code> 比较，<code>b3</code> &lt; <code>b4</code>, <code>b4</code> 败。所以父节点 <code>ls[4]=4</code>. 胜者是 <code>b3</code>, 所以 3 就晋级下一轮与 <code>b0</code> 比较（图中树的边上的数字就是晋级的选手编号）</p>
+</li>
+<li>
+<p><code>b0</code> 与 <code>b3</code> 比较, <code> b3</code> &lt; <code>b0</code>, <code>b0</code> 败, 所以父节点 <code>ls[2]=0</code>, 胜者是 <code>b3</code>，所以 3 就晋级下一轮与另一边晋级的比较</p>
+</li>
+<li>
+<p><code>b1</code> 与 <code>b2</code> 比较, <code>b1</code> &lt; <code>b2</code>, <code>b2</code> 败, 所以父节点 <code>ls[3]=2</code>. 胜者是 <code>b1</code>, 所以1就晋级下一轮与b3会师总决赛。</p>
+</li>
+<li>
+<p><code>b1</code> 与 <code>b3</code> 比较, <code>b3</code> &lt; <code>b1</code>, <code>b1</code> 败, 所以父节点 <code>ls[1]=1</code>. 胜者是 <code>b3</code>, 所以 <code>ls[0]</code> 记录最终胜者3。排序最小值，算法输出 <code> b[3]</code>（原数组中最小）。<br>
+最后构造成功：</p>
+</li>
+</ol>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TD
+
+    <span class="token keyword">subgraph</span> <span class="token string">"最终败者树结构与节点值"</span>
+        LS0_final<span class="token text string">["ls[0]=3 (总胜者索引)"]</span>
+        LS1_final<span class="token text string">["ls[1]=1 (败者索引)"]</span>
+        LS2_final<span class="token text string">["ls[2]=0 (败者索引)"]</span>
+        LS3_final<span class="token text string">["ls[3]=2 (败者索引)"]</span>
+        LS4_final<span class="token text string">["ls[4]=4 (败者索引)"]</span>
+
+        B0_f<span class="token text string">["b0 (10)"]</span>
+        B1_f<span class="token text string">["b1 (5)"]</span>
+        B2_f<span class="token text string">["b2 (8)"]</span>
+        B3_f<span class="token text string">["b3 (2)"]</span>
+        B4_f<span class="token text string">["b4 (12)"]</span>
+
+        LS0_final <span class="token arrow operator">--></span> LS1_final
+        LS1_final <span class="token arrow operator">--></span> LS2_final
+        LS1_final <span class="token arrow operator">--></span> LS3_final
+        LS2_final <span class="token arrow operator">--></span> B0_f
+        LS2_final <span class="token arrow operator">--></span> LS4_final
+        LS4_final <span class="token arrow operator">--></span> B3_f
+        LS4_final <span class="token arrow operator">--></span> B4_f
+        LS3_final <span class="token arrow operator">--></span> B1_f
+        LS3_final <span class="token arrow operator">--></span> B2_f
+
+        <span class="token keyword">style</span> LS0_final <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#90EE90<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#006400<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>
+        <span class="token keyword">style</span> LS1_final <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#D3D3D3<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333</span>
+        <span class="token keyword">style</span> LS2_final <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#D3D3D3<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333</span>
+        <span class="token keyword">style</span> LS3_final <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#D3D3D3<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333</span>
+        <span class="token keyword">style</span> LS4_final <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#D3D3D3<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333</span>
+        <span class="token keyword">style</span> B3_f <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#ADFF2F<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333</span> <span class="token comment">%% Highlight the winner leaf</span>
+    <span class="token keyword">end</span>
+
+    <span class="token comment">%% Styling</span>
+    <span class="token keyword">classDef</span> playerNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#FFFACD<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#B8860B<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>1px</span><span class="token punctuation">;</span>
+    <span class="token keyword">class</span> B0,B1,B2,B3,B4 playerNode<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> B0_f,B1_f,B2_f,B3_f,B4_f playerNode<span class="token punctuation">;</span>
+
+    <span class="token keyword">classDef</span> stepNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#ADD8E6<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#4682B4<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>1px<span class="token punctuation">,</span><span class="token property">border-radius</span><span class="token operator">:</span>5px</span><span class="token punctuation">;</span>
+    <span class="token keyword">class</span> Step1,Step2,Step3,Step4,Step5 stepNode<span class="token punctuation">;</span>
+
+    <span class="token keyword">classDef</span> winnerNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#FFA07A<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#CD5C5C<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>1px<span class="token punctuation">,</span><span class="token property">shape</span><span class="token operator">:</span>capsule</span><span class="token punctuation">;</span>
+    <span class="token keyword">class</span> Step1_W,Step2_W,Step3_W,Step4_W winnerNode<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="维护败者树">维护败者树</h4>
+<p>我们一般用&quot;<strong>更新</strong>&quot;来说明败者树的维护：</p>
+<p>我们来了一个新的成员，走了一个成员，想要让它加入后重塑这颗树，实现<strong>败者树的更新</strong>。<br>
+可以想象成<strong>晋级赛</strong>：上一轮的冠军带着“新人”重新参加比赛，只需要重新打一遍自己走过的那条“晋级之路”，而其它归并段（叶子）完全不用重新比较。每次归并输出和更新，最多只需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>k</mi></mrow><annotation encoding="application/x-tex">\log_2 k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 次比较。</p>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TD
+    <span class="token keyword">direction</span> TB
+    <span class="token comment">%% 败者树维护（插入/替换）后的状态</span>
+    <span class="token comment">%% 原冠军 b3(值2) 被 新b3(值6) 替换</span>
+    <span class="token comment">%% 调整后, 新冠军为 b1(值5)</span>
+
+    LS0_m<span class="token text string">["ls[0]=1 (新胜者: b1[5])&lt;br/>(原ls[0]=3)"]</span>
+    LS1_m<span class="token text string">["ls[1]=3 (新败者: 新b3[6])&lt;br/>(原ls[1]=1)"]</span>
+    LS2_m<span class="token text string">["ls[2]=0 (败者: b0[10])&lt;br/>(调整路径节点, 值未变)"]</span>
+    LS3_m<span class="token text string">["ls[3]=2 (败者: b2[8])&lt;br/>(非调整路径节点)"]</span>
+    LS4_m<span class="token text string">["ls[4]=4 (败者: b4[12])&lt;br/>(调整路径节点, 值未变)"]</span>
+
+    B0_m<span class="token text string">["b0 (10)"]</span>
+    B1_m<span class="token text string">["b1 (5)"]</span>
+    B2_m<span class="token text string">["b2 (8)"]</span>
+    B3_m<span class="token text string">["新b3 (6)&lt;br/>(原b3值: 2)"]</span>
+    B4_m<span class="token text string">["b4 (12)"]</span>
+
+    LS0_m <span class="token arrow operator">--></span> LS1_m
+    LS1_m <span class="token arrow operator">--></span> LS2_m
+    LS1_m <span class="token arrow operator">--></span> LS3_m
+    LS2_m <span class="token arrow operator">--></span> B0_m
+    LS2_m <span class="token arrow operator">--></span> LS4_m
+    LS4_m <span class="token arrow operator">--></span> B3_m
+    LS4_m <span class="token arrow operator">--></span> B4_m
+    LS3_m <span class="token arrow operator">--></span> B1_m
+    LS3_m <span class="token arrow operator">--></span> B2_m
+
+    <span class="token keyword">classDef</span> defaultLeaf <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#FFFACD<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#B8860B</span><span class="token punctuation">;</span>
+    <span class="token keyword">classDef</span> changedLeaf <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#lightblue<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#0000FF<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span>
+    <span class="token keyword">classDef</span> newWinnerLeaf <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#ADFF2F<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#006400<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">classDef</span> pathChangedNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#90EE90<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#006400<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span>
+    <span class="token keyword">classDef</span> pathUnchangedNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#lightyellow<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>1px<span class="token punctuation">,</span><span class="token property">stroke-dasharray</span><span class="token operator">:</span>5 5</span><span class="token punctuation">;</span>
+    <span class="token keyword">classDef</span> notOnPathNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#D3D3D3<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">class</span> LS0_m,LS1_m pathChangedNode<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> LS2_m,LS4_m pathUnchangedNode<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> LS3_m notOnPathNode<span class="token punctuation">;</span>
+    
+    <span class="token keyword">class</span> B0_m,B2_m,B4_m defaultLeaf<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> B3_m changedLeaf<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> B1_m newWinnerLeaf<span class="token punctuation">;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<p>我们插入一个新的节点 b5(4)，步骤也很简单：</p>
+<p>让新选手 <code>b5</code> 与现有选手 <code>b4</code> 进行比赛。我们需要一个新的内部节点（我们称之为 <code>ls[5]</code>）来存储这场比赛的败者。</p>
+<ul>
+<li><code>b5(4)</code> vs <code>b4(12)</code>：胜者是 <code>b5(4)</code>，败者是 <code>b4(12)</code>。所以 <code>ls[5]</code> 记录败者 <code>b4</code> 的索引 <code>4</code>。</li>
+<li>然后，这场 <code>(b5 vs b4)</code> 的胜者 (<code>b5</code>) 再与原先和 <code>b4</code> 比赛的 <code>b3</code> 进行比赛。原先存储 <code>(b3 vs b4)</code> 败者的节点 <code>ls[4]</code> 现在将存储这场 <code>(b3 vs 胜者(b5,b4))</code> 比赛的败者。<br>
+<code>b3(2)</code> vs <code>b5(4)</code>：胜者是 <code>b3(2)</code>，败者是 <code>b5(4)</code>。所以 <code>ls[4]</code> 记录败者 <code>b5</code> 的索引 <code>5</code>。</li>
+<li>这个胜者 <code>b3(2)</code> 继续沿用原有的路径向上比赛：<br>
+与 <code>b0(10)</code> 比赛：胜者 <code>b3(2)</code>，败者 <code>b0(10)</code>。<code>ls[2]</code> 记录败者 <code>b0</code> 的索引 <code>0</code> (此节点值未变)。</li>
+<li>树的另一分支 (<code>b1</code> vs <code>b2</code>) 不受影响：<br>
+<code>b1(5)</code> vs <code>b2(8)</code>：胜者 <code>b1(5)</code>，败者 <code>b2(8)</code>。<code>ls[3]</code> 记录败者 <code>b2</code> 的索引 <code>2</code> (此节点值未变)。</li>
+<li>最终决赛：<br>
+来自 <code>ls[2]</code> 分支的胜者 <code>b3(2)</code> vs 来自 <code>ls[3]</code> 分支的胜者 <code>b1(5)</code>：胜者 <code>b3(2)</code>，败者 <code>b1(5)</code>。<code>ls[1]</code> 记录败者 <code>b1</code> 的索引 <code>1</code> (此节点值未变)。</li>
+<li>总冠军：<br>
+<code>ls[0]</code> 记录总冠军 <code>b3</code> 的索引 <code>3</code> (此节点值未变)。</li>
+</ul>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TD
+    <span class="token keyword">direction</span> TB
+    <span class="token comment">%% 败者树添加新节点 b5(4) 后的状态</span>
+    <span class="token comment">%% 原有选手: b0(10), b1(5), b2(8), b3(2), b4(12)</span>
+    <span class="token comment">%% 新增选手: b5(4) (值为4, 索引为5)</span>
+    <span class="token comment">%% 数小者胜</span>
+
+    LS0<span class="token text string">["ls[0]=3 (总胜者: b3[2])"]</span>
+    LS1<span class="token text string">["ls[1]=1 (败者: b1[5])"]</span>
+    LS2<span class="token text string">["ls[2]=0 (败者: b0[10])"]</span>
+    LS3<span class="token text string">["ls[3]=2 (败者: b2[8])"]</span>
+    LS4_mod<span class="token text string">["ls[4]=5 (败者: b5[4])"  ]</span>
+    LS5_new<span class="token text string">["ls[5]=4 (败者: b4[12]) "]</span>
+
+    B0<span class="token text string">["b0 (10)"]</span>
+    B1<span class="token text string">["b1 (5)"]</span>
+    B2<span class="token text string">["b2 (8)"]</span>
+    B3<span class="token text string">["b3 (2)"]</span>
+    B4<span class="token text string">["b4 (12)"]</span>
+    B5<span class="token text string">["b5 (4)"]</span>
+
+    LS0 <span class="token arrow operator">--></span> LS1
+    LS1 <span class="token arrow operator">--></span> LS2
+    LS1 <span class="token arrow operator">--></span> LS3
+        LS2 <span class="token arrow operator">--></span> B0
+        LS2 <span class="token arrow operator">--></span> LS4_mod
+            LS4_mod <span class="token arrow operator">--></span> B3
+            LS4_mod <span class="token arrow operator">--></span> LS5_new  
+                LS5_new <span class="token arrow operator">--></span> B4
+                LS5_new <span class="token arrow operator">--></span> B5
+        LS3 <span class="token arrow operator">--></span> B1
+        LS3 <span class="token arrow operator">--></span> B2
+
+    <span class="token keyword">classDef</span> defaultLeaf <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#FFFACD<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#B8860B</span><span class="token punctuation">;</span>
+    <span class="token keyword">classDef</span> newLeaf <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#FFDAB9<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#FF8C00<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span>
+    <span class="token keyword">classDef</span> winnerLeaf <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#ADFF2F<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#006400<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">classDef</span> winnerNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#90EE90<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#006400<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span>
+    <span class="token keyword">classDef</span> loserNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#D3D3D3<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#333</span><span class="token punctuation">;</span> 
+    <span class="token keyword">classDef</span> newInternalNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#E6E6FA<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#9370DB<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span> 
+    <span class="token keyword">classDef</span> modifiedInternalNode <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#ADD8E6<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#4682B4<span class="token punctuation">,</span><span class="token property">font-weight</span><span class="token operator">:</span>bold</span><span class="token punctuation">;</span> 
+
+    <span class="token keyword">class</span> LS0 winnerNode<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> LS1,LS2,LS3 loserNode<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> LS4_mod modifiedInternalNode<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> LS5_new newInternalNode<span class="token punctuation">;</span>
+
+    <span class="token keyword">class</span> B0,B1,B2,B4 defaultLeaf<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> B3 winnerLeaf<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> B5 newLeaf<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在多路归并排序里，<strong>败者树实现比胜者树更高效、更容易维护</strong>。更新只需沿着冠军的路径向上“重新比一遍”，而不用全部重算。</p>
+<hr>
+<h2 id="代码实现与多路归并文件流">代码实现与多路归并文件流</h2>
+<p>败者树的实现比较基础，其实和<strong>堆的构建</strong>很相似，我们做的是与相邻节点一直比较，然后将失败节点放在最上端即可。<br>
+这种排序思想其实与堆排序思想相似，败者树的优势在于我们处理查找最佳者，次佳者操作，效率更高。外排序的效率瓶颈从算法到了数据读取，胜者树和败者树都是很伟大的数据结构。</p>
+<p><strong>LoserTree</strong> 基本模板类例：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 败者树类模板，T为可比较类型，最小值胜</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">T</span><span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">LoserTree</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">// k为路数，sources为每一路的当前元素</span>
+    <span class="token function">LoserTree</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token operator">&amp;</span> sources<span class="token punctuation">)</span>
+        <span class="token operator">:</span> <span class="token function">k</span><span class="token punctuation">(</span>sources<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">leaves</span><span class="token punctuation">(</span>sources<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">ls</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 返回当前最小元素的下标</span>
+    <span class="token keyword">int</span> <span class="token function">winner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> winnerIdx<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 输出冠军，并用新元素替换，维护树结构</span>
+    <span class="token keyword">void</span> <span class="token function">popAndReplace</span><span class="token punctuation">(</span>T newElem<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        leaves<span class="token punctuation">[</span>winnerIdx<span class="token punctuation">]</span> <span class="token operator">=</span> newElem<span class="token punctuation">;</span>
+        <span class="token function">adjust</span><span class="token punctuation">(</span>winnerIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 获取当前冠军的值</span>
+    T <span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> leaves<span class="token punctuation">[</span>winnerIdx<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">;</span>                      <span class="token comment">// 路数</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>T<span class="token operator">></span> leaves<span class="token punctuation">;</span>      <span class="token comment">// 叶子节点（各路的当前值）</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ls<span class="token punctuation">;</span>        <span class="token comment">// 内部节点，存败者编号</span>
+    <span class="token keyword">int</span> winnerIdx<span class="token punctuation">;</span>              <span class="token comment">// 当前冠军编号</span>
+
+    <span class="token comment">// 建树：从叶子到根层层比较，初始化ls和winnerIdx</span>
+    <span class="token keyword">void</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        ls<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        winnerIdx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> k<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>leaves<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> leaves<span class="token punctuation">[</span>winnerIdx<span class="token punctuation">]</span><span class="token punctuation">)</span> winnerIdx <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> k<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">!=</span> winnerIdx<span class="token punctuation">)</span> <span class="token function">adjust</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 从叶i出发向上挑战，维护败者树</span>
+    <span class="token keyword">void</span> <span class="token function">adjust</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> parent <span class="token operator">=</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> k<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> challenger <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>parent <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// challenger与ls[parent]决出胜负，胜者上移</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>leaves<span class="token punctuation">[</span>challenger<span class="token punctuation">]</span> <span class="token operator">&lt;</span> leaves<span class="token punctuation">[</span>ls<span class="token punctuation">[</span>parent<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                std<span class="token double-colon punctuation">::</span><span class="token function">swap</span><span class="token punctuation">(</span>challenger<span class="token punctuation">,</span> ls<span class="token punctuation">[</span>parent<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            parent <span class="token operator">/=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// 根节点与当前winner比较</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>leaves<span class="token punctuation">[</span>challenger<span class="token punctuation">]</span> <span class="token operator">&lt;</span> leaves<span class="token punctuation">[</span>winnerIdx<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            std<span class="token double-colon punctuation">::</span><span class="token function">swap</span><span class="token punctuation">(</span>challenger<span class="token punctuation">,</span> winnerIdx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// 最终winnerIdx存冠军下标</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基本使用：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> sources <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token comment">// 各路的初始元素</span>
+LoserTree<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">tree</span><span class="token punctuation">(</span>sources<span class="token punctuation">)</span><span class="token punctuation">;</span>
+std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"当前冠军编号: "</span> <span class="token operator">&lt;&lt;</span> tree<span class="token punctuation">.</span><span class="token function">winner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">", 元素: "</span> <span class="token operator">&lt;&lt;</span> tree<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+
+<span class="token comment">// 假设弹出冠军后，路3有新元素8</span>
+tree<span class="token punctuation">.</span><span class="token function">popAndReplace</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"新冠军编号: "</span> <span class="token operator">&lt;&lt;</span> tree<span class="token punctuation">.</span><span class="token function">winner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">", 元素: "</span> <span class="token operator">&lt;&lt;</span> tree<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>结合文件流</strong>，多文件编程，我们可以对于多路归并，利用败者树，实现外排序：<br>
+我们写个文件头 <code>LoserTree.h</code>，比较好引用：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//LoserTree.h</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">LOSERTREE_H</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LOSERTREE_H</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;limits></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;memory></span></span>
+
+<span class="token comment">// ------- 单路输入流接口（可扩展为文件流/数组流/网络流等） -------</span>
+<span class="token keyword">struct</span> <span class="token class-name">InputStream</span> <span class="token punctuation">&#123;</span>
+    virtual bool <span class="token function">next</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span> val<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    virtual <span class="token operator">~</span><span class="token function">InputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 败者树类，适合多路归并外排序</span>
+class LoserTree <span class="token punctuation">&#123;</span>
+public<span class="token operator">:</span>
+    <span class="token comment">// 构造函数：输入k路流</span>
+    <span class="token function">LoserTree</span><span class="token punctuation">(</span>std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>std<span class="token operator">::</span>unique_ptr<span class="token operator">&lt;</span>InputStream<span class="token operator">>></span><span class="token operator">&amp;</span> streams<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token function">winner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>    <span class="token comment">// 当前冠军编号</span>
+    <span class="token keyword">int</span> <span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>       <span class="token comment">// 当前最小元素</span>
+    <span class="token keyword">void</span> <span class="token function">popAndReplace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出冠军，补新元素，维护树结构</span>
+    bool <span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>    <span class="token comment">// 判断是否归并结束</span>
+
+private<span class="token operator">:</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> INF <span class="token operator">=</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> leaves<span class="token punctuation">;</span>  <span class="token comment">// 当前各路的元素</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ls<span class="token punctuation">;</span>      <span class="token comment">// 内部节点存败者编号</span>
+    <span class="token keyword">int</span> winnerIdx<span class="token punctuation">;</span>            <span class="token comment">// 冠军编号</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>std<span class="token operator">::</span>unique_ptr<span class="token operator">&lt;</span>InputStream<span class="token operator">>></span><span class="token operator">&amp;</span> input_streams<span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// 初始建树</span>
+    <span class="token keyword">void</span> <span class="token function">adjust</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 沿冠军路径维护</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token comment">// LOSERTREE_H</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"LoserTree.h"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token comment">// 数组流实现</span>
+<span class="token keyword">struct</span> <span class="token class-name">VectorInputStream</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">InputStream</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> arr<span class="token punctuation">;</span>
+    size_t pos<span class="token punctuation">;</span>
+    <span class="token function">VectorInputStream</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> a<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">arr</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">pos</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">bool</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span> val<span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            val <span class="token operator">=</span> arr<span class="token punctuation">[</span>pos<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> arr1<span class="token punctuation">&#123;</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> arr2<span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> arr3<span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>unique_ptr<span class="token operator">&lt;</span>InputStream<span class="token operator">>></span> streams<span class="token punctuation">;</span>
+    streams<span class="token punctuation">.</span><span class="token function">emplace_back</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token function">VectorInputStream</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    streams<span class="token punctuation">.</span><span class="token function">emplace_back</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token function">VectorInputStream</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    streams<span class="token punctuation">.</span><span class="token function">emplace_back</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token function">VectorInputStream</span><span class="token punctuation">(</span>arr3<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    LoserTree <span class="token function">lt</span><span class="token punctuation">(</span>streams<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"败者树多路归并结果："</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>lt<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> val <span class="token operator">=</span> lt<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">!=</span> std<span class="token double-colon punctuation">::</span><span class="token class-name">numeric_limits</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token double-colon punctuation">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> val <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        lt<span class="token punctuation">.</span><span class="token function">popAndReplace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>只需实现 InputStream 接口，LoserTree 就能无缝适配各种归并源（如大文件、分布式流、数据库游标），这也是它工程实践中的巨大优势。</p>
+<hr>
+<h2 id="应用">应用</h2>
+<p><strong>败者树是非常高效的数据结构</strong>，适用于各种排序和选择问题。<br>
+在实际应用中，我们可以根据具体问题选择使用胜者树或败者树。对于需要频繁更新数据集的问题，胜者树是一个更好的选择；对于需要快速记录和查找比赛结果的问题，败者树则更加适用。这两种数据结构都可以在log(n)时间内完成最值查找和更新操作，具有很高的实用价值。</p>
+<h4 id="大型搜索引擎的“网页排名归并”">大型搜索引擎的“网页排名归并”</h4>
+<p>比如你在百度、Google搜索同一个关键词时，背后往往有成百上千台服务器分别给你算出“最相关的网页排名”，但最后这些排名结果需要快速合并成一个全局排名列表。<br>
+<strong>败者树</strong>就像一场高效的“锦标赛”，每次都能最快选出全体中“最优网页”，把全球各地的“榜首网页”按序输出，大大提高搜索响应速度。</p>
+<h4 id="云盘-网盘的多服务器文件同步">云盘/网盘的多服务器文件同步</h4>
+<p>比如阿里云盘、百度网盘要把全球多台服务器上的同步文件合成一个最终的时间线展示，这时候每台服务器的文件变动已经排好序，只需归并各路“文件事件”流。<br>
+败者树就是最好的选择，保证“<strong>最近的更新</strong>”总能优先显示，哪怕有成百上千台服务器，也能稳定工作。</p>
+<h4 id="视频推荐系统的“多路个性化候选集归并”">视频推荐系统的“多路个性化候选集归并”</h4>
+<p>你刷B站/抖音时，推荐系统会从无数个“兴趣通道”各自找出适合你的视频，最后要把这些小列表合并成全局排序，推荐给你。<br>
+败者树可以把多个候选池（比如“你喜欢的音乐”、“你最近常看的UP主”、“全站热点”等）合并，保证每次推送的都是<strong>最优解</strong>。</p>
+<blockquote>
+<p>败者树不仅限于排序数字流，它适合<strong>任何有序对象的高效归并</strong>——比如合并新闻流、股票行情、快递物流进度等。<br>
+在分布式大数据场景下，败者树和胜者树比传统堆/优先队列更高效，尤其适合“路数极多”的超级归并任务。<br>
+只要你能把生活中的“多路有序队列”抽象成 InputStream，败者树就能帮你把它们归并成一条高效、无遗漏的“大路”。</p>
+</blockquote>
+<hr>
+<h2 id="性能优缺点分析">性能优缺点分析</h2>
+<h3 id="时间复杂度">时间复杂度</h3>
+<h4 id="建树（初始化）">建树（初始化）</h4>
+<ul>
+<li><strong>建树过程</strong>需要让每一个叶子节点沿路径挑战至根，共 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 路，每次最多比较 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>k</mi></mrow><annotation encoding="application/x-tex">\log_2 k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 次，总体复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>k</mi><mi>log</mi><mo>⁡</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(k \log k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span>。</li>
+</ul>
+<h4 id="归并操作（每次输出最小值）">归并操作（每次输出最小值）</h4>
+<ul>
+<li><strong>每次归并输出</strong>，新元素替换后，只需要沿冠军路径向上“重新比较”一遍，最多 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>k</mi></mrow><annotation encoding="application/x-tex">\log_2 k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9386em;vertical-align:-0.2441em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 层。</li>
+<li>因此，<strong>每次归并输出/更新的时间复杂度</strong>为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span>。</li>
+<li>对于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 个总元素归并排序，总体复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>log</mi><mo>⁡</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n \log k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span>。</li>
+</ul>
+<blockquote>
+<p>这一点比直接用暴力遍历所有路（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span>）快得多，特别适合 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 很大时使用。</p>
+</blockquote>
+<h3 id="空间复杂度">空间复杂度</h3>
+<ul>
+<li>败者树本身维护一个<strong>完全二叉树结构</strong>，含 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 个叶子和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 个内部节点（每个内部节点只需存一个路的索引或指针）。</li>
+<li>主要需要存储：
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 个叶节点（每路当前值，实际归并中只需一个元素的缓存/指针）</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 个内部节点（败者索引或指针）</li>
+</ul>
+</li>
+<li><strong>空间复杂度总为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span></strong>。</li>
+</ul>
+<h3 id="与其他归并方法对比">与其他归并方法对比</h3>
+<ul>
+<li><strong>暴力归并</strong>：每次都遍历所有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 路，查找最小元素，时间复杂度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nk)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03148em;">nk</span><span class="mclose">)</span></span></span></span>。</li>
+<li><strong>堆/优先队列归并</strong>：每次插入弹出堆顶都是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span>，和败者树同阶，但败者树常数更小，且可更好地复用内存，更新效率高。</li>
+<li><strong>败者树</strong>：在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 很大时（如数百、上千路归并），败者树的效率更明显。</li>
+</ul>
+<h3 id="优点">优点</h3>
+<ul>
+<li>每次找最小值、更新树只需 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log k)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span>，对大规模归并非常友好。</li>
+<li>空间消耗小，易于实现。</li>
+<li>特别适合归并段数量多、单段数据量小的场景。</li>
+</ul>
+<h3 id="缺点">缺点</h3>
+<ul>
+<li>实现比暴力法复杂一点，初学者需要适应树结构。</li>
+<li>归并段不均衡时，可能存在部分节点重复挑战，导致更新稍慢。</li>
+</ul>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/loser-tree/">败者树 - OI wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://yfsyfs.github.io/2019/09/07/%E6%A0%91%E6%8E%92-%E8%83%9C%E8%80%85%E6%A0%91-%E8%B4%A5%E8%80%85%E6%A0%91/">树排-胜者树-败者树 - 影法師の物語</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/summer_dew/article/details/84197001">选择树 胜者树 | 败者树 - CSDN</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/haolexiao/article/details/53488314">堆，赢者树，败者树的区别与联系</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/35144290">多路归并排序的时候，为什么要采用败者树？- 知乎回答</a></li>
+<li><a target="_blank" rel="noopener" href="https://ivanzz1001.github.io/records/post/data-structure/2018/07/03/ds-loser_tree">外部排序之败者树 - ivan 的博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2238630">一文读懂胜者树与败者树</a></li>
+<li><a target="_blank" rel="noopener" href="https://gemini.google.com/">Google Gemini</a></li>
+<li><a target="_blank" rel="noopener" href="https://chatgpt.com/">OpenAI ChatGPT</a></li>
+<li>数据结构 - 归并排序，外排序</li>
+</ul>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/记录/" class="tag">#记录</a><a href="/tags/学习/" class="tag">#学习</a><a href="/tags/数据结构/" class="tag">#数据结构</a><a href="/tags/编程/" class="tag">#编程</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/06/05/xue-xi/shu-xue/chi-san-shu-xue-zu-he-shu-xue/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">离散数学 - 组合数学</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/05/16/xue-xi/shu-xue/chi-san-shu-xue-dai-shu-xi-tong/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">离散数学-代数系统</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
