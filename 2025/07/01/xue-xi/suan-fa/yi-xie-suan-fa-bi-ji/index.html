@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>一些算法笔记 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="一些算法笔记 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/07/01/xue-xi/suan-fa/yi-xie-suan-fa-bi-ji/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-07-01T01:57:52.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/算法积累/">算法积累</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>1,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">一些算法笔记</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">一些算法笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enum-class"><span class="toc-number">1.1.</span> <span class="toc-text">Enum class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map-low-bound"><span class="toc-number">1.2.</span> <span class="toc-text">Map - low_bound</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">1.3.</span> <span class="toc-text">Set</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>一些算法笔记</h1>
+<p>记录一些做题中不太知道的，免得丢掉印象。</p>
+<h2 id="Enum-class">Enum class</h2>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">enum</span> <span class="token keyword">class</span> <span class="token class-name">Gesture</span>
+<span class="token punctuation">&#123;</span>
+    C<span class="token punctuation">,</span> <span class="token comment">// 石头</span>
+    J<span class="token punctuation">,</span> <span class="token comment">// 剪刀</span>
+    B  <span class="token comment">// 布</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于 <code>enum class</code> 结构，调用的时候得用 <code>Gesture::C</code> 这种格式。</p>
+<h2 id="Map-low-bound">Map - low_bound</h2>
+<p>在 <code>map</code> 里面有一个很好用的 <code>low_bound</code> 函数，在map中查找第一个<strong>不小于</strong>（也就是大于或等于）给定的 <code>key</code> 的元素。<br>
+根据这个函数，可以实现一个区间的映射建立</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">></span> gradeMap <span class="token operator">=</span> <span class="token punctuation">&#123;</span> 
+ <span class="token punctuation">&#123;</span><span class="token number">59</span><span class="token punctuation">,</span> <span class="token char">'F'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token comment">// 0-59分 -> F</span>
+ <span class="token punctuation">&#123;</span><span class="token number">69</span><span class="token punctuation">,</span> <span class="token char">'D'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token comment">// 60-69分 -> D </span>
+ <span class="token punctuation">&#123;</span><span class="token number">79</span><span class="token punctuation">,</span> <span class="token char">'C'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token comment">// 70-79分 -> C </span>
+ <span class="token punctuation">&#123;</span><span class="token number">89</span><span class="token punctuation">,</span> <span class="token char">'B'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token comment">// 80-89分 -> B </span>
+ <span class="token punctuation">&#123;</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token char">'A'</span><span class="token punctuation">&#125;</span> <span class="token comment">// 90-100分 -> A</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">char</span> <span class="token function">getGradeFromMap</span><span class="token punctuation">(</span><span class="token keyword">int</span> score<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 如果分数小于0或者大于100，直接返回无效</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>score <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> score <span class="token operator">></span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token char">'?'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 查找第一个不小于score的键值对</span>
+    <span class="token keyword">auto</span> it <span class="token operator">=</span> gradeMap<span class="token punctuation">.</span><span class="token function">lower_bound</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// lower_bound 找到了一个合法的区间上限</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>it <span class="token operator">!=</span> gradeMap<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// it->first 是上限分数，it->second 是对应的等级</span>
+        <span class="token keyword">return</span> it<span class="token operator">-></span>second<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 如果没找到（比如分数大于100，虽然我们已经处理了），则为无效</span>
+    <span class="token keyword">return</span> <span class="token char">'?'</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Set">Set</h2>
+<p><code>set</code> 调用的时候得用 <code>auto</code>，迭代器。<br>
+用 <code>insert</code> 插入值，迭代器输出值，迭代器是指针，所以得 <code>*it</code> 用来解应用。<br>
+见 <a target="_blank" rel="noopener" href="https://cg.hnu.edu.cn/assignment/programList.jsp?proNum=12&amp;courseID=99&amp;assignID=1362&amp;libCenter=false">week 2 12拼写检查</a>。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">set<span class="token operator">&lt;</span>ll<span class="token operator">></span>s<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>ll i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        ll x<span class="token punctuation">;</span>
+        cin<span class="token operator">>></span>x<span class="token punctuation">;</span>
+        s<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    ll count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">auto</span> it<span class="token operator">=</span>s<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>it<span class="token operator">!=</span>s<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span>count<span class="token operator">&lt;</span>k<span class="token punctuation">;</span>it<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        count<span class="token operator">++</span><span class="token punctuation">;</span>
+        cout<span class="token operator">&lt;&lt;</span><span class="token operator">*</span>it<span class="token operator">&lt;&lt;</span><span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/编程/" class="tag">#编程</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/2025/06/05/xue-xi/shu-xue/chi-san-shu-xue-zu-he-shu-xue/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">离散数学 - 组合数学</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
