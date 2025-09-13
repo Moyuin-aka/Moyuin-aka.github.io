@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>数据结构-树 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="数据结构-树 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/03/25/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-shu/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-03-25T01:10:59.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/数据结构/">数据结构</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>March</span>
+            <span>25,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">数据结构-树</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">1.1.</span> <span class="toc-text">完全二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">基本性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">遍历概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A0%91"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">表达式树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E7%9A%84%E9%9D%9E%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">遍历的非递归算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">二叉树的序列化与反序列化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">最优二叉树（哈夫曼树）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">1.2.1.</span> <span class="toc-text">带权二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A6"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">带权路径长度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8-2"><span class="toc-number">1.2.2.</span> <span class="toc-text">基本性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.3.</span> <span class="toc-text">哈夫曼算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="toc-number">1.2.4.</span> <span class="toc-text">构建哈夫曼树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.5.</span> <span class="toc-text">哈夫曼树应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">哈夫曼编码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">树表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E6%8C%87%E9%92%88%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">父指针表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">孩子表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">1.3.3.</span> <span class="toc-text">孩子兄弟表示法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E6%A3%AE%E6%9E%97%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.4.</span> <span class="toc-text">树与二叉树与森林的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E5%92%8C%E6%A3%AE%E6%9E%97%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">1.5.</span> <span class="toc-text">树和森林的遍历</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>树</h1>
+<h2 id="完全二叉树">完全二叉树</h2>
+<h3 id="基本性质">基本性质</h3>
+<p>完全二叉树有n个结点。<br>
+完全二叉树的深度 <strong>d=log2(n+1)</strong></p>
+<h4 id="存储结构">存储结构</h4>
+<p>主要存储方式:顺序存储+链式存储</p>
+<h5 id="顺序存储">顺序存储</h5>
+<p>各个结点的索引与顺序表位置一一对应，让结点的数据存放在顺序表相应位置的单元中。<br>
+顺序存储当数组，不过要开数组，可能实现空间浪费。<br>
+<img src="/images/%E6%A0%91/f42c3e4be40e4e3230917399d16f7ff.jpg" alt=""></p>
+<h5 id="链式存储">链式存储</h5>
+<p><img src="/images/%E6%A0%91/b85220c0dc44ca17d84adda22934d8c.jpg" alt=""></p>
+<p>有二叉链表和三叉链表，本质上就是有left，right，甚至还有一个parent的数据结点，指向上一个这个结点的父结点。<br>
+<img src="/images/%E6%A0%91/ba9b63dc6eb98c6ffcb7f51f0b7916e.jpg" alt=""></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">createBinarytree</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">,</span>node<span class="token operator">*</span> left_tree<span class="token punctuation">,</span>node<span class="token operator">*</span> right_tree<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	node <span class="token operator">*</span>tree<span class="token operator">=</span><span class="token keyword">new</span> <span class="token function">BinaryTreeNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	tree<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span>value<span class="token punctuation">;</span>
+	tree<span class="token punctuation">.</span><span class="token function">left_tree</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span>left_tree<span class="token punctuation">;</span>
+	tree<span class="token punctuation">.</span><span class="token function">right_tree</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span>right_tree<span class="token punctuation">;</span><span class="token comment">//创建新的二叉树</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="遍历概念">遍历概念</h4>
+<p>分为<strong>前序遍历，中序遍历，后序遍历</strong><br>
+方法不同，本质是递归方式中访问根节点的时机不同。<br>
+先遍历左子树，再遍历右子树，访问根节点root是插入其中的。遍历时间是O(n)。<br>
+<img src="/images/%E6%A0%91/5c0005353c81ef9c30cc9715aed02d1.jpg" alt=""><br>
+主要是中序遍历不太好理解。把A的左侧先遍历了，然后回到A，继续回到右侧遍历，但是FKC这里不好理解。</p>
+<blockquote>
+<p>先遍历B的左子树D，对于D也是中序遍历的规则，先把D的左子树遍历了，对于D的左子树只有一个结点H，所以我们一开始就是H，然后遍历D的右子树I，然后回到D，来到B，接着遍历B的右子树E，由于E没有左子树，所以直接从空回到E，然后读取右结点，读取J，读完后B的整个左子树读取完成，接着我们回到A，然后读取C这颗右子树，由于C这棵树有左结点，所以我们读取F这颗左树，这棵F树的左结点为空，所以从空返回F，接着读取F的右树k，之后F这颗左树完全完成，回到C，C的右子树为空，所以此时此刻遍历结束。</p>
+</blockquote>
+<p>话太多。<br>
+<strong>中序遍历</strong>就是：先读左边的小三角形 → 然后到顶点 → 最后读右边的小三角形。</p>
+<p>注意，所有的结点遍历此时此刻都要遵循其递归算法的规则，<strong>所有节点</strong>，必须都是左数-右数，读取根结点的步骤插入其中，形成一种递归调用。<strong>从底部三角形模式读取</strong>。<br>
+<img src="/images/%E6%A0%91/8b03e03cd81aad2ff9cad991ccb8a26.jpg" alt=""></p>
+<p>通过计算二叉树的高度，可用后序遍历左子树+右子树，得到两个高度的最高作为树的高度。</p>
+<h4 id="表达式树">表达式树</h4>
+<p>前缀和后缀和中缀读取。<br>
+<img src="/images/%E6%A0%91/2f6c1ef937715be115536a6046ece48.jpg" alt=""><br>
+本质上是栈+递归的读取。</p>
+<h4 id="遍历的非递归算法">遍历的非递归算法</h4>
+<p>也有非递归的转化算法，本质还是利用递归的本质，栈。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//前序遍历</span>
+<span class="token keyword">void</span> <span class="token function">preorder</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    stack<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> s<span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        TreeNode<span class="token operator">*</span> node <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> node<span class="token operator">-></span>val <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>  <span class="token comment">// 访问当前节点</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span> s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 先压右</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span> s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 再压左，保证左子树先出来</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//中序遍历</span>
+<span class="token keyword">void</span> <span class="token function">inorder</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    stack<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> s<span class="token punctuation">;</span>
+    TreeNode<span class="token operator">*</span> curr <span class="token operator">=</span> root<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>curr <span class="token operator">||</span> <span class="token operator">!</span>s<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>curr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 先把左子树压栈</span>
+            s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>curr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            curr <span class="token operator">=</span> curr<span class="token operator">-></span>left<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        curr <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> curr<span class="token operator">-></span>val <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span> <span class="token comment">// 访问当前节点</span>
+        curr <span class="token operator">=</span> curr<span class="token operator">-></span>right<span class="token punctuation">;</span> <span class="token comment">// 转向右子树</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//后序遍历</span>
+<span class="token keyword">void</span> <span class="token function">postorder</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    stack<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> s1<span class="token punctuation">,</span> s2<span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>s1<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        TreeNode<span class="token operator">*</span> node <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s1<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s2<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 先压入第二个栈</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span> s1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 先压左</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span> s1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 后压右</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>s2<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span> s2<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span>val <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span> <span class="token comment">// 访问顺序就是 左 → 右 → 根</span>
+        s2<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token comment">//利用</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>也可以考虑队列来写。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">levelOrder</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    queue<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        TreeNode<span class="token operator">*</span> node <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> node<span class="token operator">-></span>val <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span> <span class="token comment">// 访问当前节点</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 先入左子节点</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 再入右子节点</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//队列queue用于层序遍历</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="二叉树的序列化与反序列化">二叉树的序列化与反序列化</h4>
+<p>序列化：遍历，得到结点的线性序列，转化成线性结构用于线性表的存储。<br>
+反序列化：根据线性序列重构原始的二叉树。<br>
+往往<br>
+前者基于遍历算法，后者依然得用栈来还原。</p>
+<blockquote>
+<p>经典问题：用前序遍历和中序遍历结果重构二叉树，分析重构条件和算法的时间复杂度。<br>
+知道两个遍历，得到真正的二叉树结果。</p>
+</blockquote>
+<h5 id="前序遍历序列化-反序列化">前序遍历序列化&amp;反序列化</h5>
+<p>都利用了递归来还原，将字符串与数据的互相转化。<br>
+基于前序遍历。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//序列化</span>
+<span class="token keyword">void</span> <span class="token function">serialize</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">,</span> string<span class="token operator">&amp;</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        s <span class="token operator">+=</span> <span class="token string">"#,"</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    s <span class="token operator">+=</span> root<span class="token operator">-></span>val <span class="token operator">+</span> <span class="token string">","</span><span class="token punctuation">;</span> <span class="token comment">// 访问根</span>
+    <span class="token function">serialize</span><span class="token punctuation">(</span>root<span class="token operator">-></span>left<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 递归左子树</span>
+    <span class="token function">serialize</span><span class="token punctuation">(</span>root<span class="token operator">-></span>right<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 递归右子树</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//反序列化</span>
+TreeNode<span class="token operator">*</span> <span class="token function">deserialize</span><span class="token punctuation">(</span>istringstream<span class="token operator">&amp;</span> ss<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    string val<span class="token punctuation">;</span>
+    <span class="token function">getline</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> val<span class="token punctuation">,</span> <span class="token char">','</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> <span class="token string">"#"</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span> <span class="token comment">// 空节点</span>
+
+    TreeNode<span class="token operator">*</span> node <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TreeNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    node<span class="token operator">-></span>left <span class="token operator">=</span> <span class="token function">deserialize</span><span class="token punctuation">(</span>ss<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    node<span class="token operator">-></span>right <span class="token operator">=</span> <span class="token function">deserialize</span><span class="token punctuation">(</span>ss<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="层序遍历序列化-反序列化">层序遍历序列化&amp;反序列化</h5>
+<p>利用队列queue。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">string <span class="token function">serialize</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">"#"</span><span class="token punctuation">;</span>
+    queue<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    string res <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        TreeNode<span class="token operator">*</span> node <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            res <span class="token operator">+=</span> node<span class="token operator">-></span>val <span class="token operator">+</span> <span class="token string">","</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            res <span class="token operator">+=</span> <span class="token string">"#,"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//反序列化</span>
+TreeNode<span class="token operator">*</span> <span class="token function">deserialize</span><span class="token punctuation">(</span>string data<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>data <span class="token operator">==</span> <span class="token string">"#"</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    istringstream <span class="token function">ss</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    string val<span class="token punctuation">;</span>
+    <span class="token function">getline</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> val<span class="token punctuation">,</span> <span class="token char">','</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    TreeNode<span class="token operator">*</span> root <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TreeNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    queue<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        TreeNode<span class="token operator">*</span> node <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getline</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> val<span class="token punctuation">,</span> <span class="token char">','</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">!=</span> <span class="token string">"#"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                node<span class="token operator">-></span>left <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TreeNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">getline</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> val<span class="token punctuation">,</span> <span class="token char">','</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">!=</span> <span class="token string">"#"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                node<span class="token operator">-></span>right <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TreeNode</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="最优二叉树（哈夫曼树）">最优二叉树（哈夫曼树）</h2>
+<h3 id="带权二叉树">带权二叉树</h3>
+<p>每个结点带有一个权重值。<br>
+<img src="/images/%E6%A0%91/79dfdcf215f8727742cec5f2837eadd.jpg" alt=""></p>
+<h4 id="带权路径长度">带权路径长度</h4>
+<p><strong>WPL=w1l1+w2l2+…+wnln</strong><br>
+带权路径长度最小的二叉树，成为最优二叉树，即哈夫曼树。<br>
+<img src="/images/%E6%A0%91/a52bfc7abd4ed7949cebcafed828d45.jpg" alt=""></p>
+<h3 id="基本性质-2">基本性质</h3>
+<p>定理1：<strong>最优二叉树一定是满二叉树。</strong><br>
+定理2： 最优二叉树中，如果两个叶结点的权重值不同，<strong>则权重值小的叶结点中的树的层数，大于等于权重值大的叶节点</strong>。</p>
+<h3 id="哈夫曼算法">哈夫曼算法</h3>
+<p>一个至下而上的构建最优二叉树的方法，通过不断合并两个带权二叉树，最终生成最优二叉树。<br>
+<img src="/images/%E6%A0%91/b048c8f0ebcb2a15146ee9a05a5ed74.jpg" alt=""></p>
+<h3 id="构建哈夫曼树">构建哈夫曼树</h3>
+<p>时间复杂度：O(n^2)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//创建哈夫曼树代码</span>
+<span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> ch<span class="token punctuation">;</span>        <span class="token comment">// 字符</span>
+    <span class="token keyword">int</span> freq<span class="token punctuation">;</span>       <span class="token comment">// 频率（权值）</span>
+    Node <span class="token operator">*</span>left<span class="token punctuation">,</span> <span class="token operator">*</span>right<span class="token punctuation">;</span>
+
+    <span class="token comment">// 构造函数</span>
+    <span class="token function">Node</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">,</span> <span class="token keyword">int</span> f<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ch</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">freq</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">left</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">right</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 自定义比较函数（优先队列默认大根堆，我们需要小根堆）</span>
+<span class="token keyword">struct</span> <span class="token class-name">Compare</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Node<span class="token operator">*</span> a<span class="token punctuation">,</span> Node<span class="token operator">*</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> a<span class="token operator">-></span>freq <span class="token operator">></span> b<span class="token operator">-></span>freq<span class="token punctuation">;</span>  <span class="token comment">// 频率小的优先</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 构造哈夫曼树</span>
+Node<span class="token operator">*</span> <span class="token function">buildHuffmanTree</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span> freqList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    priority_queue<span class="token operator">&lt;</span>Node<span class="token operator">*</span><span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>Node<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">,</span> Compare<span class="token operator">></span> pq<span class="token punctuation">;</span>
+
+    <span class="token comment">// 初始化优先队列（最小堆）</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> it <span class="token operator">:</span> freqList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span>first<span class="token punctuation">,</span> it<span class="token punctuation">.</span>second<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 构建哈夫曼树</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>pq<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        Node<span class="token operator">*</span> left <span class="token operator">=</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> pq<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Node<span class="token operator">*</span> right <span class="token operator">=</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> pq<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 创建新节点（合并两个最小节点）</span>
+        Node<span class="token operator">*</span> parent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token char">'\0'</span><span class="token punctuation">,</span> left<span class="token operator">-></span>freq <span class="token operator">+</span> right<span class="token operator">-></span>freq<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        parent<span class="token operator">-></span>left <span class="token operator">=</span> left<span class="token punctuation">;</span>
+        parent<span class="token operator">-></span>right <span class="token operator">=</span> right<span class="token punctuation">;</span>
+
+        <span class="token comment">// 插入新节点到优先队列</span>
+        pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 最终根节点就是哈夫曼树的根</span>
+    <span class="token keyword">return</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="哈夫曼树应用">哈夫曼树应用</h3>
+<h4 id="哈夫曼编码">哈夫曼编码</h4>
+<p>将文本字符串转化为二进制字符串编码。<br>
+在一般方案里，我们使用定长码，规定ascll码中的每个字符的编号。但我们这样的话空间花销大。所以我们可以使用不定长码来提高效率。</p>
+<h5 id="不定长码">不定长码</h5>
+<p>使用频率高的字符采用短编码，频率低的字符采用长编码。</p>
+<h6 id="前缀码">前缀码</h6>
+<p>一种常用的不定长码，每个字母的编码都不是其他字母编码的前缀。<br>
+（这样的编码可以避免读取的歧义，比如1101，可以看作1 101，也可以看作11 01，这样的歧义需要避免。）<br>
+<strong>构造示例</strong>：<br>
+<img src="/images/%E6%A0%91/a0149c452deca71987867fcefd399cd.jpg" alt=""><br>
+其实还是很有意思的。我们可以算编码长度的加权平均数，即平均码长。<br>
+P为出现频率，W为码长。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>W</mi><mo>ˉ</mo></mover><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo>∗</mo><mi>W</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\bar{W}= \frac{1}{n}\sum_{i=1}^{n} (P(i)*W(i))
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8201em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">))</span></span></span></span></span></p>
+<h2 id="树表示法">树表示法</h2>
+<h3 id="父指针表示法">父指针表示法</h3>
+<p>保存父节点的索引。<br>
+<img src="/images/%E6%A0%91/fd75aeae4ccae8845829ade83c135d7.jpg" alt=""><br>
+一般用于实现并查集，时间复杂度为O(H)，H为树的高度。</p>
+<h3 id="孩子表示法">孩子表示法</h3>
+<p>存储的是结点所有的孩子，是一个子节点链表，存储的是头指针。<br>
+各个子节点按从左向右的顺序排列。<br>
+<img src="/images/%E6%A0%91/6001222e3a5c9ba14b6cdd93fe1530e.jpg" alt=""></p>
+<h3 id="孩子兄弟表示法">孩子兄弟表示法</h3>
+<p>常常使用<strong>二叉链表</strong>实现。每个节点存放它的第一个孩子和它的下一个兄弟的信息。<br>
+其实这个是最直观表现树结构的，兄弟信息代表所在层，孩子信息指向下一层。<br>
+<img src="/images/%E6%A0%91/4fb17c82d96e8f451b97cf62689314e.jpg" alt=""></p>
+<h2 id="树与二叉树与森林的转换">树与二叉树与森林的转换</h2>
+<p><img src="/images/%E6%A0%91/Pasted%20image%2020250320090033.png" alt=""><br>
+<img src="/images/%E6%A0%91/Pasted%20image%2020250320090130.png" alt=""></p>
+<h2 id="树和森林的遍历">树和森林的遍历</h2>
+<p>树和森林的遍历都只有前序遍历和后序遍历，<strong>无中序遍历</strong>。<br>
+规则相同，都是从左到右，依次遍历。<br>
+<strong>树和森林</strong>的前序遍历与二叉树的前序遍历相同，<strong>后序遍历与二叉树的中序遍历相同</strong>，遍历时间复杂度与二叉树一样，都是O(n)。<br>
+<img src="/images/%E6%A0%91/Pasted%20image%2020250320090331.png" alt=""><br>
+<img src="/images/%E6%A0%91/Pasted%20image%2020250320090848.png" alt=""></p>
+<hr>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/数据结构/" class="tag">#数据结构</a><a href="/tags/编程/" class="tag">#编程</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/04/01/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-dui/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">数据结构-堆</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/03/19/xue-xi/shu-ju-jie-gou/kmp-suan-fa/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">KMP算法</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
