@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>Hack the box - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Hack the box - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/03/11/xue-xi/ctf/hack-the-box/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-03-11T15:03:18.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/CTF学习/">CTF学习</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>March</span>
+            <span>11,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">Hack the box</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Hack the box</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5"><span class="toc-number">1.1.</span> <span class="toc-text">起步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#telnet"><span class="toc-number">1.1.1.</span> <span class="toc-text">telnet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ftp-File-Transfer-Protocol"><span class="toc-number">1.1.2.</span> <span class="toc-text">ftp (File Transfer Protocol)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMB-Server-Message-Book"><span class="toc-number">1.1.3.</span> <span class="toc-text">SMB (Server Message Book)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-Redis"><span class="toc-number">1.1.4.</span> <span class="toc-text">TCP(Redis)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%B9HTB%E5%85%B3%E5%8D%A1%E7%BB%93%E6%9D%9F-%E4%B9%8B%E5%90%8E%E7%8E%A9%E4%B8%80%E7%8E%A9%E5%88%AB%E7%9A%84%E3%80%82"><span class="toc-number">1.2.</span> <span class="toc-text">免费HTB关卡结束,之后玩一玩别的。</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>Hack the box</h1>
+<p>玩一下。</p>
+<h2 id="起步">起步</h2>
+<p>起步的确很简单，连接了vpn然后就可以用kali玩玩渗透测试了。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> openvpn Moyuin.vpn <span class="token comment">#记住得在文件目录里面打开，否则就是报错</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="telnet">telnet</h3>
+<p><strong>基础流程</strong>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token comment"># 看看ping是否通，确认一下网络</span>
+
+<span class="token function">sudo</span> nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-p</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token comment"># 找开的端口，确认一下我们的方案</span>
+
+telnet <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token comment">#直接连接，用root登陆</span>
+
+<span class="token function">ls</span>
+flag.txt  snap
+
+<span class="token function">cat</span> flag.txt
+b40abdfe23665f766f9c61ecba8a4c19<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>提交第一个 flag！telnet弱凭证！</p>
+<h3 id="ftp-File-Transfer-Protocol">ftp (File Transfer Protocol)</h3>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span>
+
+<span class="token function">sudo</span> nmap <span class="token parameter variable">-sV</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span>
+<span class="token comment"># 开21端口，用ftp连接</span>
+
+<span class="token function">ftp</span> <span class="token parameter variable">-a</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token comment">#使用anonymous匿名登陆</span>
+
+<span class="token function">ls</span> <span class="token operator">|</span> <span class="token function">dir</span>
+
+get flag.txt <span class="token operator">|</span> mget flag.txt <span class="token comment">#后者下载多个文件，可以用lcd先设置好目录</span>
+
+ctrl+z <span class="token comment">#退出</span>
+
+<span class="token function">cat</span> flag.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="SMB-Server-Message-Book">SMB (Server Message Book)</h3>
+<p><code>sudo nmap -sV &#123;target_ip&#125;</code> 扫到端口。<br>
+<img src="/images/Hackthebox/20250317000824135.png" alt=""><br>
+SMB 在445/tcp运行，服务名为 microsoft-ds。<br>
+使用 <code>smbclient -L &#123;target_ip&#125;</code> 访问SMP服务，获取所有的 Dancing List，但登陆后提示需要账户，随便输入后得到可以登陆的账户。</p>
+<p><img src="/images/Hackthebox/20250317001452215.png" alt=""><br>
+有4个用户，一直访问，直到获取权限。<br>
+使用  <code>smbclient \\\\&#123;target_ip&#125;\\&#123;用户名&#125;</code> ，用于登陆，可是密码怎么办呢？使用空密码，一个一个账户试一试。<br>
+用户名为WorkShares时，成功。<br>
+<img src="/images/Hackthebox/20250317002508240.png" alt=""></p>
+<p>用help看看指令。发现基本和linux指令相同。<br>
+<img src="/images/Hackthebox/20250317002646839.png" alt=""><br>
+用cd进入各种库，看看flag藏在哪里。用 <code>get &#123;文件名&#125;</code> 得到文件。<br>
+看完库了就 <code>cd .. </code> 退出。<br>
+<img src="/images/Hackthebox/20250317002934559.png" alt=""><br>
+找到flag，get后exit。<br>
+最后 <code>cat flag.txt</code> 得到答案。<br>
+<img src="/images/Hackthebox/20250317003131774.png" alt=""></p>
+<h3 id="TCP-Redis">TCP(Redis)</h3>
+<p>先扫端口，自己的虚拟机不知道为什么nmap扫不出6379这个端口，只好一个一个试了<br>
+<img src="/images/Hackthebox/20250318225134933.png" alt=""><br>
+Redis是一个内存数据库，详见<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Redis">Redis维基百科</a>。<br>
+使用 <code>redis-cli</code> 进入客户端基本操作。<a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-commands.html">可看菜鸟教程。</a><br>
+用 -h 指定主机名，-p 指定端口， -a 指定密码。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">redis-cli <span class="token parameter variable">-h</span> <span class="token punctuation">&#123;</span>target_ip<span class="token punctuation">&#125;</span> <span class="token parameter variable">-p</span> <span class="token number">6379</span> <span class="token parameter variable">-a</span> <span class="token string">""</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>连接远程redis服务器，开始操作。<br>
+使用</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">&#123;</span>target_ip:6379<span class="token punctuation">&#125;</span><span class="token operator">></span> INFO<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>找到服务器的消息。<br>
+<img src="/images/Hackthebox/20250318231434680.png" alt=""><br>
+在看keyspace的时候，可以看到连接的是哪一个数据库：<br>
+<img src="/images/Hackthebox/20250318232344057.png" alt=""><br>
+这里显示：这个服务器上只有一个数据库db0，db0有4个key，并且没有过期时间，每个数据库的数据是隔离的，一般用一个数据库的key存不同数据，所以我们先</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">keys * <span class="token comment">#查看这个数据库所有的keys的名称，相当于ls了</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>ps:如果有不同数据库，我们需要先</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">select</span> <span class="token punctuation">[</span>index<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>用于选择不同的数据库。<br>
+<img src="/images/Hackthebox/20250318232918261.png" alt=""><br>
+找到了flag，我们直接</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">get flag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="/images/Hackthebox/20250318232955821.png" alt=""><br>
+得到flag。</p>
+<h2 id="免费HTB关卡结束-之后玩一玩别的。">免费HTB关卡结束,之后玩一玩别的。</h2>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/CTF/" class="tag">#CTF</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/03/13/sheng-huo/ji-lu/bao-yuan/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">抱怨</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">HNUCTF2024新生杯writeup</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
