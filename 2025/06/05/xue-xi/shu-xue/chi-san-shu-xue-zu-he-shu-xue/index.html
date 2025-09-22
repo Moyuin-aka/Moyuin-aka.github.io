@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>离散数学 - 组合数学 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="离散数学 - 组合数学 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/06/05/xue-xi/shu-xue/chi-san-shu-xue-zu-he-shu-xue/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-06-05T01:02:07.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/离散数学/">离散数学</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>June</span>
+            <span>5,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">离散数学 - 组合数学</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">离散数学 - 组合数学</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">公式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%AC%E5%BC%8F-C-n%E2%88%92k-1-k-%E2%80%9C%E9%80%89-k-%E4%B8%AA%E4%B8%8D%E7%9B%B8%E9%82%BB%E5%85%83%E7%B4%A0%E2%80%9D"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 公式 C(n−k+1,k): “选 k 个不相邻元素”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%AC%E5%BC%8F-C-n-k%E2%88%921-k%E2%88%921-%E6%88%96-C-n-k%E2%88%921-n-%E2%80%9C%E9%9A%94%E6%9D%BF%E6%B3%95%E2%80%9D-%E2%80%9C%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E9%9D%9E%E8%B4%9F%E6%95%B4%E6%95%B0%E8%A7%A3%E2%80%9D"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 公式 C(n+k−1,k−1) 或 C(n+k−1,n): “隔板法” &#x2F; “不定方程非负整数解”</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>离散数学 - 组合数学</h1>
+<p>只是 copy，没有力气整理了。</p>
+<h2 id="公式">公式</h2>
+<p>这两个公式在组合数学中非常有用，分别解决不同类型的问题。我们来逐个解释一下它们的来源和思路：</p>
+<h3 id="1-公式-C-n−k-1-k-“选-k-个不相邻元素”">1. 公式 C(n−k+1,k): “选 k 个不相邻元素”</h3>
+<p>问题场景：<br>
+从排成一排的 n 个不同元素中，选出 k 个元素，要求这 k 个元素中任意两个都不能相邻。问有多少种选法？<br>
+<strong>推导思路 (转换法/映射法):</strong></p>
+<ol>
+<li><strong>标记元素位置：</strong> 假设这 n 个元素的位置编号为 1,2,…,n。我们要选出 k 个位置 x1​,x2​,…,xk​，并且它们满足 1≤x1​&lt;x2​&lt;…&lt;xk​≤n。</li>
+<li><strong>不相邻条件：</strong> “任意两个不相邻”意味着：
+<ul>
+<li>x2​−x1​≥2</li>
+<li>x3​−x2​≥2</li>
+<li>…</li>
+<li>xk​−xk−1​≥2</li>
+</ul>
+</li>
+<li><strong>变量代换 (核心技巧)：</strong> 为了消除“≥2”这个不方便处理的条件，我们引入一组新的变量 y1​,y2​,…,yk​：
+<ul>
+<li>y1​=x1​</li>
+<li>y2​=x2​−1</li>
+<li>y3​=x3​−2</li>
+<li>…</li>
+<li>yk​=xk​−(k−1)</li>
+</ul>
+</li>
+<li><strong>分析新变量的性质：</strong>
+<ul>
+<li>由于 x1​≥1，所以 y1​≥1。</li>
+<li>y2​−y1​=(x2​−1)−x1​=(x2​−x1​)−1。因为 x2​−x1​≥2，所以 (x2​−x1​)−1≥1。这意味着 y2​&gt;y1​。</li>
+<li>同理，y3​−y2​=(x3​−2)−(x2​−1)=(x3​−x2​)−1≥1。这意味着 y3​&gt;y2​。</li>
+<li>依此类推，我们得到 1≤y1​&lt;y2​&lt;…&lt;yk​。</li>
+<li>现在看 yk​ 的上限：yk​=xk​−(k−1)。因为 xk​≤n，所以 yk​≤n−(k−1)=n−k+1。</li>
+</ul>
+</li>
+<li>问题转化：<br>
+我们成功地将“从 1,…,n 中选 k 个不相邻的数 xi​”的问题，转化为了“从 1,…,n−k+1 中选 k 个不同的数 yi​”的问题。<br>
+从 n−k+1 个数中选 k 个不同的数，选法数量就是组合数 C(n−k+1,k)。</li>
+</ol>
+<p><strong>另一种直观理解 (插空法变种 / 隔板法思想)：</strong></p>
+<ol>
+<li>想象我们有 k 个要选中的物品（“选中球”）和 n−k 个不选中的物品（“白色球”）。</li>
+<li>为了保证选中的 k 个物品不相邻，我们可以先把这 k 个“选中球”拿出来。</li>
+<li>剩下 n−k 个“白色球”。将它们排成一排，它们之间以及两端会形成 (n−k)+1 个空隙。 _ W _ W _ … _ W _ (W代表白色球，_ 代表空隙)</li>
+<li>现在，将 k 个“选中球”放入这 (n−k)+1 个空隙中，每个空隙最多放一个球。这样就能保证任意两个“选中球”之间至少隔着一个“白色球”，即它们不相邻。</li>
+<li>从 (n−k)+1 个空隙中选择 k 个空隙来放置“选中球”，选法数量就是 C(n−k+1,k)。</li>
+</ol>
+<hr>
+<h3 id="2-公式-C-n-k−1-k−1-或-C-n-k−1-n-“隔板法”-“不定方程非负整数解”">2. 公式 C(n+k−1,k−1) 或 C(n+k−1,n): “隔板法” / “不定方程非负整数解”</h3>
+<p>问题场景1 (不定方程解)：</p>
+<p>方程 x1​+x2​+…+xk​=n 有多少组非负整数解 (即 xi​≥0)？</p>
+<p>问题场景2 (相同物品分给不同人)：</p>
+<p>将 n 个相同的物品分给 k 个不同的人，每人可以分到0个或多个，有多少种分法？</p>
+<p>这两个场景是等价的。xi​ 可以看作第 i 个人分到的物品数量。</p>
+<p><strong>推导思路 (“隔板法” / “Stars and Bars”):</strong></p>
+<ol>
+<li>
+<p>物品表示 (Stars)： 把 n 个相同的物品想象成 n 个小星星（*）排成一列：</p>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>… * (共 n 个星)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>分组 (Bars)：</strong> 要将这 n 个星星分成 k 组 (对应 k 个人或 k 个变量 xi​)，我们只需要在这 n 个星星形成的序列中插入 k−1 个隔板（<code>|</code>）。</p>
+<ul>
+<li>例如，如果 n=5,k=3 (即 x1​+x2​+x3​=5)：
+<ul>
+<li><code>**|*|**</code> 表示 x1​=2,x2​=1,x3​=2</li>
+<li><code>***||**</code> 表示 x1​=3,x2​=0,x3​=2</li>
+<li><code>||*****</code> 表示 x1​=0,x2​=0,x3​=5</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>排列隔板和星星： 我们现在总共有 n 个星星和 k−1 个隔板。这些星星和隔板共同占据了 n+(k−1) 个位置。</p>
+<p>我们的问题就转化成了：在这 n+k−1 个位置中，选择 k−1 个位置放置隔板（剩下的位置自然就是星星了）。</p>
+<p>选择的方法数就是组合数 C(n+k−1,k−1)。</p>
+</li>
+<li>
+<p>等价形式：</p>
+<p>同样，我们也可以选择 n 个位置放置星星（剩下的位置就是隔板）。</p>
+<p>选择的方法数是 C(n+k−1,n)。</p>
+<p>根据组合数的性质 C(N,K)=C(N,N−K)，我们知道 C(n+k−1,k−1)=C(n+k−1,(n+k−1)−(k−1))=C(n+k−1,n)。所以这两个表达式是等价的。</p>
+</li>
+</ol>
+<p><strong>场景变形：如果要求每人至少分到1个物品 (即 xi​≥1)</strong></p>
+<ol>
+<li>
+<p><strong>预先分配：</strong> 先给每人（每个变量）分配1个物品。这样就用掉了 k 个物品。</p>
+</li>
+<li>
+<p><strong>剩余分配：</strong> 还剩下 n−k 个物品。现在的问题变成将这 n−k 个物品分给 k 个人，每人可以分到0个或多个。</p>
+</li>
+<li>
+<p>套用公式： 把问题中的 n 替换为 n−k，套用上面的隔板法公式：</p>
+<p>C((n−k)+k−1,k−1)=C(n−1,k−1)。</p>
+<ul>
+<li>或者直观理解：有 n 个星星 <code>* * ... *</code>。它们之间有 n−1 个空隙。要将它们分成 k 份（且每份至少1个），只需要在这 n−1 个空隙中选择 k−1 个位置插入隔板。方法数是 C(n−1,k−1)。</li>
+<li>你之前第一个问题“4位同学分吃10个相同的苹果，每位同学至少会吃1个”，就是这个变形。n=10,k=4，所以是 C(10−1,4−1)=C(9,3)=84。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/数学/" class="tag">#数学</a><a href="/tags/离散数学/" class="tag">#离散数学</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/07/01/xue-xi/suan-fa/yi-xie-suan-fa-bi-ji/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">一些算法笔记</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/06/01/xue-xi/shu-ju-jie-gou/bai-zhe-shu/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">败者树</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

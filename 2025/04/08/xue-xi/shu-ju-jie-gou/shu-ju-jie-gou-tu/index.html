@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>数据结构-图 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="数据结构-图 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/04/08/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-tu/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-04-08T02:39:49.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/数据结构/">数据结构</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>April</span>
+            <span>8,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">数据结构-图</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">数据结构-图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.</span> <span class="toc-text">图的术语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%B1%BB%EF%BC%9A%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%EF%BC%8C%E5%86%99%E4%BB%A3%E7%A0%81%E4%BC%9A%E7%9B%B4%E6%8E%A5%E7%94%A8%E5%88%B0%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.1.</span> <span class="toc-text">一类：必须掌握，写代码会直接用到的术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%B1%BB%EF%BC%9A%E7%90%86%E8%A7%A3%E4%BA%86%E5%B0%B1%E8%83%BD%E7%94%A8%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.2.</span> <span class="toc-text">二类：理解了就能用的术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E8%AE%BA%E6%9C%AF%E8%AF%AD%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8C%E4%BB%85%E4%BE%9B%E6%9F%A5%E9%98%85"><span class="toc-number">1.1.3.</span> <span class="toc-text">图论术语学习笔记，仅供查阅</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-number">1.2.</span> <span class="toc-text">比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ADT%E7%9A%84C-%E7%B1%BB%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">ADT的C++类表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">存储</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%EF%BC%88%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%89"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">邻接矩阵（二维数组）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">邻接表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8D%E5%8E%86"><span class="toc-number">1.4.</span> <span class="toc-text">遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DFS"><span class="toc-number">1.4.1.</span> <span class="toc-text">DFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BFS"><span class="toc-number">1.4.2.</span> <span class="toc-text">BFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98%EF%BC%88Dijkstra%EF%BC%8CBellman-Ford%EF%BC%8CFloyd-Warshall%EF%BC%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">最短路径问题（Dijkstra，Bellman-Ford，Floyd-Warshall）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A-%E4%B8%80%E6%9D%A1%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E8%83%BD%E5%8C%85%E5%90%AB%E7%8E%AF%E8%B7%AF%E5%90%97%EF%BC%9F"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">问题： 一条最短路径能包含环路吗？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dijkstra%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">Dijkstra算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bellman-Ford%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">Bellman-Ford算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Floyd-Warshall%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">Floyd-Warshall算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%88%E6%9C%80%E5%B0%8F%E6%94%AF%E6%92%91%E6%A0%91%EF%BC%89%E9%97%AE%E9%A2%98%EF%BC%88%E7%94%9F%E6%88%90MST%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">最小生成树（最小支撑树）问题（生成MST）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Prim%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Prim算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Kruskal-%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Kruskal 算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.3.</span> <span class="toc-text">拓扑排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">关键路径</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>数据结构-图</h1>
+<p>图就是一群<strong>点与点之间的连接关系</strong>。</p>
+<blockquote>
+<p>图 = 点 + 关系</p>
+</blockquote>
+<p>我们一般利用矩阵对它进行计算。</p>
+<h2 id="图的术语">图的术语</h2>
+<p>图的术语很多很多，分类记忆优先。</p>
+<h3 id="一类：必须掌握，写代码会直接用到的术语"><strong>一类：必须掌握，写代码会直接用到的术语</strong></h3>
+<p>这些术语不仅是定义，更是写代码、分析题目的关键词</p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>有向图 / 无向图</strong></td>
+<td>箭头 vs 无箭头，影响建边方式（<code>add(u,v)</code> 是否对称）</td>
+</tr>
+<tr>
+<td><strong>邻接（Adjacency）</strong></td>
+<td>一个点相邻的所有点，用于 DFS / BFS</td>
+</tr>
+<tr>
+<td><strong>出度 / 入度 / 度</strong></td>
+<td>出去多少条边、进来多少条边，图遍历/拓扑排序常用</td>
+</tr>
+<tr>
+<td><strong>加权图</strong></td>
+<td>边有权值了，要用 <code>edge.to, edge.w</code> 来写</td>
+</tr>
+<tr>
+<td><strong>简单路径 / 简单环</strong></td>
+<td>不重复点的路径 / 环，DFS 搜索路径时要判断</td>
+</tr>
+<tr>
+<td><strong>子图</strong></td>
+<td>原图的一部分，图论算法经常讲“找子图”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二类：理解了就能用的术语"><strong>二类：理解了就能用的术语</strong></h3>
+<p>这些术语不是写代码的前提，但出现在算法分析里，比如题干说“强连通分量”，得知道那是啥</p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>连通图 / 强连通图</strong></td>
+<td>DFS/BFS 一遍能走完 vs 每个点都能互相到达</td>
+</tr>
+<tr>
+<td><strong>连通分量 / 强连通分量</strong></td>
+<td>把图分成“互相能到达的块”</td>
+</tr>
+<tr>
+<td><strong>极大连通子图</strong></td>
+<td>不能再扩展的连通分量，Tarjan算法中会用</td>
+</tr>
+<tr>
+<td><strong>网络（flow network）</strong></td>
+<td>用于网络流，前期接触少，可以见到再查</td>
+</tr>
+<tr>
+<td><strong>回路 / 环 / 简单环</strong></td>
+<td>DFS 检测环判断用，图论题会提到</td>
+</tr>
+</tbody>
+</table>
+<p>画成图理解，有题再回笔记复习，不需要死记硬背术语。<br>
+让G老师整理了一个简略的模板，复制粘贴一下。</p>
+<h3 id="图论术语学习笔记，仅供查阅">图论术语学习笔记，仅供查阅</h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>中文解释</th>
+<th>图论举例</th>
+<th>代码意义 / 使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有向图</td>
+<td>边有方向，A→B 与 B→A 不同</td>
+<td>A → B → C</td>
+<td>邻接表只存 u→v，不加反边</td>
+</tr>
+<tr>
+<td>无向图</td>
+<td>边无方向，A-B 是双向的</td>
+<td>A - B - C</td>
+<td>建边要加两次 u↔v</td>
+</tr>
+<tr>
+<td>邻接</td>
+<td>某个点能直接到达的点</td>
+<td>A 相邻点为 B, C</td>
+<td>DFS / BFS / 最短路核心</td>
+</tr>
+<tr>
+<td>入度</td>
+<td>进入该点的边数</td>
+<td>C 有入度 2：A→C, B→C</td>
+<td>拓扑排序判断是否入度为 0</td>
+</tr>
+<tr>
+<td>出度</td>
+<td>从该点出发的边数</td>
+<td>A 有出度 1：A→B</td>
+<td>构建邻接表或最短路用</td>
+</tr>
+<tr>
+<td>度</td>
+<td>无向图中与该点相连的总边数</td>
+<td>B 有度 3：连了 A, C, D</td>
+<td>统计图结构复杂度</td>
+</tr>
+<tr>
+<td>加权图</td>
+<td>每条边有权重值（如距离、代价）</td>
+<td>边 A→B 权重为 3</td>
+<td>需要额外记录权重 edge.w</td>
+</tr>
+<tr>
+<td>简单路径</td>
+<td>路径中点不重复</td>
+<td>A→B→C 合法</td>
+<td>DFS 中用 visited[] 防止重复</td>
+</tr>
+<tr>
+<td>简单环 / 回路</td>
+<td>点不重复的闭环</td>
+<td>A→B→A 是简单环</td>
+<td>判断是否有环</td>
+</tr>
+<tr>
+<td>子图</td>
+<td>图的一部分（点与边的子集）</td>
+<td>G 的子图仅含 A, B, C</td>
+<td>大图中划分子问题</td>
+</tr>
+<tr>
+<td>连通图</td>
+<td>任意两个点之间有路径</td>
+<td>一笔能走完所有点</td>
+<td>用 DFS / BFS 判断连通性</td>
+</tr>
+<tr>
+<td>强连通图</td>
+<td>有向图中任意两点互达</td>
+<td>所有点之间都有双向路径</td>
+<td>Tarjan 算法中强连通分量（SCC）判定</td>
+</tr>
+<tr>
+<td>连通分量</td>
+<td>连通图中独立的“块”</td>
+<td>一个图被分成多个连通子图</td>
+<td>并查集找连通块 / 统计图中有几个分量</td>
+</tr>
+<tr>
+<td>强连通分量</td>
+<td>强连通图中的“极大块”</td>
+<td>Tarjan 算法识别强连通部分</td>
+<td>拆图结构、题目要求找 SCC 时使用</td>
+</tr>
+<tr>
+<td>极大连通子图</td>
+<td>无法再扩展的连通图</td>
+<td>一次 DFS 得到的整块</td>
+<td>判最大图结构 / DFS 局部图遍历</td>
+</tr>
+<tr>
+<td>极小连通子图</td>
+<td>包含所有点、最少边的连通图，去掉一条边就不连通，增加一条边就成环</td>
+<td>原图有环，生成树去掉了冗余边</td>
+<td>用来描述 MST 的性质/写题时判断图是否成树常用</td>
+</tr>
+<tr>
+<td>网络（flow）</td>
+<td>带容量限制的有向图</td>
+<td>边 A→B 最大流 5</td>
+<td>最大流 / 最小割等网络流建模</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="比较">比较</h2>
+<p>线性、树、图结构中</p>
+<ul>
+<li>线性结构中，每个元素只有<strong>一个直接前驱和直接后继</strong>。</li>
+<li>树形结构中，每个元素中有<strong>一个直接前驱</strong>，但可以有<strong>多个直接后继</strong>。</li>
+<li>图形结构中，数据元素之间的关系任意。每个元素可以和任意多个数据元素相关，有任意多个直接前驱和直接后继。<em>（在无向图中，在有向图视角下甚至互为前驱后继）</em></li>
+</ul>
+<hr>
+<h2 id="实现">实现</h2>
+<h3 id="ADT的C-类表示">ADT的C++类表示</h3>
+<blockquote>
+<p><code>Graph</code> 是一个支持添加边、遍历（DFS/BFS）、获取邻接点的抽象图结构。<br>
+支持有向图和无向图的建图形式，底层使用邻接表实现。适合作为图论算法的基础类。</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 图的抽象数据类型（ADT）结构表示</span>
+<span class="token keyword">class</span> <span class="token class-name">Graph</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> V<span class="token punctuation">;</span> <span class="token comment">// 顶点数量</span>
+    <span class="token keyword">bool</span> directed<span class="token punctuation">;</span> <span class="token comment">// 是否为有向图</span>
+    vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> adj<span class="token punctuation">;</span> <span class="token comment">// 邻接表表示图</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">// 构造函数：初始化图的顶点数量与有向/无向标志</span>
+    <span class="token function">Graph</span><span class="token punctuation">(</span><span class="token keyword">int</span> vertices<span class="token punctuation">,</span> <span class="token keyword">bool</span> isDirected <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        V <span class="token operator">=</span> vertices<span class="token punctuation">;</span>
+        directed <span class="token operator">=</span> isDirected<span class="token punctuation">;</span>
+        adj<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>V<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 添加一条边（u 到 v）</span>
+    <span class="token keyword">void</span> <span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        adj<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>directed<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            adj<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 无向图加双向边</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 获取一个点的所有邻接点</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">getNeighbors</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> adj<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 深度优先遍历（DFS）</span>
+    <span class="token keyword">void</span> <span class="token function">DFS</span><span class="token punctuation">(</span><span class="token keyword">int</span> start<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">></span><span class="token operator">&amp;</span> visited<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        visited<span class="token punctuation">[</span>start<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">:</span> adj<span class="token punctuation">[</span>start<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">DFS</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> visited<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 广度优先遍历（BFS）</span>
+    <span class="token keyword">void</span> <span class="token function">BFS</span><span class="token punctuation">(</span><span class="token keyword">int</span> start<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">></span> <span class="token function">visited</span><span class="token punctuation">(</span>V<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        visited<span class="token punctuation">[</span>start<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> u <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">:</span> adj<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 获取图中顶点数量</span>
+    <span class="token keyword">int</span> <span class="token function">getVertexCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> V<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 获取图中某点的度数（无向图）或出度（有向图）</span>
+    <span class="token keyword">int</span> <span class="token function">getDegree</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> adj<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="存储">存储</h3>
+<p>图的存储用于存储点和边的关系，主要有2种方法。</p>
+<ul>
+<li>邻接矩阵：用一个二维表格记录“有没有边”</li>
+<li>邻接表：每个点有一张自己的“出边名单”</li>
+</ul>
+<h4 id="邻接矩阵（二维数组）">邻接矩阵（二维数组）</h4>
+<ul>
+<li>适合小图，构造简单直接。有几个顶点就存几个方向。</li>
+<li><strong>在一维数组里面存储顶点信息，二维矩阵中存储边的信息</strong>。</li>
+<li>用一个二维数组 <code>g[i][j]</code> 表示<br>
+有边：<code>g[i][j] = 1</code>（或权值 w）<br>
+没边：<code>g[i][j] = 0</code>（或 INF，无穷大)</li>
+</ul>
+<p><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/20250325111944762.png" alt=""><br>
+对于<strong>稠密图，有向图</strong>，采用邻接矩阵非常合适。但存储大量无边信息，造成空间浪费。<br>
+<em>这个很好构造，创一个二维数组，赋值关系间就好。比如1号元素指向2号元素，权值为2，则</em>  <code>g[1][2]=2</code><br>
+对于一些有权图问题，我们为了代码能跑，经常会设置INF，辅助最小路径问题，这样输入也方便</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>graph<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> i <span class="token operator">!=</span> j<span class="token punctuation">)</span> graph<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> INF<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="邻接表">邻接表</h4>
+<p>邻接表的实现和邻接矩阵很像，但不约束于邻接矩阵<code>n*n</code>的固定大小。<br>
+每一个顶点使用一个<strong>一维数组</strong>来存储，而边的存储是同一个顶点出发的所有边，组成<strong>一条单链表</strong>。<br>
+我们用 STL 实现的话，vector 的 push_back() 很好的起到了邻接表的实现来存储图。邻接表就是链表式的图结构。<br>
+当然也可以直接用链表，跳转。<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/20250325113155345.png" alt=""><br>
+对于<strong>稀疏图，无向图</strong>，采用邻接表非常合适。空间利用效率大幅度提高，不存储无边的无用信息。</p>
+<h5 id="STL-实现">STL 实现</h5>
+<p><strong>无权图版本</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//基本结构</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">10010</span><span class="token punctuation">;</span> <span class="token comment">// 最大点数</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> graph<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 邻接表：graph[u] 存放 u 的邻接点</span>
+
+<span class="token comment">//加边操作</span>
+<span class="token keyword">void</span> <span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 无向图要加两次</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//遍历</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">:</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// u → v 有一条边</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//非常类似链表遍历，每个点自己的链表就是vector</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>有权图版本</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span> graph<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// pair&lt;to, weight></span>
+
+<span class="token keyword">void</span> <span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> v<span class="token punctuation">,</span> <span class="token keyword">int</span> w<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>v<span class="token punctuation">,</span> w<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 如果是无向图：</span>
+    <span class="token comment">// graph[v].push_back(&#123;u, w&#125;);</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> <span class="token punctuation">[</span>v<span class="token punctuation">,</span> w<span class="token punctuation">]</span> <span class="token operator">:</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// u → v, 权重为 w</span>
+<span class="token punctuation">&#125;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="链表实现"><strong>链表实现</strong></h5>
+ <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> <span class="token keyword">struct</span> <span class="token class-name">Graph</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">&#123;</span><span class="token comment">//边的构造</span>
+        <span class="token keyword">int</span> to<span class="token punctuation">;</span>           <span class="token comment">// 边通往哪个点</span>
+        Node<span class="token operator">*</span> next<span class="token punctuation">;</span>       <span class="token comment">// 还有没有其他边从该店出去</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+    Node<span class="token operator">*</span> head<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token comment">// 图的点对应的边，是数组</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token keyword">int</span> from<span class="token punctuation">,</span> <span class="token keyword">int</span> to<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    Node<span class="token operator">*</span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">&#123;</span>to<span class="token punctuation">,</span> head<span class="token punctuation">[</span>from<span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    head<span class="token punctuation">[</span>from<span class="token punctuation">]</span> <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//插入边</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>“如果一个点有很多出边怎么办？如果没有出边怎么办？”</p>
+</blockquote>
+<p>那我们就反向思维，我们链表存储的是<strong>图的边</strong>，并非图的所有点。点可以对应很多边，但边可以对应只有两个点。而且我们图的关系，看的往往是边的关系。</p>
+<ul>
+<li>顶点编号 = <code>head[i]</code> 中的 <code>i</code></li>
+<li>边 = 存在于从 <code>i</code> 出发的一串 <code>Node</code></li>
+<li><code>to</code> 指向的是该边的到达点，出发点就是插入这条边的时候所在的下标。</li>
+</ul>
+<p>插入边直接 addEdge(1,2)，插入一条从1指向2的边。我们每一次构造都是插入 Node 。<br>
+<code>head[from] = newNode</code> 表面上是赋值，<br>
+但这行代码背后的意义是：</p>
+<blockquote>
+<p>把新的边插在原链表的最前面，原来的边通过 <code>newNode-&gt;next</code> 继续挂在后面。</p>
+</blockquote>
+<p>建立新节点的时候 <code>new node&#123;to,head[from]&#125;</code> 把旧的链表接在新边后面，<strong>实现了“头插法”追加”</strong>。</p>
+<hr>
+<h2 id="遍历">遍历</h2>
+<p>遍历图和遍历二叉树不太一样，图的每个顶点地位相同，我们要判断“一个点是否被访问过”，避免遗漏。</p>
+<h3 id="DFS">DFS</h3>
+<p><em>其实感觉有点像开 bool 数组呢…</em><br>
+深度优先遍历。<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/20250401110553640.png" alt=""><br>
+<strong>访问方式</strong>：</p>
+<ul>
+<li>从选中的某一个未访问过的顶点出发，访问并对该顶点加已访问标志。</li>
+<li>依次从该顶点的未被访问过的第1个、第2个、第3个…… 邻接顶点出发，依次进行<strong>深度优先遍历</strong>，即转向1。</li>
+<li>如果还有顶点未被访问过，选中其中一个顶点作为起始顶点，再次转向1。如果 所有的顶点都被访问到，遍历结束。<br>
+简单点就是，一条路一直走，走到头，栈式回退，一层层卸载。<br>
+<strong>注意：</strong></li>
+<li>深度优先遍历结果不唯一。</li>
+<li>DFS 是一个典型的<strong>递归过程</strong>，用对规模小的图的遍历问题解决大图遍历问题。<br>
+<strong>实现</strong>：<br>
+深度优先，就是开bool数组吧…递归只要做到”来过“就可以了。</li>
+</ul>
+<p>从指定点开始深度优先遍历，我们先把一个点变成 true ，从它开始…</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">DFS</span><span class="token punctuation">(</span>Graph G<span class="token punctuation">,</span> <span class="token keyword">int</span> v<span class="token punctuation">,</span> <span class="token keyword">bool</span> visited<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>         <span class="token comment">// 标记当前点已访问</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>每一个与 v 相邻的顶点 u<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">DFS</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span> u<span class="token punctuation">,</span> visited<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 递归访问未访问的邻居</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="BFS">BFS</h3>
+<p>广度优先遍历。<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE/20250401110701225.png" alt=""><br>
+<strong>访问方式</strong>：</p>
+<ul>
+<li>从选中的某一个未访问过的顶点出发，访问并对该顶点加已访问标志。</li>
+<li>依次对该顶点的未被访问过的第1个、第2个、第3个……第 k 个邻接点 v1、v2 、v3…… vk进行访问且加已访问标志。</li>
+<li>依次对顶点 v1 、v2、v3…… vk转向操作2。</li>
+<li>如果还有顶点未被访问过，选中其中一个顶点作为起始顶点，再次转向1。如果 所有的顶点都被访问到，遍历结束。</li>
+</ul>
+<blockquote>
+<p>与深度优先不太一样的是，广度优先像是 “访问邻居“，确保从一个点出发，所有与该点连接的点都遍历到，然后再跳转下一点。</p>
+</blockquote>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>广度优先遍历结果不唯一。</li>
+<li><strong>广度优先遍历不是递归过程</strong>，它更像是一个对点的逐个访问。<br>
+<strong>实现</strong>：</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">BFS</span><span class="token punctuation">(</span>Graph G<span class="token punctuation">,</span> <span class="token keyword">int</span> start<span class="token punctuation">,</span> <span class="token keyword">bool</span> visited<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+    visited<span class="token punctuation">[</span>start<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>start<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 起点入队</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> v <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 取出当前点</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>每一个与 v 相邻的顶点 u<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                visited<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>    <span class="token comment">// 标记为已访问</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment">// 邻居入队</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="应用">应用</h2>
+<h3 id="最短路径问题（Dijkstra，Bellman-Ford，Floyd-Warshall）">最短路径问题（Dijkstra，Bellman-Ford，Floyd-Warshall）</h3>
+<p><strong>定义</strong>：在最短路径问题中，给定一个带有权值的有向图 G=(V,E)，令w(u,v)表示边(u,v)的权值。图中一条路径p=&lt;v_0,v_1,…,v_k&gt;的权值w(p)是构成该路径的所有边的权值之和，在所有的从顶点u到顶点v的路径当中，权值最小的那条路径称之为从u到v的最短路径。<br>
+<em>说白了就是每次都走权值最大or最小的路径。最后整条路径是权值最大or最小的。</em></p>
+<p><strong>重要性质</strong>：给定两个顶点之间的一条最短路径，则在该路径上任意两个点的路径都是最短的，这种最短子路径称为最优子结构。<br>
+<em>一条大路是最优解，那么每条小路都是最优解。</em></p>
+<p>我们用动态规划，Dijkstra算法的基础，就是基于这个“每条小路最优解”。</p>
+<h4 id="问题：-一条最短路径能包含环路吗？">问题： 一条最短路径能包含环路吗？</h4>
+<p>答：<strong>不能。绝不行。不管环的权值是负的、正的，还是零，全都不行。</strong></p>
+<h5 id="如果环的权值是负数-这玩意最危险）">如果环的权值是负数 (这玩意最危险）</h5>
+<p>假设你从 A 出发，走到某个地方遇到了一个负权环，也就是说，这个环越绕越“省钱”。<br>
+那干嘛不在这个环里绕一百万圈，搞个负无穷大？你这什么最短路径，明明还可以更短！<br>
+只要<strong>图里能从起点走到一个负权环，那你永远也找不到真正的最短路径</strong>，<br>
+结论：负权环 = 最短路径永远没完没了。</p>
+<h5 id="如果环的权值是正数（这玩意没啥用）">如果环的权值是正数（这玩意没啥用）</h5>
+<p>你走了一条路，中间绕了个小贵环回来，然后再继续走。<br>
+那你为啥要走那个贵环？你删掉它不是省更多？<br>
+<strong>只要路径里有正权环，你都可以删掉它，剩下的路更短。</strong><br>
+结论：正权环 = 拖后腿，没必要。</p>
+<h5 id="如果环的权值是-0（-这玩意最容易骗你）">如果环的权值是 0（ 这玩意最容易骗你）</h5>
+<p>你以为走这个 0 环“也没多付钱啊”，那可太天真了。<br>
+虽然它不会让路径更差，但它也不会让路径更好，<br>
+<strong>而且它让你走了一圈纯属浪费感情。</strong><br>
+结论：0 权环 = 没损失但也没价值，是废环，删了也不影响最短路径。</p>
+<h4 id="Dijkstra算法">Dijkstra算法</h4>
+<p>手写作业写最短路径的时候，按教材那个表达来。<br>
+遍历+贪心。<br>
+流程：</p>
+<ul>
+<li>Dijkstra 每一轮都更新「从源点到某节点的所有可能路径」，<strong>只取当前最短那一条</strong>，<strong>并不是</strong>依赖于上一条选好的线路而贪心增加。（比如选好了&lt;4,2,3&gt;是4到3最短，再看4到6的时候，除了要看&lt;4,2,3,6&gt;,可能还要看&lt;4,6&gt;,&lt;4,2,6&gt;等等…）</li>
+</ul>
+<p>实例：<br>
+<img src="https://img.moyuin.top/i/2025/04/21/6806420d215bc.png" alt="题目"><br>
+<em>顺便给一下教材写法，考试格式…</em><br>
+<img src="https://img.moyuin.top/i/2025/04/21/680644fd78993.png" alt="image.png"></p>
+<ul>
+<li>标记（舍）是因为比已知存在路径要权重大，因此不作为下个未标记点的路径。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">终点</th>
+<th style="text-align:left">i=1</th>
+<th style="text-align:left">i=2</th>
+<th style="text-align:left">i=3</th>
+<th style="text-align:left">i=4</th>
+<th style="text-align:left">i=5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:left">⟨4,1⟩20</td>
+<td style="text-align:left">⟨4,2,1⟩15</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">⬛ ⟨4,6,1⟩12</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:left">⬛ ⟨4,2⟩5</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">⬛ ⟨4,2,3⟩8</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:left">⬛ ⟨4,5⟩11</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">⟨4,2,3,5⟩23(舍)</td>
+<td style="text-align:left">⟨4,6,5⟩13</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:left">⬛ ⟨4,6⟩10</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center">u(选好的最短路径节点)</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:center">s(已确定最短路径的节点集合)</td>
+<td style="text-align:left">{4,2}</td>
+<td style="text-align:left">{4,2,3}</td>
+<td style="text-align:left">{4,2,3,6}</td>
+<td style="text-align:left">{4,2,3,6,5}</td>
+<td style="text-align:left">{4,2,3,6,5,1}</td>
+</tr>
+<tr>
+<td style="text-align:center">最终结果（最短路径）：</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>v1：⟨4,6,1⟩，dist=12</li>
+<li>v2：⟨4,2⟩，dist=5</li>
+<li>v3：⟨4,2,3⟩，dist=8</li>
+<li>v5：⟨4,5⟩，dist=11</li>
+<li>v6：⟨4,6⟩，dist=10</li>
+</ul>
+<p>代码实现（这里是把所有点到点的距离全部计入了）：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">dijkstra</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> start<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> graph<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">dist</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> INF<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 存储起点到各点的最短距离</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">></span> <span class="token function">visited</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 标记哪些点已经确定最短路径</span>
+
+    dist<span class="token punctuation">[</span>start<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 起点到自己的距离是0</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> u <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> minDist <span class="token operator">=</span> INF<span class="token punctuation">;</span>
+
+        <span class="token comment">// 找当前未访问的点中，距离起点最近的那个</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> dist<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> minDist<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                u <span class="token operator">=</span> j<span class="token punctuation">;</span>
+                minDist <span class="token operator">=</span> dist<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>u <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span> <span class="token comment">// 如果没找到说明剩下的都不可达，结束</span>
+
+        visited<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 标记这个点已经确定最短路径</span>
+
+        <span class="token comment">// 更新与u相邻的点的距离</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> v <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> v<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">!=</span> INF<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>dist<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">+</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">&lt;</span> dist<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    dist<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> dist<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">+</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 输出结果</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dist<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> INF<span class="token punctuation">)</span>
+            cout <span class="token operator">&lt;&lt;</span> <span class="token string">"从"</span> <span class="token operator">&lt;&lt;</span> start <span class="token operator">&lt;&lt;</span> <span class="token string">"到"</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">"：不可达"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            cout <span class="token operator">&lt;&lt;</span> <span class="token string">"从"</span> <span class="token operator">&lt;&lt;</span> start <span class="token operator">&lt;&lt;</span> <span class="token string">"到"</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">"：最短距离 = "</span> <span class="token operator">&lt;&lt;</span> dist<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h4 id="Bellman-Ford算法">Bellman-Ford算法</h4>
+<p><strong>核心思想</strong>：Bellman-Ford算法通过对边进行<strong>松弛的方式</strong>渐近地求出<strong>源顶点s到其余顶点v</strong>的最短路径距离。</p>
+<ul>
+<li><strong>Dijkstra 不支持负权边</strong>（就是边的权值可以是负数）</li>
+<li><strong>Bellman-Ford 可以！</strong></li>
+</ul>
+<blockquote>
+<p>Bellman-Ford 的核心机制就是：<br>
+<strong>“你别急，我帮你把路径松弛 V-1 次。”</strong><br>
+啥叫“松弛”？不是拉筋，是更新路径：</p>
+</blockquote>
+<p>每次松弛，就是尝试：</p>
+<blockquote>
+<p>“如果从 A 到 B 这条边能让 B 的最短距离更小，我就更新一下到达 B 的最短距离。”</p>
+</blockquote>
+<p>你把图里所有边一遍一遍扫，<br>
+每发现能更新的路径，就更新。<br>
+重复这个过程 <strong>V-1 次</strong>（V = 点的数量）。</p>
+<p>因为最短路径最多经过 V-1 条边，<br>
+再多就是环了，你就绕圈圈了。</p>
+<blockquote>
+<p>“如果我松弛了 V-1 次还没完，<br>
+第 V 次还能继续更新，那说明你有 <strong>负权环</strong>，无限省钱大骗局，整个图炸了。”</p>
+</blockquote>
+<p>代码实现：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">bellmanFord</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> start<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>Edge<span class="token operator">></span><span class="token operator">&amp;</span> edges<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> dist<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    dist<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> INF<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dist<span class="token punctuation">[</span>start<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 进行 n-1 次松弛操作</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> edge <span class="token operator">:</span> edges<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>u<span class="token punctuation">]</span> <span class="token operator">!=</span> INF <span class="token operator">&amp;&amp;</span> dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>u<span class="token punctuation">]</span> <span class="token operator">+</span> edge<span class="token punctuation">.</span>w <span class="token operator">&lt;</span> dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>u<span class="token punctuation">]</span> <span class="token operator">+</span> edge<span class="token punctuation">.</span>w<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 第n次松弛，检测是否还有可以更新的——有就代表存在负权回路</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> edge <span class="token operator">:</span> edges<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>u<span class="token punctuation">]</span> <span class="token operator">!=</span> INF <span class="token operator">&amp;&amp;</span> dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>u<span class="token punctuation">]</span> <span class="token operator">+</span> edge<span class="token punctuation">.</span>w <span class="token operator">&lt;</span> dist<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">// 有负权环</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 成功，没有负权环</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有负权环没答案。答案存在 dist 数组里。</p>
+<hr>
+<h4 id="Floyd-Warshall算法">Floyd-Warshall算法</h4>
+<p><strong>算法介绍</strong>：Floyd-Warshall算法是一种动态规划算法，能解决<strong>所有顶点对最短路径</strong>问题，运行时间为O(|V|^3)，能够处理权值为负的边。<br>
+<strong>代码更短。</strong></p>
+<p><strong>核心思想</strong>：如果你想让 i 到 j 更短，那试试看从 i 到 k 再到 j 会不会更便宜。</p>
+<blockquote>
+<p>你有一张图，任意两点之间的最短路径你都想知道，一个一个试太累，那你干脆：<br>
+<strong>让每个点都轮流当“中转站”，看看是不是能让两点之间的距离变短。</strong></p>
+</blockquote>
+<p><strong>本质</strong>：<br>
+你要更新的路径是 <code>dist[i][j]</code>，<br>
+每当你发现：<br>
+<code>dist[i][j] &gt; dist[i][k] + dist[k][j]</code></p>
+<p>你就做一次松弛<br>
+<code>dist[i][j] = dist[i][k] + dist[k][j];</code></p>
+<p>代码不太优雅：<br>
+<em>从 i 到 j，如果我中转一下 k，是不是更便宜？</em></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>k<span class="token punctuation">)</span>  <span class="token comment">// 中转点</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>    <span class="token comment">// 起点</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span><span class="token comment">// 终点</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>dist<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> dist<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> dist<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                dist<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> dist<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> dist<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>不能有负环，否则结果会出事（无限套现）。</p>
+<hr>
+<h3 id="最小生成树（最小支撑树）问题（生成MST）">最小生成树（最小支撑树）问题（生成MST）</h3>
+<p><strong>定义</strong>：给定一个连通的加权图G=(V,E)，其中V为顶点的集合，E为边的集合，其中E中的每条边都有一个非负的权值。最小生成树问题是在G中<strong>求解权值最小的生成树</strong>（MST）。</p>
+<h4 id="Prim算法">Prim算法</h4>
+<p>是一个贪心算法，构造树的时候，每次都是选择权值最小的路径连接点与点。<br>
+一个点出发，慢慢往外连边，每次都选：</p>
+<blockquote>
+<p><strong>“从已经连接好的点，到外面去的边中，最短的那一条。”</strong></p>
+</blockquote>
+<p>prim算法和Dijkstra算法的思想很像很像，不过一个是关注<strong>单纯点到点的路径的权值</strong>，一个是关注<strong>从源点到该点的路径和</strong>。也要注意保留<strong>未选取路径中指向未选取点的</strong>。</p>
+<p>照样<strong>不能去成环</strong>，理由和最短路径的那个一样的。</p>
+<h5 id="代码实现：">代码实现：</h5>
+<ul>
+<li>代码总览：(邻接矩阵实现)</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;climits></span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> INF <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> <span class="token comment">// 最大顶点数</span>
+
+<span class="token keyword">int</span> graph<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 邻接矩阵</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">></span><span class="token function">visited</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 标记是否加入MST，哪些点已经被我们选了</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token function">dist</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span>INF<span class="token punctuation">)</span>     <span class="token comment">// 到MST的最小边权值，初始每个点都贵得离谱</span>
+<span class="token keyword">int</span> n<span class="token punctuation">;</span>           <span class="token comment">// 顶点数量</span>
+
+<span class="token keyword">int</span> <span class="token function">prim</span><span class="token punctuation">(</span><span class="token keyword">int</span> start<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    dist<span class="token punctuation">[</span>start<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> totalWeight <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+    <span class="token comment">//给每一个点找最便宜的权值,处理后加上去</span>
+        <span class="token keyword">int</span> u <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> minDist <span class="token operator">=</span> INF<span class="token punctuation">;</span>
+        <span class="token comment">//从还没选的点中选一个最便宜的</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> dist<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> minDist<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                minDist <span class="token operator">=</span> dist<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                u <span class="token operator">=</span> j<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>u <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span> <span class="token comment">// 找不到了，说明不连通</span>
+
+        visited<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 找到了，标记一下，下次不选它了，不然有可能形成环路</span>
+        totalWeight <span class="token operator">+=</span> dist<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 加一下找到的u点出发最短权值</span>
+
+        <span class="token comment">// 更新从点 u 出发可以到达的，但还没去过的其他点的，权值，便于下次选择最短路径</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> v <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> v<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">&lt;</span> dist<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+	        <span class="token comment">//v 点我还没去过，并且我发现u到v点的路径比我一开始设定的minDist还要短，那我就把它改成u到v的边，调整一下</span>
+                dist<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> graph<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> totalWeight<span class="token punctuation">;</span> <span class="token comment">// 输出最短路径</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>输入格式（邻接矩阵，邻接表实现其实要麻烦一些，要遍历表找最值）</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> n<span class="token punctuation">;</span>
+cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">graph</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token generic-function"><span class="token function">vector</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cin <span class="token operator">>></span> graph<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>graph<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> i <span class="token operator">!=</span> j<span class="token punctuation">)</span> graph<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span> <span class="token comment">// 无边当作 ∞</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>Prim 算法遍历邻接矩阵所有点</strong>，平均时间复杂度为O(n^2)。</p>
+<ul>
+<li>邻接表实现：</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;queue></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Edge</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> to<span class="token punctuation">,</span> weight<span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">const</span> Edge <span class="token operator">&amp;</span>e<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> weight <span class="token operator">></span> e<span class="token punctuation">.</span>weight<span class="token punctuation">;</span>  <span class="token comment">// 小根堆</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1001</span><span class="token punctuation">;</span> <span class="token comment">//顶点最大个数</span>
+vector<span class="token operator">&lt;</span>Edge<span class="token operator">></span> graph<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//图，邻接表表示的，数组索引i表示是第i个节点，存的是边链表的头</span>
+<span class="token keyword">bool</span> visited<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">prim</span><span class="token punctuation">(</span><span class="token keyword">int</span> start<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    priority_queue<span class="token operator">&lt;</span>Edge<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>Edge<span class="token operator">></span><span class="token punctuation">,</span> greater<span class="token operator">&lt;</span>Edge<span class="token operator">>></span> pq<span class="token punctuation">;</span>
+    visited<span class="token punctuation">[</span>start<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> <span class="token operator">&amp;</span>e <span class="token operator">:</span> graph<span class="token punctuation">[</span>start<span class="token punctuation">]</span><span class="token punctuation">)</span> pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    
+    <span class="token keyword">int</span> total_weight <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>pq<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        Edge curr <span class="token operator">=</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> pq<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>visited<span class="token punctuation">[</span>curr<span class="token punctuation">.</span>to<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+        visited<span class="token punctuation">[</span>curr<span class="token punctuation">.</span>to<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        total_weight <span class="token operator">+=</span> curr<span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> <span class="token operator">&amp;</span>e <span class="token operator">:</span> graph<span class="token punctuation">[</span>curr<span class="token punctuation">.</span>to<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>e<span class="token punctuation">.</span>to<span class="token punctuation">]</span><span class="token punctuation">)</span> pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> total_weight<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Kruskal-算法">Kruskal 算法</h4>
+<p>算法思想很简单：</p>
+<blockquote>
+<p>我先把全世界最便宜的边找出来，想加就加，只要它不会成环。</p>
+</blockquote>
+<p>那么<strong>先把边按权值大小排序，从上往下加入边，如果不成环就加</strong>。（这里判断是否成环需要用到并查集）。<br>
+代码之后补充，因为还没了解并查集😿。</p>
+<hr>
+<h3 id="拓扑排序算法">拓扑排序算法</h3>
+<p><img src="https://img.moyuin.top/i/2025/04/10/67f7b8ca34b28.png" alt="image.png"></p>
+<p>拓扑排序还是很容易去理解的，我们根据前后关联性可以轻松写出它的拓扑排序。<br>
+拓扑排序算法一般还是用于查找该图“是否有拓扑排序”。</p>
+<hr>
+<h4 id="关键路径">关键路径</h4>
+<p>从起点到某点的最长路径称为起点到该点的<strong>关键路径</strong>。一般用于AOE网络。<br>
+<img src="https://img.moyuin.top/i/2025/04/15/67fdc0f8c51bb.png" alt="image.png"></p>
+<p>关键路径上的活动被称为<strong>关键活动</strong>。<br>
+对于一个图的优先调度，有多余的人力物力放在非关键路径上其实是不起效果的。<br>
+<strong>求解关键路径</strong>：<br>
+<img src="https://img.moyuin.top/i/2025/04/15/67fdc43fa4398.png" alt="image.png"></p>
+<p>目标：<strong>从 v₀ 出发走到 v₈，找出耗时最长但不能耽误任何环节的一条路径，也就是“关键路径”。</strong></p>
+<p>A. 先算每个事件的 <code>earliest[v]</code><br>
+从起点 v₀ 开始，最早发生时间记为 0<br>
+然后向下游传播，按下式推：</p>
+<blockquote>
+<p><code>earliest[v] = max&#123; earliest[u] + weight(u,v) &#125;</code></p>
+</blockquote>
+<p>按顺序来算：</p>
+<ul>
+<li>
+<p><strong>v₀</strong> = 0（起点）</p>
+</li>
+<li>
+<p><strong>v₁</strong> = v₀ + 5 = <strong>5</strong>（a₀）</p>
+</li>
+<li>
+<p><strong>v₂</strong> = v₀ + 3 = <strong>3</strong>（a₁）</p>
+</li>
+<li>
+<p><strong>v₃</strong> = v₂ + 5 = <strong>8</strong>（a₂）</p>
+</li>
+<li>
+<p><strong>v₄</strong> 有两条路：</p>
+<ul>
+<li>v₂ + 1 = 4（a₃）</li>
+<li>v₁ + 4 = 9（a₄）→ 取 max → <strong>9</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>v₅</strong> = v₁ + 2 = <strong>7</strong>（a₅）</p>
+</li>
+<li>
+<p>v₆ 有两条路：</p>
+<ul>
+<li>v₃ + 7 = 15（a₆）</li>
+<li>v₄ + 5 = 14（a₇）→ max → <strong>15</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>v₇</strong> 有两条路：</p>
+<ul>
+<li>v₄ + 5 = 14（a₈）</li>
+<li>v₅ + 6 = 13（a₉）→ max → <strong>14</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>v₈</strong> 有两条路：</p>
+<ul>
+<li>v₆ + 2 = 17（a₁₀）</li>
+<li>v₇ + 8 = 22（a₁₁）→ max → <strong>22</strong></li>
+</ul>
+</li>
+</ul>
+<p>于是你现在有了 <code>earliest[v]</code> ：见图中绿色数字。</p>
+<p>B. 反过来算 <code>latest[v]</code>（从终点往前推）<br>
+从终点 v₈ 开始：</p>
+<ul>
+<li>v₈ = 22（设为基准）<br>
+我们用公式：</li>
+</ul>
+<blockquote>
+<p><code>latest[u] = min&#123; latest[v] - weight(u,v) &#125;</code></p>
+</blockquote>
+<p>倒着来算</p>
+<ul>
+<li>
+<p>v₇ = v₈ - 8 = <strong>14</strong>（a₁₁）</p>
+</li>
+<li>
+<p>v₆ = v₈ - 2 = <strong>20</strong>（a₁₀）</p>
+</li>
+<li>
+<p>v₅ = v₇ - 6 = <strong>8</strong>（a₉）</p>
+</li>
+<li>
+<p>v₄：</p>
+<ul>
+<li>v₇ - 5 = 9（a₈）</li>
+<li>v₆ - 5 = 15（a₇）→ 取 <strong>min = 9</strong></li>
+</ul>
+</li>
+<li>
+<p>v₃ = v₆ - 7 = <strong>13</strong></p>
+</li>
+<li>
+<p>v₂：</p>
+<ul>
+<li>v₃ - 5 = 8（a₂）</li>
+<li>v₄ - 1 = 8（a₃）→ min = <strong>8</strong></li>
+</ul>
+</li>
+<li>
+<p>v₁:</p>
+<ul>
+<li>v₄ - 4 = 5（a₄）</li>
+<li>v₅ - 2 = 6（a₅）→ min = <strong>5</strong></li>
+</ul>
+</li>
+<li>
+<p>v₀:</p>
+<ul>
+<li>v₁ - 5 = 0（a₀）</li>
+<li>v₂ - 3 = 5（a₁）→ min = <strong>0</strong></li>
+</ul>
+</li>
+</ul>
+<p>C. 计算每条活动的 e[i] 和 l[i]<br>
+对每条活动 aᵢ：<br>
+<code>e[i] = earliest[u]</code> （活动起点的最早时间）<br>
+<code>l[i] = latest[v] - weight(u,v)</code>（终点最晚时间-任务耗时）<br>
+若 <code>e[i] == l[i]</code>，说明该活动不能晚，就是关键路径的一部分！</p>
+<p>我们来实际举几个：<br>
+a₀（v₀→v₁）：</p>
+<ul>
+<li>e[0] = earliest[v₀] = 0</li>
+<li>l[0] = latest[v₁] - 5 = 5 - 5 = 0 ✔️ e = l → <strong>关键路径</strong></li>
+</ul>
+<p>a₄（v₁→v₄）：</p>
+<ul>
+<li>e = 5（v₁）</li>
+<li>l = 9 - 4 = 5 ✔️ 关键路径</li>
+</ul>
+<p>a₆（v₃→v₆）：</p>
+<ul>
+<li>e = 8（v₃）</li>
+<li>l = 20 - 7 = 13 ✘ 不是关键路径（8 ≠ 13）</li>
+</ul>
+<p>连接所有 e[i]=I[i] 的点，得到关键路径。<br>
+最终关键路径是：</p>
+<blockquote>
+<p><strong>v₀ → v₁ → v₄ → v₇ → v₈</strong></p>
+</blockquote>
+<p>总耗时：5 + 4 + 5 + 8 = <strong>22</strong>（也就是项目最早完成时间）</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/数据结构/" class="tag">#数据结构</a><a href="/tags/编程/" class="tag">#编程</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/04/14/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-jing-dian-suan-fa-she-ji-qi-zhong-bei-kao-yong/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">数据结构-经典算法设计（期中备考用）</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/04/01/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-dui/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">数据结构-堆</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

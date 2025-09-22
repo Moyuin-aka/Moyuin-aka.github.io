@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>离散数学-代数系统 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="离散数学-代数系统 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/05/16/xue-xi/shu-xue/chi-san-shu-xue-dai-shu-xi-tong/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-05-16T06:53:22.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/离散数学/">离散数学</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>May</span>
+            <span>16,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">离散数学-代数系统</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">离散数学-代数系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E5%8A%A0%E4%B9%98"><span class="toc-number">1.1.</span> <span class="toc-text">广义加乘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E5%BE%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">定律</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E5%8A%A0%E4%B9%98%E7%9A%84%E5%B0%81%E9%97%AD%E6%80%A7"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">广义加乘的封闭性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E5%BE%8B"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">交换律</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E5%90%88%E5%BE%8B"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">结合律</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%82%E7%AD%89%E5%BE%8B"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">幂等律</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%85%8D%E5%BE%8B"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">分配律</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%B8%E6%94%B6%E5%BE%8B"><span class="toc-number">1.1.2.6.</span> <span class="toc-text">吸收律</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BD%8D%E5%85%83%E4%B8%8E%E9%9B%B6%E5%85%83"><span class="toc-number">1.1.3.</span> <span class="toc-text">单位元与零元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86%E5%85%83"><span class="toc-number">1.1.4.</span> <span class="toc-text">逆元</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%9B%B8%E4%BC%BC%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">代数系统的相似性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">同构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E4%BD%99"><span class="toc-number">1.2.2.</span> <span class="toc-text">同余</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%A4"><span class="toc-number">1.3.</span> <span class="toc-text">群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E7%BE%A4%E3%80%81%E5%8D%8A%E7%BE%A4%E3%80%81%E5%B9%BA%E7%BE%A4%E3%80%81%E7%BE%A4"><span class="toc-number">1.3.1.</span> <span class="toc-text">广群、半群、幺群、群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Klein-%E7%BE%A4"><span class="toc-number">1.3.2.</span> <span class="toc-text">Klein 群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Abel-%E7%BE%A4%EF%BC%88%E4%BA%A4%E6%8D%A2%E7%BE%A4%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">Abel 群（交换群）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">定理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BE%A4%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">群的性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">表表示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BE%A4%E7%9A%84%E5%B9%82"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">群的幂</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E5%91%A8%E6%9C%9F%EF%BC%88%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%B6%EF%BC%89"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">元素的周期（元素的阶）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-2"><span class="toc-number">1.3.4.4.</span> <span class="toc-text">定理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E7%BE%A4"><span class="toc-number">1.3.5.</span> <span class="toc-text">子群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E7%BE%A4%E5%BF%AB%E6%8D%B7%E5%88%A4%E6%96%AD%E5%AE%9A%E7%90%86"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">子群快捷判断定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%AD%90%E7%BE%A4"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">循环子群</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%AA%E9%9B%86"><span class="toc-number">1.3.6.</span> <span class="toc-text">陪集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">定理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AE%9A%E7%90%86"><span class="toc-number">1.3.7.</span> <span class="toc-text">拉格朗日定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%AE%E6%8D%A2%E7%BE%A4"><span class="toc-number">1.3.8.</span> <span class="toc-text">置换群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4"><span class="toc-number">1.3.8.1.</span> <span class="toc-text">定理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E4%B8%8E%E7%8E%AF%E5%9F%9F"><span class="toc-number">1.4.</span> <span class="toc-text">环与环域</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>离散数学-代数系统</h1>
+<h2 id="广义加乘">广义加乘</h2>
+<h3 id="定义">定义</h3>
+<p>广义的加法与乘法没有特定的运算形式，主要依赖于它的定义。可以定义它为<strong>实数</strong>运算，也可定义它为<strong>矩阵</strong>类运算。<br>
+如果不好定义或没有符号，只能使用<strong>运算表</strong>，限于<strong>有限情况</strong>。</p>
+<blockquote>
+<p>广义加乘形式类似于 C++ 中的运算符重载。</p>
+</blockquote>
+<p>运算符号由自己定义。</p>
+<h3 id="定律">定律</h3>
+<h4 id="广义加乘的封闭性">广义加乘的封闭性</h4>
+<p><img src="https://pic.moyuin.top/2025/05/16/6826e28868590.png" alt="image.png"></p>
+<h4 id="交换律">交换律</h4>
+<p>广义交换律是二元运算中存在 <code>x*y=y*x</code><br>
+二元交换普遍存在。</p>
+<h4 id="结合律">结合律</h4>
+<p>任意 xyz 在集合 S 中，有 <code>(x+y)+z=x+y+z=x+(y+z)</code>，称该运算在 S 中满足结合律。<br>
+实数的加、乘；<br>
+集合的并、交；<br>
+逻辑的与、逻辑或；<br>
+矩阵的加、乘<br>
+可满足结合律。</p>
+<h4 id="幂等律">幂等律</h4>
+<p>任意 x 在集合 S 中，有 <code>x+x=x</code> 称该运算在 S 中幂等。<br>
+有些不满足幂等律，但某些元素满足。如普通加法不满足幂等。</p>
+<h4 id="分配律">分配律</h4>
+<p>任意 xyz 在集合 S 中，有 <code>x*(y+z)=(x*y)+(x*z)</code>, 称 <code>*</code> 对 <code>+</code> 可分配。<br>
+如实数加乘，逻辑的与、逻辑或。</p>
+<h4 id="吸收律">吸收律</h4>
+<p>任意 xy 在集合 S 中，有 <code>x*(x+y)=x,x+(x*y)=x</code>, 则称 <code>*</code> 与 <code>+</code> 满足吸收率。<br>
+如 xyz 命题变元。</p>
+<h3 id="单位元与零元">单位元与零元</h3>
+<blockquote>
+<p>实数乘法的 1，实数加法的 0：广义加乘为单位元。</p>
+</blockquote>
+<p><img src="https://pic.moyuin.top/2025/05/16/6826e673c673c.png" alt="image.png"></p>
+<p><img src="https://pic.moyuin.top/2025/05/16/6826e75fc7b49.png" alt="image.png"></p>
+<p>在单位元和零元都存在的基础上，单位元和零元必然不会相同。<br>
+例如：</p>
+<ul>
+<li>乘法中 1 为单位元，0 为零元</li>
+<li>加法中 0 为单位元，没有零元。</li>
+</ul>
+<h3 id="逆元">逆元</h3>
+<blockquote>
+<p>实数乘的倒数，实数加相反数广义加乘的逆元。</p>
+</blockquote>
+<p>并不是所有元素都一定有逆元。<br>
+逆元必须在代数系统集合内，满足运算但是不在系统集合内的，不算逆元。<br>
+<img src="https://pic.moyuin.top/2025/05/16/6826ea24d80c4.png" alt="image.png"></p>
+<hr>
+<h2 id="代数系统的相似性">代数系统的相似性</h2>
+<p>其实类比于 C++ 的类，集合 S 相当于数据成员，运算相当于函数成员。<br>
+代数系统中举例子，实数系统就由 <code>&lt;实数,+，*&gt;</code> 构成。</p>
+<p><code>&lt;集合,运算&gt;</code> 构成一个代数系统。</p>
+<h3 id="同构">同构</h3>
+<p><img src="https://pic.moyuin.top/2025/05/16/6826eb9687ca7.png" alt="image.png"></p>
+<p>注意：<strong>满足一个映射</strong>即可说两组代数系统同构。</p>
+<h3 id="同余">同余</h3>
+<p><img src="https://pic.moyuin.top/2025/05/16/6826eed1cdbbd.png" alt="image.png"><br>
+这个同余在之前的学习中也有提及，好像是关系里的，可以回去看看。</p>
+<hr>
+<h2 id="群">群</h2>
+<h3 id="广群、半群、幺群、群">广群、半群、幺群、群</h3>
+<ul>
+<li>若代数系统封闭，称其为广群。</li>
+<li>若代数系统封闭、可结合,则其为半群。</li>
+<li>若V=封闭、可结合、有e，则为幺群(独异点)</li>
+<li>若封闭，可结合，有 e，则为群。</li>
+</ul>
+<p>我们做题，就是判断这个题是否为&quot;群&quot;。<br>
+判断这个代数系统是否为群，这个例题：<br>
+<img src="https://pic.moyuin.top/2025/05/19/682ad4ace6ada.png" alt="image.png"><br>
+用运算分别判断封闭，结合，单位元，逆元，从而判断。</p>
+<h3 id="Klein-群">Klein 群</h3>
+<p>和周期挂钩。<br>
+<img src="https://pic.moyuin.top/2025/05/19/682ae2c9ade1d.png" alt="image.png"></p>
+<h3 id="Abel-群（交换群）">Abel 群（交换群）</h3>
+<p><strong>符合交换律的群</strong>即为交换群，又叫作 abel 群。</p>
+<h4 id="定理">定理</h4>
+<ul>
+<li>已知 <code>&lt;G,*&gt;</code> 是群，G 是交换群 = 对于任意元素 a, b 有 <code>(a*b)*(a*b)=(a*a)*(b*b)</code><br>
+这是一个充要条件。</li>
+</ul>
+<h3 id="群的性质">群的性质</h3>
+<h4 id="表表示">表表示</h4>
+<p>群是可以用运算表表示的，对于群，我们看运算表可以获得它的封闭，可结合，逆元，单位元。<br>
+<img src="https://pic.moyuin.top/2025/05/19/682ad65198ca4.png" alt="image.png"></p>
+<h4 id="群的幂">群的幂</h4>
+<p><img src="https://pic.moyuin.top/2025/05/19/682addd5f3305.png" alt="image.png"><br>
+<img src="https://pic.moyuin.top/2025/05/19/682adcc4cbf80.png" alt="image.png"></p>
+<p>负数幂怎么操作？取逆元后再进行幂运算。<br>
+模运算 ：“模 p 加法意思就是（a+b）mod p 的值”。<br>
+<img src="https://pic.moyuin.top/2025/05/23/6830195f41548.png" alt="image.png"></p>
+<h4 id="元素的周期（元素的阶）">元素的周期（元素的阶）</h4>
+<p>注意，<strong>对于群而言，群的阶表达的是群的元素个数</strong>，这里解释的是元素的阶。<br>
+<img src="https://pic.moyuin.top/2025/05/19/682add5618e86.png" alt="image.png"><br>
+<img src="https://pic.moyuin.top/2025/05/19/682ae296eacd8.png" alt="image.png"></p>
+<p>周期与幂有关，对元素作 n 次幂，让元素转化为单位元，那么可以说该元素的周期为 n。<br>
+其实这样子在模运算里也比较难识别的。模运算转化为一种乘法运算也比较方便。</p>
+<ul>
+<li>单位元的阶（周期）为 1。</li>
+</ul>
+<blockquote>
+<p>这个“陌生”的运算，其实是大学抽象代数里最经典、最简单的群之一，叫做<strong>整数模n加法群</strong>，记作 (Zn​,+)。我们的 G 集合就是 Z8​ 的一个“二进制马甲”。</p>
+</blockquote>
+<p>对于这种群，有一个<strong>求周期的黄金公式</strong>：</p>
+<p><strong>元素 k 的周期 = <code>m/gcd(k,m)</code></strong></p>
+<p>这里的字母代表：</p>
+<ul>
+<li><strong>m</strong>: 群里一共有多少个元素。在这道题里，<code>G</code>有8个元素，所以 m=8。</li>
+<li><strong>k</strong>: 我们要计算的那个元素所代表的十进制数。比如 <code>010</code> 代表 2，<code>110</code> 代表 6。</li>
+<li><strong>gcd(k,m)</strong>: k 和 m 的<strong>最大公约数</strong> (Greatest Common Divisor)。就是能同时整除 k 和 m 的最大正整数。</li>
+</ul>
+<h4 id="定理-2">定理</h4>
+<ul>
+<li>
+<ol>
+<li>幂的普通运算</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>幂与逆元<br>
+<img src="https://pic.moyuin.top/2025/05/19/682adfba7bf5c.png" alt="image.png"></li>
+</ol>
+</li>
+<li>
+<p>3.群无零元<br>
+有零元代表该代数系统<strong>无逆元</strong>，而群的基本性质就是有逆元，因此冲突，推出群无逆元。注意周期大于等于 2。<br>
+<img src="https://pic.moyuin.top/2025/05/19/682ae1d0135ef.png" alt="image.png"></p>
+</li>
+<li>
+<ol start="4">
+<li>一元一次群方程有解，且解唯一。<br>
+<img src="https://pic.moyuin.top/2025/05/19/682ae0941c74f.png" alt="image.png"></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>群满足消去律<br>
+<img src="https://pic.moyuin.top/2025/05/19/682ae1add7df3.png" alt="image.png"></li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>群的阶，<code>a^k=e</code> 相当于阶 <code>r|k</code><br>
+<img src="https://pic.moyuin.top/2025/05/19/682ae3208eefd.png" alt="image.png"></li>
+</ol>
+</li>
+</ul>
+<h3 id="子群">子群</h3>
+<p>类似于子集吧。子群，顾名思义就是一个群的一部分，一个代数系统的一部分。<br>
+<img src="https://pic.moyuin.top/2025/05/19/682ae502564ac.png" alt="image.png"></p>
+<p>子群依然符合群的各种性质：</p>
+<ul>
+<li>封闭</li>
+<li>可结合</li>
+<li>单位元</li>
+<li>每个元素有逆元</li>
+</ul>
+<h4 id="子群快捷判断定理">子群快捷判断定理</h4>
+<p>1.（1）任何 a, b 属于 H, 有 <code>a*b</code> 属于 H。<br>
+（2）所有 a 属于 H 都有 a^-1 属于 H。<br>
+<img src="https://pic.moyuin.top/2025/05/23/68301c181bff4.png" alt="image.png"><br>
+2. 任何 a，b 属于 H 都有 <code>a*b^-1</code> 属于 H。（逆元混沌封闭）<br>
+<img src="https://pic.moyuin.top/2025/05/23/68301cdd800c7.png" alt="image.png"><br>
+3. 任意 a，b 属于 H 都有 <code>a*b</code> 属于 H。(只封闭)<br>
+<img src="https://pic.moyuin.top/2025/05/23/68301e5e1cd7c.png" alt="image.png"></p>
+<h4 id="循环子群">循环子群</h4>
+<p>定义：由 a 的幂次方组成的子群称为循环子群或者生成子群，记为 <code>&lt;a,*&gt;</code> 或 <code>&lt;a&gt;</code><br>
+<img src="https://pic.moyuin.top/2025/05/23/68302364aeafb.png" alt="image.png"></p>
+<p><img src="https://pic.moyuin.top/2025/05/23/6830281205314.png" alt="image.png"></p>
+<hr>
+<h3 id="陪集">陪集</h3>
+<p>陪集是一种集合而非群，它相当于是一种映射关系的集合。<br>
+<img src="https://pic.moyuin.top/2025/05/23/68302940ab6a1.png" alt="image.png"></p>
+<h4 id="定理-3">定理</h4>
+<p>1.（1）与单位元建立映射的右陪集等于原来的子群。<br>
+（2）与常数项建立映射的右陪集等于原来的子群的倍。<br>
+<img src="https://pic.moyuin.top/2025/05/23/68302a88a4042.png" alt="image.png"> 2. 子群是对群的划分，是相同关系的集合。<br>
+<img src="https://pic.moyuin.top/2025/05/23/68302af68b0f4.png" alt="image.png"> 3. 陪集与等价关系<br>
+<img src="https://pic.moyuin.top/2025/05/26/68340d800bc99.png" alt="image.png"><br>
+对于等价类 <code>[a]</code>, 对于一个子群 H，它的所有的左（或者右）陪集的集合，本质上就是一个子群 H 的等价类的集合。</p>
+<ul>
+<li><strong>核心都是划分：</strong> 等价关系的核心作用是<strong>划分 (Partition)</strong> 一个集合。陪集的作用也完全一样，它将一个大群 G <strong>划分</strong>成若干个大小相等、互不相交的子集（陪集）。每个元素 g∈G 都属于且仅属于一个陪集。<br>
+<img src="https://pic.moyuin.top/2025/05/26/683411643a531.png" alt="image.png"></li>
+</ul>
+<hr>
+<h3 id="拉格朗日定理">拉格朗日定理</h3>
+<p>特指子群元素的拉格朗日定理。结合刚才的群定理，总结出群的四个定理，前三条回顾。</p>
+<ol>
+<li><img src="https://pic.moyuin.top/2025/05/26/683414773c58e.png" alt="image.png"><br>
+2.<img src="https://pic.moyuin.top/2025/05/26/683414939463b.png" alt="image.png"><br>
+3.<img src="https://pic.moyuin.top/2025/05/26/6834149e790c5.png" alt="image.png"><br>
+定理 3 还有一个推论：<br>
+<img src="https://pic.moyuin.top/2025/05/26/683414bb95ba9.png" alt="image.png"></li>
+</ol>
+<p><strong>拉格朗日定理</strong><br>
+<img src="https://pic.moyuin.top/2025/05/26/68341541976c5.png" alt="image.png"><br>
+或者说，子群的元素个数是母群的因数。</p>
+<blockquote>
+<p><strong>在一个有限群中，任何一个元素的阶，都必然能整除这个群的阶。</strong></p>
+</blockquote>
+<p>也有一种表达：</p>
+<blockquote>
+<p>对于一个有限群 <code>G</code> 和它的任意一个子群 <code>H</code>，群 <code>G</code> 的阶（元素个数，记作 ∣G∣）必然是子群 <code>H</code> 的阶（∣H∣）的整数倍。</p>
+</blockquote>
+<p>这是对于群 <code>G</code> 为有限群而言，子群 <code>H</code> 的陪集数目是有限的。<br>
+当群 <code>G</code> 为无限群，陪集数可能有限，可能无限，要依赖选取的子群来确定。拉格朗日定理只适用于有限群。</p>
+<hr>
+<h3 id="置换群">置换群</h3>
+<p>好像就是把洗牌的指令集合为群。<br>
+<img src="https://pic.moyuin.top/2025/05/26/6834188e3730f.png" alt="image.png"></p>
+<p>乘积/复合：<code>σ ∘ τ</code> （或写作 <code>στ</code>），先按 <code>σ</code> 的指令操作，然后按 <code>τ</code> 的指令操作，构成一个新的排列。</p>
+<blockquote>
+<p><strong>注意：</strong> 在数学上，运算顺序通常是<strong>从右往左</strong>的。但是这里 PPT 上这么处理，所以跟着 PPT 的来吧。<br>
+<img src="https://pic.moyuin.top/2025/05/26/683418cec60f2.png" alt="image.png"></p>
+</blockquote>
+<h4 id="定理-4">定理</h4>
+<p><img src="https://pic.moyuin.top/2025/05/26/683418ee50f18.png" alt="image.png"><br>
+就是把&quot;洗牌顺序&quot;，所有的方法集合，构成了一个置换群。</p>
+<hr>
+<h2 id="环与环域">环与环域</h2>
+<p><img src="https://pic.moyuin.top/2025/05/26/68341a84e329c.png" alt="image.png"><br>
+<img src="https://pic.moyuin.top/2025/05/26/68341a9cf39ed.png" alt="image.png"><br>
+<strong>群 → 环 → 域</strong>，是一个能力不断增强，限制越来越严格的过程。<strong>环是比群多了一个乘法运算的结构，域是比环多了一个除法运算的结构。</strong></p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/离散数学/" class="tag">#离散数学</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/06/01/xue-xi/shu-ju-jie-gou/bai-zhe-shu/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">败者树</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/05/12/xue-xi/shu-xue/chi-san-shu-xue-shu-ju-jie-gou-tu-lun-chang-pi-pei-wen-ti-yu-suan-fa-gai-gua/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">离散数学&amp;数据结构-图论常匹配问题与算法概括</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

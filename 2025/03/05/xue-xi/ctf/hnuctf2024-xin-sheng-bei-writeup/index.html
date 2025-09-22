@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>HNUCTF2024新生杯writeup - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="HNUCTF2024新生杯writeup - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/03/05/xue-xi/ctf/hnuctf2024-xin-sheng-bei-writeup/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-03-05T05:13:51.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/CTF学习/">CTF学习</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>March</span>
+            <span>5,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">HNUCTF2024新生杯writeup</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">HNUCTF2024新生杯writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text">基本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%83%85%E5%86%B5"><span class="toc-number">1.2.</span> <span class="toc-text">解题情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc"><span class="toc-number">1.2.1.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Misc-%E7%AD%BE%E5%88%B0"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1.Misc 签到</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Misc-%E7%BD%91%E7%BB%9C%E9%B2%A8%E9%B1%BC"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.Misc 网络鲨鱼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Misc-bob-traffic"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3.Misc bob_traffic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Misc-%E6%96%B0%E4%BD%9B%E7%BB%8F"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">4.Misc 新佛经</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Misc-Tetris"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">5.Misc Tetris</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Misc-git-leak"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">6.Misc git_leak</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Crypto"><span class="toc-number">1.2.2.</span> <span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Cypto-Buddha"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1.Cypto Buddha</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Crypto-ebg13"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2.Crypto ebg13</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Crypto-ezrsa"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">3.Crypto ezrsa</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WEB"><span class="toc-number">1.2.3.</span> <span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Web-ez-sqli"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">1.Web ez_sqli</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Web-ez-cmdi"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2.Web ez_cmdi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Web-md5"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">3.Web md5:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Web-md5-again"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">4.Web md5_again:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Web-ez-serialize"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">5.Web ez_serialize</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PWN"><span class="toc-number">1.2.4.</span> <span class="toc-text">PWN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Pwn-command-injection"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">1.Pwn command injection</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reverse"><span class="toc-number">1.2.5.</span> <span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Reverse-ez-reverse1"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">1.Reverse: ez_reverse1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSINT"><span class="toc-number">1.2.6.</span> <span class="toc-text">OSINT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Osint-here-is"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">1.Osint here is</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Osint-where-are-i"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">2.Osint where_are_i</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Osint-where-are-i-again"><span class="toc-number">1.2.6.3.</span> <span class="toc-text">3.Osint where_are_i_again!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Osint-see-see-need"><span class="toc-number">1.2.6.4.</span> <span class="toc-text">4.Osint see_see_need</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>HNUCTF2024新生杯writeup</h1>
+<p><strong>HNUCTF</strong>新生杯——来自不睡觉的新生<strong>MOMOsleeping</strong>的wirteup<br>
+这是一篇留档，为HNU2024年12月的一场新生杯writeup。<br>
+也是我的第一场CTF。</p>
+<h2 id="基本信息">基本信息</h2>
+<blockquote>
+<p><strong>平台id：Moyuin</strong><br>
+<strong>排名：第8名</strong></p>
+</blockquote>
+<h2 id="解题情况"><strong>解题情况</strong></h2>
+<p><img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/%E8%A7%A3%E9%A2%98%E6%83%85%E5%86%B5.png" alt=""></p>
+<h3 id="Misc">Misc</h3>
+<h4 id="1-Misc-签到">1.Misc <strong>签到</strong></h4>
+<p><img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc1.png" alt=""><br>
+复制粘贴即可。</p>
+<blockquote>
+<p><strong>HNUCTF{Welcome_to_HNUCTF2024!}</strong></p>
+</blockquote>
+<h4 id="2-Misc-网络鲨鱼">2.Misc <strong>网络鲨鱼</strong></h4>
+<p>上网搜索后发现是一个网络嗅探包，使用<strong>Wireshark</strong>打开文件，在一堆files not found中发现这个http流量get的有点特别。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc2.png" alt=""><br>
+猜测是base64加密，解码后得到。</p>
+<blockquote>
+<p><strong>HNUCTF{w1r3sh4rk_4n4lys1s}</strong></p>
+</blockquote>
+<h4 id="3-Misc-bob-traffic">3.Misc <strong>bob_traffic</strong></h4>
+<p>同样是网络嗅探包。<br>
+利用wireshark直接去分析tcp和http的get，发现有一个特殊流量（唯一的，显示f！ag，打开看看发现）<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc3.png" alt=""><br>
+得到flag。<br>
+与上一题解题思路重复了，也许上一题的各大http流量里面藏有所玄机？</p>
+<blockquote>
+<p><strong>HNUCTF{pcapng_Zcpuatre_traffic}</strong></p>
+</blockquote>
+<h4 id="4-Misc-新佛经">4.Misc <strong>新佛经</strong></h4>
+<p><img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc4.png" alt=""><br>
+打开txt是一个hex编码，使用cyberchef解密得到</p>
+<pre class="line-numbers language-none"><code class="language-none">TFJZR1hKe2E2blIzaWdfcTBWM19JcmcwZ01yOX0&#x3D;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>拖过去base64解密，得到</p>
+<pre class="line-numbers language-none"><code class="language-none">LRYGXJ&#123;a6nR3ig_q0V3_Irg0gMr9&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>什么玩意儿？<br>
+迷茫中看到题目说：</p>
+<blockquote>
+<p>听闻凯撒贝斯。知晓16与string的轮回。</p>
+</blockquote>
+<p>贝斯是指base64，那么凯撒就是…<br>
+凯撒密码？尝试凯撒密码一步一步解决。<br>
+遍历4个加密位移后得到想要的结果。</p>
+<blockquote>
+<p><strong>HNUCTF{w6jN3ec_m0R3_Enc0cIn9}</strong></p>
+</blockquote>
+<h4 id="5-Misc-Tetris">5.Misc <strong>Tetris</strong></h4>
+<p>经典本地游戏CE修改器刷分咯。<br>
+用ce修改这个游戏，跟着网上教程来。<br>
+先得几分然后next scan最终得到这两个address。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc5_1.png" alt=""><br>
+Change一下变成10000，得到题目要求“10000分得到flag”。<br>
+把value改到10000以上的数，然后让乱玩让gameover，之后弹出来:<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc5_2.png" alt=""><br>
+得到flag。</p>
+<blockquote>
+<p><code>HNUCTF&#123;#31c0m3_t0_HN#CtF_2024_eX1JT0O1&#125;</code><br>
+<em>这里使用非代码块会出渲染问题…{和#的组合太恐怖</em></p>
+</blockquote>
+<h4 id="6-Misc-git-leak">6.Misc <strong>git_leak</strong></h4>
+<p>打开下载的文件，看见flag.txt打开:<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-1.png" alt=""><br>
+那我就下一个Typora吧。学长有心了，给新生这样的小建议。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-2.png" alt=""><br>
+说里有个flag，开找“这里”，题目也说了是“git leak”。<br>
+刚好，打开.git翻找，发现有一个文件叫flag，说明git里面有有关flags的记录！<br>
+打开得到:<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-3.png" alt=""><br>
+刚好vscode里面有一个git插件，就导入进去看看记录吧。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/misc6-4.png" alt="">Flag在git里面leak咯。</p>
+<blockquote>
+<p><strong>HNUCTF{y0u_h4ve_f1nd_th3_g1t_l34k}</strong></p>
+</blockquote>
+<h3 id="Crypto">Crypto</h3>
+<h4 id="1-Cypto-Buddha">1.Cypto <strong>Buddha</strong></h4>
+<p><strong>佛曰解密为base64</strong><br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto1-1.png" alt=""><br>
+Base64解密即可<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto1-2.png" alt=""></p>
+<blockquote>
+<p><strong>HNUCTF{buddha_2c5f12b7-a95f-4c22-9372-1e320b297f49}</strong></p>
+</blockquote>
+<h4 id="2-Crypto-ebg13">2.Crypto <strong>ebg13</strong></h4>
+<p><strong>Base64</strong>解密<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto2-1.png" alt=""><br>
+加凯撒密码<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto2-2.png" alt=""></p>
+<blockquote>
+<p><strong>HNUCTF{rot_is_fun_e8057890-1e42-4c61-9e57-4ad8c218e4c3}</strong></p>
+</blockquote>
+<h4 id="3-Crypto-ezrsa">3.Crypto <strong>ezrsa</strong></h4>
+<p>让ai写一个解密rsa的python ,再不断装库之后得到。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/crypto3-1.png" alt=""></p>
+<blockquote>
+<p><strong>HNUCTF{rsa_is_fun_8e4b49fd-070c-473f-a510-ff891b95f56b}</strong></p>
+</blockquote>
+<h3 id="WEB">WEB</h3>
+<h4 id="1-Web-ez-sqli"><a target="_blank" rel="noopener" href="http://1.Web">1.Web</a> <strong>ez_sqli</strong></h4>
+<p>经典sql注入。<br>
+经典的用户名：admin’ OR ‘1’='1<br>
+密码：输入啥都行<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web1.png" alt=""></p>
+<blockquote>
+<p><strong>HNUCTF{SQL_iNJECTor_4059a701-61a6-4f11-96bd-e6b01e3a3186}</strong></p>
+</blockquote>
+<h4 id="2-Web-ez-cmdi"><a target="_blank" rel="noopener" href="http://2.Web">2.Web</a> <strong>ez_cmdi</strong></h4>
+<p>现学curl，理解一下get和post。<br>
+看ip，ip后的输入可以当作命令，直接cat flag。<br>
+那我们给ip后发送command即可。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web2.png" alt=""></p>
+<blockquote>
+<p><strong>HNUCTF{ping_command_091ae904-c702-4b02-9bf6-9d377aa382c6}</strong></p>
+</blockquote>
+<h4 id="3-Web-md5"><a target="_blank" rel="noopener" href="http://3.Web">3.Web</a> <strong>md5:</strong></h4>
+<p>经典md5= =比较。<br>
+根据if条件可以判断要找两个不同但md5相同的字符串<br>
+找个md5碰撞对相同的密码和用户名就ok了，这个得去网上找一下。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web3.png" alt=""><br>
+随便挑一个curl一下输入post传参即可。<br>
+输入：</p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST -d &quot;password&#x3D;QNKCDZO&quot; &quot;http:&#x2F;&#x2F;129.204.78.34:20703?name&#x3D;240610708&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>得到Flag:</p>
+<blockquote>
+<p><strong>HNUCTF{easy_md5_2b34686e-50b2-45e8-9757-e28a94fece1f}</strong></p>
+</blockquote>
+<h4 id="4-Web-md5-again"><a target="_blank" rel="noopener" href="http://4.Web">4.Web</a> <strong>md5_again:</strong></h4>
+<p>以为是Name从get变成post，改一下输入curl就行<br>
+发现不对！<br>
+转头一看发现是严格相等。为===<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web4.png" alt=""><br>
+由于题目还限定了强制转化字符串比较，因此不能使用数组来绕过，我们需要构造一对md5相同而不同字符的字符串。我们只能使用md5碰撞来实现。<br>
+去网上找一下符合要求的，复制粘贴形成post要传的参数。<br>
+curl post记得urlencode，把特殊字符传出去。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web4-2.png" alt=""></p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST &quot;http:&#x2F;&#x2F;x.x.x.x:xxxx&quot; \
+     -H &quot;Content-Type: application&#x2F;x-www-form-urlencoded&quot; \
+     -d &quot;name&#x3D;M%9C9h%FF%E0%E3%5C%20%9...%93%D8&amp;password&#x3D;M%9C9h%FF%E0%E3%5C%20%9...%93%D8&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>powershell传入。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web4-3.png" alt=""><br>
+得到flag</p>
+<blockquote>
+<p><strong>HNUCTF{md5_again_bcf8de06-3aa5-4c09-9120-4bfeccf0b5a1}</strong></p>
+</blockquote>
+<h4 id="5-Web-ez-serialize"><a target="_blank" rel="noopener" href="http://5.Web">5.Web</a> <strong>ez_serialize</strong></h4>
+<p>看得懂那个网站的php：<br>
+传入post的参数为base64可以转化为command指令，那我们直接先ls看看有没有flag，然后cat一下就出来了。<br>
+先将命令转化为base64，然后curl传进去。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/web5-1.png" alt=""><br>
+获取ls：</p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST -d
+&quot;data&#x3D;Tzo10iJteWNtZCI6MTp7cz0z0iJjbWQ103M6NDoibHMgLyI7fQ&#x3D;&#x3D;&quot;
+http:&#x2F;&#x2F;129.204.78.34:20738&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>cat flag：</p>
+<pre class="line-numbers language-none"><code class="language-none">curl -X POST -d
+&quot;data&#x3D;Tzo10iJtewNtZCI6MTp7cz0z0iJjbwQi03M60ToiY2F0Ic9mbGFnIjt9&quot; http:&#x2F;&#x2F;129.204.78.34:20738&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>HNUCTF{easy_serialize_af79f24b-7638-4e49-b60d-08ac1431d690}</strong></p>
+</blockquote>
+<h3 id="PWN">PWN</h3>
+<h4 id="1-Pwn-command-injection">1.Pwn <strong>command injection</strong></h4>
+<p>nc连接到ip，这不用说。<br>
+获取command权限后，但是发现ls和cat没反应。<br>
+但是看了看规则后，显示==;==后的命令会进行。<br>
+诶，那是不是说明 ；前面的指令无法执行，后面的指令可以进行？然后就尝试 ;cat flag了一下，结果就出来了<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/PWN1.png" alt=""></p>
+<blockquote>
+<p><strong>HNUCTF{u_have_completed_the_command_injection_28918ec949db}</strong></p>
+</blockquote>
+<h3 id="Reverse">Reverse</h3>
+<h4 id="1-Reverse-ez-reverse1">1.Reverse: <strong>ez_reverse1</strong></h4>
+<p>签到题就要有签到题的样子，在网上看看reverse签到题一般什么样，然后学习。<br>
+<strong>先下载神器ida pro,再跟着做</strong></p>
+<ul>
+<li>将文件导入到IDA里</li>
+<li>按F5进行反编译</li>
+<li>观察反编译后的C语言源码，找到flag<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/reverse1-1.png" alt=""><br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/reverse1-2.png" alt=""></li>
+</ul>
+<blockquote>
+<p><strong>HNUCTF{W3lcome_t0_HNUCTF}</strong></p>
+</blockquote>
+<h3 id="OSINT">OSINT</h3>
+<h4 id="1-Osint-here-is">1.Osint <strong>here is</strong></h4>
+<p>照片里可以看到：<br>
+<strong>虎踞龙盘在此间；灵秀聚钟人莫识</strong><br>
+在bing搜索一下发现一篇介绍韶山滴水洞引用这句诗的新闻。<em>（顺便感慨一下bing的强悍爬虫…已经把这个博客的文章给爬取了）</em><br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint1-1.png" alt=""><br>
+结合这里的山环境，可以合理猜测一下这个地点就是滴水洞景区，搜索一下它的票价。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint1-2.png" alt=""><br>
+根据flag所给规则，写入正确：</p>
+<blockquote>
+<p><strong>HNUCTF{dishuidong_O3!nT_40.00}</strong></p>
+</blockquote>
+<h4 id="2-Osint-where-are-i">2.Osint <strong>where_are_i</strong></h4>
+<p>关键词 <strong>云巴，磁悬浮，空旷，十字路口</strong>。打开百度地图搜索就看得见一个<strong>云巴旅游磁悬浮线</strong>，观察附近街景直接确定。<br>
+并且周围还有相同的建筑物，更加笃定了。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint2-1.png" alt=""><br>
+找到街景最近的十字路口。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint2-2.png" alt=""><br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint2-3.png" alt=""><br>
+得到flag。</p>
+<blockquote>
+<p><strong>HNUCTF{112.924_28.096_Os!nT}</strong></p>
+</blockquote>
+<h4 id="3-Osint-where-are-i-again">3.Osint <strong>where_are_i_again!</strong></h4>
+<p>通过12306查询D3009这辆车 ，对比时间，粗略判断这一站是<strong>南京南</strong>。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint3-1.png" alt=""><br>
+然后从南京南找到75为末尾号，终点站为合肥南，始发站为XX南的列车，恰好就这一个：<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint3-2.png" alt=""><br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint3-3.png" alt=""><br>
+注意flag是始发站的车次号就ok，G7675始发站为G7674，得到flag。</p>
+<blockquote>
+<p><strong>HNUCTF{0siN7_G7674_nanjingnan}</strong></p>
+</blockquote>
+<h4 id="4-Osint-see-see-need">4.Osint <strong>see_see_need</strong></h4>
+<p>去bing搜搜信安协会会长<a target="_blank" rel="noopener" href="https://github.com/L1uYun/l1uyun_blog">L1uYun</a> 找到了他的github！<br>
+然后在他的blog里看他最近的submit的文件 发现了<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint4-1.png" alt=""><br>
+交上去发现不对，很怪，结合聊天记录说有干扰项，另辟思路看看其他大佬的。<br>
+发现了一个健身学长<a target="_blank" rel="noopener" href="https://github.com/yulv706/blog/blob/main/src/site/notes/blog/%E5%AE%89%E5%85%A8/%E5%B7%A5%E5%85%B7/Hydra_%E5%AD%97%E5%85%B8%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3.md">yulv706</a>的github仓库！<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/osint4-2.png" alt=""><br>
+其实还有一个派大星学长的，但是派大星学长直接说是HNUCTF{fake_flag}，故直接提交可用的flag。<br>
+因为健身佬的blog好久没更新了，所以我只要看最新的更新一直点一直点，然后看到HNUCTF复制粘贴就好了。或者直接去他的博客检索HNUCTF，也可以得到含有这个flag的博客文章。<em>顺便学到了一些ctf知识</em><br>
+提交成功。<br>
+<strong>大家平时也要注意自己的个人信息能不能直接被搜索引擎搜到哦…😑</strong></p>
+<blockquote>
+<p><strong>HNUCTF{OSINT_leads_to_flag}</strong></p>
+</blockquote>
+<h2 id="总结"><strong>总结</strong></h2>
+<p>作为新生打这场ctf还是很开心的！这一次新生杯严格来说算是自己的第一次网安的比赛，感觉和acm很不一样，也更好玩一些，像一系列趣味游戏！<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/summary.png" alt=""><br>
+前面的大佬还是超级多！！有ak的！太强了，和前一名的这位新生大佬差快800分了，但是作为新生，第一次尝试这场比赛我已经很知足，边打边学新知识，实践出真知！<br>
+虽然reverse和pwn没写出来几个哈哈哈，但是web和misc做了很多，还是很感兴趣的，以后要选比赛方向的话，这两个很有趣，可能会选。<br>
+但是pwn的操作很像 《<strong>Hacknet</strong>》的玩法，这个更符合我对hacker的印象了，超级酷，reverse有点难难的，涉及到编译基础，也激励着我在之后的学习中多多了解。<br>
+<img src="/images/HNUCTF2024%E6%96%B0%E7%94%9F%E6%9D%AFwriteup/blanket.png" alt=""></p>
+<p><strong>收获很多，期待以后的前行路。</strong></p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/记录/" class="tag">#记录</a><a href="/tags/学习/" class="tag">#学习</a><a href="/tags/CTF/" class="tag">#CTF</a><a href="/tags/writeup/" class="tag">#writeup</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/03/11/xue-xi/ctf/hack-the-box/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Hack the box</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/03/03/sheng-huo/ji-lu/xiao-ji-lu/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">记录与计划</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>离散数学&amp;数据结构-图论常匹配问题与算法概括 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="离散数学&amp;数据结构-图论常匹配问题与算法概括 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/05/12/xue-xi/shu-xue/chi-san-shu-xue-shu-ju-jie-gou-tu-lun-chang-pi-pei-wen-ti-yu-suan-fa-gai-gua/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-05-12T06:47:40.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/数据结构/">数据结构</a>
+        
+            <a href="/categories/日常学习/数据结构/离散数学/">离散数学</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>May</span>
+            <span>12,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">离散数学&amp;数据结构-图论常匹配问题与算法概括</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">离散数学&amp;数据结构-图论常匹配问题与算法概括</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">基本图论算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%88Minimum-Spanning-Tree%EF%BC%8CMST%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">一、最小生成树（Minimum Spanning Tree，MST）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88Single-All-Pairs-Shortest-Path%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">二、最短路径（Single&#x2F;All Pairs Shortest Path）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%97%85%E8%A1%8C%E5%95%86%E9%97%AE%E9%A2%98%EF%BC%88Traveling-Salesman-Problem%EF%BC%8CTSP%EF%BC%89"><span class="toc-number">1.1.3.</span> <span class="toc-text">三、旅行商问题（Traveling Salesman Problem，TSP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%AD%E5%9B%BD%E9%82%AE%E8%B7%AF%E9%97%AE%E9%A2%98%EF%BC%88Euler-%E5%9B%9E%E8%B7%AF%EF%BC%89"><span class="toc-number">1.1.4.</span> <span class="toc-text">四、中国邮路问题（Euler 回路）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98%EF%BC%88DAG-%E4%B8%8A%E7%9A%84%E6%8E%92%E5%BA%8F%EF%BC%89"><span class="toc-number">1.1.5.</span> <span class="toc-text">五、拓扑排序问题（DAG 上的排序）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%9C%BC%E7%9C%8B%E5%9B%BE%E8%AF%86%E9%A2%98%E6%8A%80%E5%B7%A7"><span class="toc-number">1.1.6.</span> <span class="toc-text">一眼看图识题技巧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95%E8%A1%8D%E7%94%9F"><span class="toc-number">1.2.</span> <span class="toc-text">图论算法衍生</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81"><span class="toc-number">1.2.1.</span> <span class="toc-text">网络流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EK%E7%AE%97%E6%B3%95%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">EK算法最大流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%89%B2"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">最小割</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>离散数学&amp;数据结构-图论常匹配问题与算法概括</h1>
+<h2 id="基本图论算法">基本图论算法</h2>
+<h3 id="一、最小生成树（Minimum-Spanning-Tree，MST）">一、最小生成树（Minimum Spanning Tree，MST）</h3>
+<ul>
+<li>
+<p><strong>关键词</strong>：连通、造价最小、覆盖所有点、不关注路径、不成环</p>
+</li>
+<li>
+<p><strong>典型题干</strong>：</p>
+<blockquote>
+<p>设计一个通信网络，使所有城市能互相通信且造价最小。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>常用算法</strong>：</p>
+<ul>
+<li><strong>Kruskal</strong>：按边权升序排序，逐条选入，不成环为准。</li>
+<li><strong>Prim</strong>：从任意点出发，逐步扩展最短连边进集合。</li>
+</ul>
+</li>
+<li>
+<p><strong>适用问题类型</strong>：</p>
+<ul>
+<li>网络建设、城市连接、铺设电缆、布线等</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="二、最短路径（Single-All-Pairs-Shortest-Path）">二、最短路径（Single/All Pairs Shortest Path）</h3>
+<ul>
+<li><strong>关键词</strong>：从某点到某点路径最短、有向/无向图、有权图</li>
+<li><strong>典型题干</strong>
+<blockquote>
+<p>求 A 城市到其他城市的最短路径。</p>
+</blockquote>
+</li>
+<li><strong>常用算法</strong>：
+<ul>
+<li><strong>Dijkstra</strong>：正权图单源最短路径（常用于地图/网路延迟）</li>
+<li><strong>SPFA</strong>：负边权也能跑，适用于稀疏图</li>
+<li><strong>Floyd</strong>：所有点对最短路径，三重循环（适用于稠密图）</li>
+</ul>
+</li>
+<li><strong>适用问题类型</strong>：
+<ul>
+<li>地图导航、路线规划、网络延迟最小化</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="三、旅行商问题（Traveling-Salesman-Problem，TSP）">三、旅行商问题（Traveling Salesman Problem，TSP）</h3>
+<ul>
+<li><strong>关键词</strong>：访问所有点、只访问一次、形成闭环、最短路径</li>
+<li><strong>典型题干</strong>：
+<blockquote>
+<p>某人需访问所有城市一次并返回起点，求最短路线。</p>
+</blockquote>
+</li>
+<li><strong>常用算法</strong>：
+<ul>
+<li>暴力搜索 / 状压 DP / 分支限界 / 启发式搜索（如遗传算法）</li>
+</ul>
+</li>
+<li><strong>适用问题类型</strong>
+<ul>
+<li>快递路线、外卖送货、城市巡回问题</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="四、中国邮路问题（Euler-回路）">四、中国邮路问题（Euler 回路）</h3>
+<ul>
+<li><strong>关键词</strong>：走遍所有<strong>边</strong>一次、不重复、回到起点或不回起点</li>
+<li><strong>典型题干</strong>：
+<blockquote>
+<p>邮递员需要经过每条街道一次，如何规划路线？</p>
+</blockquote>
+</li>
+<li><strong>常用算法</strong>：
+<ul>
+<li><strong>Hierholzer 算法</strong>：找欧拉回路或路径</li>
+<li><strong>判断条件</strong>：
+<ul>
+<li>欧拉回路：所有点度数为偶数</li>
+<li>欧拉路径：最多两个点为奇数度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>适用问题类型</strong>：
+<ul>
+<li>邮递、清扫机器人、巡检线路问题</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="五、拓扑排序问题（DAG-上的排序）">五、拓扑排序问题（DAG 上的排序）</h3>
+<ul>
+<li><strong>关键词</strong>：有向无环图、先修课程、依赖关系、顺序安排</li>
+<li><strong>典型题干</strong>：
+<blockquote>
+<p>给定课程依赖关系，安排上课顺序。</p>
+</blockquote>
+</li>
+<li><strong>常用算法</strong>：
+<ul>
+<li><strong>拓扑排序（BFS/Kahn）</strong></li>
+<li><strong>DFS 建序列（逆后序）</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="一眼看图识题技巧">一眼看图识题技巧</h3>
+<table>
+<thead>
+<tr>
+<th>问题关键词</th>
+<th>属于哪一类</th>
+<th>应用算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连通、造价最小</td>
+<td>最小生成树（MST）</td>
+<td>Prim / Kruskal</td>
+</tr>
+<tr>
+<td>起点到各点最短</td>
+<td>最短路径</td>
+<td>Dijkstra / SPFA</td>
+</tr>
+<tr>
+<td>所有点走一圈</td>
+<td>旅行商问题（TSP）</td>
+<td>状压 DP / 搜索</td>
+</tr>
+<tr>
+<td>所有边走一遍</td>
+<td>中国邮路（Euler 回路）</td>
+<td>Hierholzer</td>
+</tr>
+<tr>
+<td>有依赖顺序安排</td>
+<td>拓扑排序（DAG）</td>
+<td>Kahn / DFS</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="图论算法衍生">图论算法衍生</h2>
+<h3 id="网络流">网络流</h3>
+<h4 id="EK算法最大流">EK算法最大流</h4>
+<p>最大流问题就是：</p>
+<blockquote>
+<p>想象你是个调水的管道工：<br>
+有个<strong>源点（source）</strong>：水从这儿开始流。<br>
+有个<strong>汇点（sink）</strong>：水最终要流到这。<br>
+图里的每条边是水管，有个<strong>最大能流多少水的限制（容量）</strong>。<br>
+你要解决的核心问题就是<br>
+“从源点最多能往汇点送多少水？”</p>
+</blockquote>
+<ul>
+<li>问题：在给定容量限制下，从源点到汇点的最大可能流量。</li>
+<li>经典算法：Ford-Fulkerson（增广路径）、Edmonds-Karp（BFS）、Dinic（分层图 + DFS）。</li>
+</ul>
+<p>EK算法最大流是：</p>
+<blockquote>
+<p>用<strong>广度优先</strong>去找：从源点到汇点还有没有“能通的水路”。<br>
+找到就“倒水”：找出这条路上最细的那根管子（瓶颈），推这么多流量。<br>
+更新管道：把用掉的流量减去，剩下的再来。<br>
+直到你怎么找都找不到新路了：那就是最大流了。</p>
+</blockquote>
+<p>Edmonds-Karp 是一种 <strong>基于广度优先搜索（BFS）</strong> 的最大流算法，属于 Ford-Fulkerson 方法的实现之一。<br>
+<strong>注意：离散数学考试给予简化版本，不维护反向边。</strong></p>
+<blockquote>
+<p>它的核心思想是：<br>
+每次用 BFS 在残量网络中找一条从源点 <code>S</code> 到汇点 <code>T</code> 的最短增广路径，然后将该路径上的可增广流量加入到总流中，并更新残量网络。</p>
+</blockquote>
+<h5 id="核心结构">核心结构</h5>
+<ul>
+<li><strong>残量网络</strong>：对于每条边 <code>(u,v)</code>，我们维护：<br>
+正向边容量 <code>c(u,v)</code><br>
+当前流量 <code>f(u,v)</code><br>
+残余容量 <code>r(u,v) = c(u,v) - f(u,v)</code><br>
+并添加反向边 <code>(v,u)</code>，其残余容量为 <code>f(u,v)</code>，表示可以“退回”流量。</li>
+</ul>
+<p>假设你有如下图的网络：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">S --(10)--> A --(5)--> T
+ \                      /
+  \----(15)------------/
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>你用 BFS 找到 <code>S-&gt;A-&gt;T</code>，可增广流为 <code>5</code>，再找 <code>S-&gt;T</code>，可增广流为 <code>15</code>。<br>
+总流量 <code>5 + 15 = 20</code>，路径更新后不能再增广，算法结束。</p>
+<h4 id="最小割">最小割</h4>
+<ul>
+<li>
+<p><strong>割</strong>：将所有节点分为两个集合 <code>S集合</code> 和 <code>T集合</code>，使得源点 <code>S</code> 在 <code>S集合</code>，汇点 <code>T</code> 在 <code>T集合</code>。</p>
+</li>
+<li>
+<p>最小割：在所有可能的割中，<strong>跨越两个集合的边的容量之和最小的割</strong>。</p>
+</li>
+<li>
+<p>问题：将图中点集分为两部分，使得源点在一侧，汇点在另一侧，割掉的边容量总和最小。</p>
+</li>
+<li>
+<p>定理：最大流 = 最小割。<br>
+<strong>在一个有向图中，从源点 <code>S</code> 到汇点 <code>T</code> 的最大流的大小，等于从 <code>S</code> 到 <code>T</code> 的最小割的容量。</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>最大流 = 能从水库 <code>S</code> 送到城市 <code>T</code> 的最多水量<br>
+最小割 = 一刀下去能阻断的最小总水流（把某些管道切掉）<br>
+换句话说：<br>
+最大你能送的 = 最少别人能拦的</p>
+</blockquote>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">S --(3)--> A --(2)--> T
+ \                  /
+  \----(4)--------/
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>最大流是 5（S→A→T 走 2，S→T 走 3）<br>
+最小割是割断 <code>S→T</code> 和 <code>A→T</code>（容量是 3+2=5）<br>
+他们相等，定理成立。</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>定义（通俗解释）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络流图</td>
+<td>一个带有容量限制的有向图，每条边表示“能容纳多少流量”。</td>
+</tr>
+<tr>
+<td>源点（S）</td>
+<td>流量的起点，像是“水库”或“工厂”。</td>
+</tr>
+<tr>
+<td>汇点（T）</td>
+<td>流量的终点，像是“城市”或“消费者”。</td>
+</tr>
+<tr>
+<td>流量（Flow）</td>
+<td>实际通过边的流量，不能超过边的容量。</td>
+</tr>
+<tr>
+<td>容量（Capacity）</td>
+<td>边所能承受的最大流量，相当于“管道粗细”。</td>
+</tr>
+<tr>
+<td>残量网络</td>
+<td>当前流量状态下，图中还可以继续“走”的路径与容量。</td>
+</tr>
+<tr>
+<td>增广路</td>
+<td>在残量网络中，从源点到汇点还可以“加流”的路径。</td>
+</tr>
+<tr>
+<td>最大流</td>
+<td>从源点到汇点能“加”上的最大总流量。</td>
+</tr>
+<tr>
+<td>割（Cut）</td>
+<td>把图的点分成两个集合，源点在一边，汇点在另一边。</td>
+</tr>
+<tr>
+<td>割的容量</td>
+<td>从源点集合通向汇点集合的边的容量总和。</td>
+</tr>
+<tr>
+<td>最小割</td>
+<td>所有可能割中，容量最小的一个，表示“最小阻断能力”。</td>
+</tr>
+<tr>
+<td>最大流最小割定理</td>
+<td>最大能通过的流量 = 最小能拦下的割。</td>
+</tr>
+<tr>
+<td>EK算法（Edmonds-Karp）</td>
+<td>使用 BFS 查找增广路，逐步累加流量，直到没有增广路。时间复杂度 O(VE²)。</td>
+</tr>
+<tr>
+<td>Dinic算法</td>
+<td>更快的最大流算法，基于分层图+DFS增广。时间复杂度 O(V²E)（稀疏图较优）。</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/数学/" class="tag">#数学</a><a href="/tags/数据结构/" class="tag">#数据结构</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/05/16/xue-xi/shu-xue/chi-san-shu-xue-dai-shu-xi-tong/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">离散数学-代数系统</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/05/06/sheng-huo/ji-lu/vim-xue-xi/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Vim 学习 Daily</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>数据结构-堆 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="数据结构-堆 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/04/01/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-dui/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-04-01T08:27:32.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/数据结构/">数据结构</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>April</span>
+            <span>1,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">数据结构-堆</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">数据结构-堆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">堆(实现优先级队列)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%90%86%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">基本理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E7%9A%84%E6%8F%92%E5%85%A5"><span class="toc-number">2.1.1.</span> <span class="toc-text">堆的插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E7%9A%84%E8%8A%82%E7%82%B9%E5%88%A0%E9%99%A4"><span class="toc-number">2.1.2.</span> <span class="toc-text">堆的节点删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%9C%80%E5%A4%A7%E5%A0%86"><span class="toc-number">2.1.3.</span> <span class="toc-text">构造最大堆</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.2.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E5%A0%86"><span class="toc-number">2.2.1.</span> <span class="toc-text">二叉堆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">小技巧</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%8F%89%E5%A0%86"><span class="toc-number">2.2.2.</span> <span class="toc-text">多叉堆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-2"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">2.2.3.</span> <span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#STL-%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.1.</span> <span class="toc-text">STL 实现</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>数据结构-堆</h1>
+<h1>堆(实现优先级队列)</h1>
+<p>优先级队列是一种特殊的队列，特殊在优先级队列的<strong>出队顺序</strong>按照事先规定的<strong>优先级顺序</strong>进行。<br>
+可以用<strong>线性表</strong>实现，但每次需要遍历，这样的出队操作复杂度为 O(n)，效率低，因此考虑使用<strong>堆</strong>来实现优先级队列。<br>
+堆通常看作是<strong>一棵完全二叉树</strong>，且某个节点的值总是不大于或不小于其父节点的值。</p>
+<h2 id="基本理解">基本理解</h2>
+<p>参考的是CSDN的一条<a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaomucgwlmx/article/details/103522410">教程</a>，很好理解。</p>
+<h3 id="堆的插入">堆的插入</h3>
+<p>每次都是新数据放在数组最后，然后将数据交换以满足堆的性质（最大堆，最小堆）。<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401161835075.png" alt=""><br>
+插入数据 16<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401162218264.png" alt=""><br>
+为满足最大堆，调整位置，有父节点与孩节点交换。<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401161953977.png" alt=""><br>
+依然没有完全符合最大堆（根节点数据最大），继续调整位置。<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401162400848.png" alt=""></p>
+<h3 id="堆的节点删除">堆的节点删除</h3>
+<p><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401162859978.png" alt=""><br>
+堆中<strong>每次删除都只能删除堆顶元素</strong>。实际操作是给最后一个数据的值（最大或最小值，视堆的性质而定）赋值到堆顶，然后调整位置。<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401163525900.png" alt=""><br>
+然后开始不断调整…<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401163552994.png" alt=""><br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401163558282.png" alt=""></p>
+<h3 id="构造最大堆">构造最大堆</h3>
+<p>我们从一个例题开始。目前我们有原始数组<br>
+<code>a[]=&#123;4,1,3,2,16,9,10,14,8,7&#125;</code><br>
+采用顺序存储的方式，对应的完全二叉树如下图：<br>
+<img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401163639280.png" alt=""><br>
+假设数组中有 n 个元素，我们的遍历与调整应该从<code>a[i],此时 i=n/2-1</code> 开始，然后往前推。（即最中间的那个元素），将它看作父节点，去和它的孩子比较（<strong>不要和它的父节点比较</strong>）。一样的逻辑，不断比较父节点和孩子节点调整，最后做到最大的数在最上面。</p>
+<p><img src="/images/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/20250401164025600.png" alt=""></p>
+<p>推完了如果发现不是最大堆形式，我们就从最初点（ <code>a[0]</code> ）继续交换，对交换后的值继续交换…</p>
+<p><strong>最小堆构造与最大堆构造几乎一致，只是比较调整的时候逻辑是最小的换到父节点。</strong></p>
+<ul>
+<li>最大堆的插入节点就是在堆的最后，最小值后面添加一个节点，然后沿着数堆上升调整，和堆的插入是一致的。</li>
+<li>堆顶节点删除思想：将堆树的最后节点放到根节点，删除最大值，再重新初始化调整比较。<br>
+逻辑是一样的。</li>
+</ul>
+<h2 id="概念">概念</h2>
+<h3 id="二叉堆">二叉堆</h3>
+<p>二叉堆是一个用<strong>完全二叉树</strong>来实现的<strong>优先队列</strong>结构，支持高效插入与取最值操作。</p>
+<h4 id="特点">特点</h4>
+<ul>
+<li><strong>完全二叉树</strong>（除了最后一层，其他层都满，且从左到右填满）</li>
+<li>每个结点都满足：
+<ul>
+<li><strong>最小堆（小根堆）</strong>：父节点 ≤ 子节点</li>
+<li><strong>最大堆（大根堆）</strong>：父节点 ≥ 子节点</li>
+</ul>
+</li>
+<li>用<strong>数组</strong>实现（因为完全二叉树可以用下标映射）</li>
+</ul>
+<h4 id="小技巧">小技巧</h4>
+<ul>
+<li>父节点下标 i → 左子节点 2i，右子节点 2i+1</li>
+<li>子节点 j → 父节点是 j/2（向下取整）</li>
+<li>上调插入 push O(log n)，下调删除最值 pop O(log n)，取最值 O(1)<br>
+二叉堆是一种隐式数据结构，将元素的逻辑结构蕴含在存储结构中，避免额外的指针空间开销，所以经常用。</li>
+</ul>
+<h3 id="多叉堆">多叉堆</h3>
+<p>多叉堆（d-ary heap）就是一个<strong>每个节点有 d 个孩子的堆</strong>，也是一种用数组实现的优先队列。</p>
+<h4 id="特点-2">特点</h4>
+<ul>
+<li>一般是<strong>d 叉完全树</strong></li>
+<li>小根堆 / 大根堆原则依然成立</li>
+<li>结构仍然是数组实现，不过下标关系会变化：</li>
+</ul>
+<p>📌 设根节点下标为 0（或 1 视实现而定）：</p>
+<ul>
+<li>父节点  i → 子节点范围是：<code>d*i + 1</code> 到 <code>d*i + d</code></li>
+<li>子节点  j→ 父节点是：<code>(j - 1) / d</code></li>
+</ul>
+<h3 id="应用">应用</h3>
+<ul>
+<li>哈夫曼树的构建。<br>
+<img src="/images/%E6%A0%91/20250325101821385.png" alt=""></li>
+<li>Dijkstra 最短路径的构建</li>
+<li>贪心算法</li>
+</ul>
+<h2 id="实现">实现</h2>
+<h3 id="STL-实现">STL 实现</h3>
+<p>在 STL 里有一个现成的“优先队列”。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>priority_queue<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>本身是一个堆结构封装好的数据结构，默认用的是大根堆，最大值优先。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;queue></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    priority_queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> pq<span class="token punctuation">;</span>
+
+    pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    cout <span class="token operator">&lt;&lt;</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// 输出 8（最大值）</span>
+
+    pq<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 删除最大值</span>
+
+    cout <span class="token operator">&lt;&lt;</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// 输出 5</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果想要最小值优先，可以构造优先级队列的时候，传入比较函数。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">priority_queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">,</span> greater<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> pq<span class="token punctuation">;</span>
+
+pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+cout <span class="token operator">&lt;&lt;</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment">// 输出 2（最小值）</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果想要自定义结构体的优先级，得先写一个比较器（或者lambda表达式等）</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> id<span class="token punctuation">,</span> val<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">cmp</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> Node <span class="token operator">&amp;</span>a<span class="token punctuation">,</span> <span class="token keyword">const</span> Node <span class="token operator">&amp;</span>b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> a<span class="token punctuation">.</span>val <span class="token operator">></span> b<span class="token punctuation">.</span>val<span class="token punctuation">;</span> <span class="token comment">// 小根堆：val小的优先</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+priority_queue<span class="token operator">&lt;</span>Node<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>Node<span class="token operator">></span><span class="token punctuation">,</span> cmp<span class="token operator">></span> pq<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里也附上一个lambda表达式的模板，由于 lambda 是匿名类型，而priority_queue 是模板类，所以传参略微复杂。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">auto</span> cmp <span class="token operator">=</span> <span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">const</span> pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>a<span class="token punctuation">,</span> <span class="token keyword">const</span> pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> a<span class="token punctuation">.</span>second <span class="token operator">></span> b<span class="token punctuation">.</span>second<span class="token punctuation">;</span>  <span class="token comment">// 小根堆：值小的优先</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+priority_queue<span class="token operator">&lt;</span>
+    pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">,</span>
+    vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span><span class="token punctuation">,</span>
+    <span class="token keyword">decltype</span><span class="token punctuation">(</span>cmp<span class="token punctuation">)</span>
+<span class="token operator">></span> <span class="token function">pq</span><span class="token punctuation">(</span>cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>为什么要写 <code>decltype(cmp)</code>？</p>
+<ul>
+<li>因为 lambda 是匿名类型，必须用 <code>decltype</code> 获取它的类型作为模板参数。</li>
+<li>然后把这个比较器传进去初始化构造函数 <code>pq(cmp)</code><br>
+<strong>完整用法</strong></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;queue></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 按 second 小的优先（小根堆）</span>
+    <span class="token keyword">auto</span> cmp <span class="token operator">=</span> <span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">const</span> pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> a<span class="token punctuation">,</span> <span class="token keyword">const</span> pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> a<span class="token punctuation">.</span>second <span class="token operator">></span> b<span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+    priority_queue<span class="token operator">&lt;</span>
+        pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">,</span>
+        vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span><span class="token punctuation">,</span>
+        <span class="token keyword">decltype</span><span class="token punctuation">(</span>cmp<span class="token punctuation">)</span>
+    <span class="token operator">></span> <span class="token function">pq</span><span class="token punctuation">(</span>cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 注意要传 cmp 进去！</span>
+
+    pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pq<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>pq<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> pq<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>second <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        pq<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/数据结构/" class="tag">#数据结构</a><a href="/tags/编程/" class="tag">#编程</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/04/08/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-tu/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">数据结构-图</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/03/25/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-shu/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">数据结构-树</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

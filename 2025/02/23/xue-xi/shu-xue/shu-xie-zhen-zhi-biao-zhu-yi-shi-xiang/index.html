@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>书写真值表注意事项 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="书写真值表注意事项 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/02/23/xue-xi/shu-xue/shu-xie-zhen-zhi-biao-zhu-yi-shi-xiang/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-02-23T14:58:50.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/离散数学/">离散数学</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>February</span>
+            <span>23,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">书写真值表注意事项</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">书写真值表注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B9%A6%E5%86%99%E7%9C%9F%E5%80%BC%E8%A1%A8%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 书写真值表的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B9%A6%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 书写顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E5%AD%97-%E7%AC%A6%E5%8F%B7%E4%B9%A6%E5%86%99%E8%A7%84%E8%8C%83"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 数字 &amp; 符号书写规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%A1%8C%E6%95%B0%E4%B8%80%E5%AE%9A%E8%A6%81%E5%AF%B9%E9%BD%90"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 行数一定要对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%81%BF%E5%85%8D%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 避免常见错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.0.6.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>书写真值表注意事项</h1>
+<p>G老师给的</p>
+<hr>
+<h3 id="1-书写真值表的格式"><strong>1. 书写真值表的格式</strong></h3>
+<p>一般来说，真值表的格式是 <strong>表格状</strong>，每一列对应一个变量或计算结果，每一行代表一种可能情况：</p>
+<pre class="line-numbers language-none"><code class="language-none">| A | B | 计算结果 |
+|:-:|:-:|:-:|
+| 0 | 0 | ? |
+| 0 | 1 | ? |
+| 1 | 0 | ? |
+| 1 | 1 | ? |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但手写作业时，可能不是每个人都习惯画表格，你可以：</p>
+<ul>
+<li><strong>规范画表格</strong>（最好用直尺，让表格对齐，看起来清晰）。</li>
+<li><strong>如果不画表格，也要对齐数据</strong>，不要写得歪歪扭扭，影响计算。</li>
+</ul>
+<hr>
+<h3 id="2-书写顺序"><strong>2. 书写顺序</strong></h3>
+<ol>
+<li>
+<p><strong>先列出输入变量（A、B、C…）</strong>，排列方式按<strong>二进制顺序</strong>：</p>
+<ul>
+<li>两个变量 → 00、01、10、11</li>
+<li>三个变量 → 000、001、010、011、100、101、110、111</li>
+<li>以此类推，行数是 。</li>
+</ul>
+</li>
+<li>
+<p><strong>如果是复杂表达式，分步计算，每个中间结果开一栏</strong>。</p>
+<ul>
+<li>
+<p><strong>例如计算</strong> ：</p>
+  <pre class="line-numbers language-none"><code class="language-none">| A | B | C | A ∧ B | ¬C | (A ∧ B) ∨ ¬C |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| 0 | 0 | 0 |  0  |  1  |       1       |
+| 0 | 0 | 1 |  0  |  0  |       0       |
+| 0 | 1 | 0 |  0  |  1  |       1       |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p><strong>不要直接跳到最终结果</strong>，这样容易出错。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>计算时注意逻辑运算的优先级</strong>：</p>
+<ul>
+<li><strong>先计算括号内的内容</strong>。</li>
+<li><strong>非（¬）的优先级最高</strong>。</li>
+<li><strong>与（∧）高于或（∨）</strong>。</li>
+<li><strong>蕴含（→）可以拆解成 “¬A ∨ B”</strong> 计算。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="3-数字-符号书写规范"><strong>3. 数字 &amp; 符号书写规范</strong></h3>
+<p>手写作业时：</p>
+<ul>
+<li><strong>0 和 1 要清晰，别写成 o 或 l</strong>（尤其是用草稿本时）。</li>
+<li><strong>运算符号写清楚</strong>，比如：
+<ul>
+<li>“∧” （与）不要写成普通的“^”。</li>
+<li>“∨” （或）不要写成 “V”。</li>
+<li>“¬” （非）可以直接写成 “¬” 或 “~”（看老师习惯）。</li>
+</ul>
+</li>
+<li><strong>表达式复杂时，括号一定要写全</strong>，否则可能影响计算顺序。</li>
+</ul>
+<hr>
+<h3 id="4-行数一定要对齐"><strong>4. 行数一定要对齐</strong></h3>
+<ul>
+<li>书写时，<strong>每一行都要整齐</strong>，别让某些数据偏左、某些偏右，容易导致计算错误。</li>
+<li>如果是表格形式，最好用<strong>直尺</strong>画线，这样作业看起来整洁，批改也方便。</li>
+</ul>
+<hr>
+<h3 id="5-避免常见错误"><strong>5. 避免常见错误</strong></h3>
+<ul>
+<li>
+<p><strong>变量排列顺序错了</strong><br>
+❌ <strong>错误例子：</strong></p>
+  <pre class="line-numbers language-none"><code class="language-none">| A | B |
+|:-:|:-:|
+| 0 | 1 |
+| 1 | 0 |
+| 0 | 0 |
+| 1 | 1 |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>✅ <strong>正确方式（按照二进制递增）：</strong></p>
+  <pre class="line-numbers language-none"><code class="language-none">| A | B |
+|:-:|:-:|
+| 0 | 0 |
+| 0 | 1 |
+| 1 | 0 |
+| 1 | 1 |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p><strong>直接写最终结果，而不写中间步骤</strong></p>
+<ul>
+<li>这样老师可能会扣步骤分，建议<strong>先写中间逻辑运算，再写最终答案</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>计算 “蕴含（→）” 时搞错规则</strong></p>
+<ul>
+<li>记住 只有在 <strong>A=1, B=0 时为 0</strong>，其他情况都是 1。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="总结"><strong>总结</strong></h3>
+<p>✔ <strong>画表格/对齐数据，让作业清晰</strong>。<br>
+✔ <strong>按二进制顺序列变量</strong>，别乱排列。<br>
+✔ <strong>复杂表达式分步计算，每个运算单独一列</strong>。<br>
+✔ <strong>符号写清楚，运算优先级正确</strong>。<br>
+✔ <strong>用直尺画线（如果老师要求规范整齐）</strong>。</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/数学/" class="tag">#数学</a><a href="/tags/注意事项/" class="tag">#注意事项</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/02/24/sheng-huo/ji-lu/typora-ji-huo-cheng-gong/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Typora激活成功</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/02/18/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-ke-cheng-zhu-yi-shi-xiang/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">数据结构课程注意事项</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

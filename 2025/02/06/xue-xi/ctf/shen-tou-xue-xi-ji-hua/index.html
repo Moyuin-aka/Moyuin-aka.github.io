@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>渗透学习 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="渗透学习 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/02/06/xue-xi/ctf/shen-tou-xue-xi-ji-hua/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-02-06T14:11:25.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/CTF学习/">CTF学习</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>February</span>
+            <span>6,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">渗透学习</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">🛡 CTF 学习计划</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC-1-%E9%98%B6%E6%AE%B5%EF%BC%9A%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.1.</span> <span class="toc-text">📌 第 1 阶段：环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A5-%E7%AC%AC-2-%E9%98%B6%E6%AE%B5%EF%BC%9AWeb-%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">🔥 第 2 阶段：Web 渗透基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%80-%E7%AC%AC-2-%E9%98%B6%E6%AE%B5%EF%BC%9APwn-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">💀 第 2 阶段：Pwn 漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-%E7%AC%AC-3-%E9%98%B6%E6%AE%B5%EF%BC%9A%E7%9C%9F%E5%AE%9E%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6"><span class="toc-number">1.4.</span> <span class="toc-text">🚀 第 3 阶段：真实漏洞研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">🎯 学习方法建议</span></a></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>🛡 CTF 学习计划</h1>
+<p>GPT给的</p>
+<h2 id="📌-第-1-阶段：环境搭建">📌 <strong>第 1 阶段：环境搭建</strong></h2>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>推荐资源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安装 Kali Linux（VMware/VirtualBox）</td>
+<td><a target="_blank" rel="noopener" href="https://www.kali.org/">Kali 官方网站</a></td>
+</tr>
+<tr>
+<td>配置 Web 渗透工具（Burp Suite, sqlmap）</td>
+<td><a target="_blank" rel="noopener" href="https://portswigger.net/burp">Burp Suite 文档</a>, <a target="_blank" rel="noopener" href="https://github.com/sqlmapproject/sqlmap">sqlmap GitHub</a></td>
+</tr>
+<tr>
+<td>安装 pwn 调试工具（gdb, pwndbg, ropper）</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg">pwndbg GitHub</a>, <a target="_blank" rel="noopener" href="https://github.com/sashs/Ropper">Ropper 工具</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="🔥-第-2-阶段：Web-渗透基础">🔥 <strong>第 2 阶段：Web 渗透基础</strong></h2>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>推荐资源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在 DVWA 练习 SQL 注入，使用 sqlmap</td>
+<td><a target="_blank" rel="noopener" href="http://www.dvwa.co.uk/">DVWA 靶场</a>, <a target="_blank" rel="noopener" href="https://github.com/sqlmapproject/sqlmap/wiki">sqlmap 教程</a></td>
+</tr>
+<tr>
+<td>学习 XSS（反射型、存储型、DOM XSS）</td>
+<td><a target="_blank" rel="noopener" href="https://xsshunter.com/">XSS 平台 xsshunter</a>, <a target="_blank" rel="noopener" href="https://owasp.org/www-community/attacks/xss/">OWASP XSS Guide</a></td>
+</tr>
+<tr>
+<td>练习 Webshell 上传绕过</td>
+<td><a target="_blank" rel="noopener" href="https://www.hackthebox.com/">Hack The Box Webshell 题目</a></td>
+</tr>
+<tr>
+<td>学习 SSRF（服务器端请求伪造）</td>
+<td><a target="_blank" rel="noopener" href="https://portswigger.net/web-security/ssrf">SSRF 实战教程</a></td>
+</tr>
+<tr>
+<td>在 HackTheBox 里尝试一个 Web 靶机</td>
+<td><a target="_blank" rel="noopener" href="https://www.hackthebox.com/">HackTheBox 入口</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="💀-第-2-阶段：Pwn-漏洞利用">💀 <strong>第 2 阶段：Pwn 漏洞利用</strong></h2>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>推荐资源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学习基础缓冲区溢出（Buffer Overflow）</td>
+<td><a target="_blank" rel="noopener" href="http://pwnable.kr/">pwnable.kr 官网</a></td>
+</tr>
+<tr>
+<td>使用 gdb 调试 <a target="_blank" rel="noopener" href="http://pwnable.kr">pwnable.kr</a> 的基础题</td>
+<td><a target="_blank" rel="noopener" href="https://sourceware.org/gdb/">GDB 使用手册</a></td>
+</tr>
+<tr>
+<td>学习格式化字符串漏洞（Format String）</td>
+<td><a target="_blank" rel="noopener" href="https://ctftime.org/writeups">格式化字符串漏洞 CTF 题解</a></td>
+</tr>
+<tr>
+<td>练习 ROP，利用返回地址执行 shell</td>
+<td><a target="_blank" rel="noopener" href="https://ropemporium.com/">ROP Emporium 练习</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="🚀-第-3-阶段：真实漏洞研究">🚀 <strong>第 3 阶段：真实漏洞研究</strong></h2>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>推荐资源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在 Exploit-DB 找一个 CVE 漏洞复现</td>
+<td><a target="_blank" rel="noopener" href="https://www.exploit-db.com/">Exploit-DB</a></td>
+</tr>
+<tr>
+<td>学习 CVE 漏洞利用的 PoC 编写</td>
+<td><a target="_blank" rel="noopener" href="https://www.cvedetails.com/">CVE Details</a></td>
+</tr>
+<tr>
+<td>尝试写自己的简单 Exploit</td>
+<td><a target="_blank" rel="noopener" href="https://www.offensive-security.com/metasploit-unleashed/exploit-development/">Python 编写 Exploit 教程</a></td>
+</tr>
+<tr>
+<td>挑战 HackTheBox 里的真实靶机</td>
+<td><a target="_blank" rel="noopener" href="https://www.hackthebox.com/">HackTheBox 挑战列表</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="🎯-学习方法建议">🎯 <strong>学习方法建议</strong></h2>
+<ul>
+<li><strong>每个阶段至少完成 3-5 个任务后再进入下一阶段</strong></li>
+<li><strong>遇到问题时，优先查找 Writeup（题解），然后自己尝试</strong></li>
+<li><strong>可以在博客或笔记中记录每个阶段的收获</strong></li>
+<li><strong>如果有不懂的，去 CTFHub / XCTF 社区交流</strong></li>
+<li><strong>最重要的是，动手实操，不只是看理论！</strong></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/CTF/" class="tag">#CTF</a><a href="/tags/计划/" class="tag">#计划</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/02/09/sheng-huo/ji-lu/jia/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">家</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/01/18/sheng-huo/za-tan/cun-ge-li-xi-dai-ma/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">存个利息代码</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

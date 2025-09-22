@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+
+  
+  <title>数据结构-排序与查找 - Moyuin&#39;s Note</title>
+  
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/174886737?v=4">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="数据结构-排序与查找 - Moyuin&#39;s Note" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://notes.moyuin.top/2025/04/22/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-pai-xu-yu-cha-zhao/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2025-04-22T02:13:27.000Z" />
+  
+  <meta property="og:article:author" content="Moyuin" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="4"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Moyuin&#39;s Notebook</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">归档</a>
+            
+            
+            
+            <a class="nav-item" href="/tags">标签</a>
+            
+            
+            
+            <a class="nav-item" href="/categories">分类</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/moyuin-aka" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/日常学习/">日常学习</a>
+        
+            <a href="/categories/日常学习/数据结构/">数据结构</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>April</span>
+            <span>22,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">数据结构-排序与查找</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ✅ 插入 TOC 目录渲染 -->
+    
+    <div class="toc-container">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">数据结构-排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">排序分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">稳定性分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">内存使用情况分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%AE%E6%8E%92%E5%BA%8F%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.3.</span> <span class="toc-text">据排序实现手段分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%BE%E6%98%93%E7%A8%8B%E5%BA%A6%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.4.</span> <span class="toc-text">难易程度分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">经典排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">插入排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">折半插入排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">希尔排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">简单选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.3.</span> <span class="toc-text">堆排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.4.</span> <span class="toc-text">交换排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">快速排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.5.</span> <span class="toc-text">归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%85%8D%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.6.</span> <span class="toc-text">分配排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">计数排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">桶排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.6.3.</span> <span class="toc-text">基数排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.7.</span> <span class="toc-text">索引排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">数据结构-查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">基本查找算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE"><span class="toc-number">2.1.1.</span> <span class="toc-text">顺序查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="toc-number">2.1.2.</span> <span class="toc-text">二分查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%9F%A5%E6%89%BE%EF%BC%88%E5%88%86%E5%9D%97%E6%9F%A5%E6%89%BE%EF%BC%89"><span class="toc-number">2.1.3.</span> <span class="toc-text">索引查找（分块查找）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">如何构建索引？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91-%EF%BC%88BST%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">二叉查找树 （BST）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89"><span class="toc-number">2.2.1.</span> <span class="toc-text">基本定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE"><span class="toc-number">2.2.2.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E6%8F%92%E5%85%A5%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.3.</span> <span class="toc-text">二叉树插入算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">2.2.4.</span> <span class="toc-text">二叉查找树的建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-number">2.2.5.</span> <span class="toc-text">二叉查找树的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88AVL%E6%A0%91%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">平衡二叉树（AVL树）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">基本定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0AVL%E6%A0%91"><span class="toc-number">2.3.2.</span> <span class="toc-text">构造AVL树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86BST%E8%BD%AC%E5%8C%96%E4%B8%BAAVL"><span class="toc-number">2.3.3.</span> <span class="toc-text">将BST转化为AVL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E5%8C%96%E6%97%8B%E8%BD%AC"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">平衡化旋转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%A1%A1%E8%B0%83%E6%95%B4%E6%97%8B%E8%BD%AC%E5%B9%B3%E8%A1%A1%E5%A4%84%E7%90%86"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">失衡调整旋转平衡处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5"><span class="toc-number">2.3.4.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">2.3.5.</span> <span class="toc-text">删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE-%E5%93%88%E5%B8%8C%E6%9F%A5%E6%89%BE"><span class="toc-number">2.4.</span> <span class="toc-text">散列查找 | 哈希查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0-%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.1.</span> <span class="toc-text">散列函数 | 哈希函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%9C%B0%E5%9D%80%E5%AD%98%E5%82%A8%E6%B3%95"><span class="toc-number">2.4.1.1.</span> <span class="toc-text">直接地址存储法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">2.4.1.2.</span> <span class="toc-text">数字分析法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E5%8F%96%E4%B8%AD%E6%B3%95"><span class="toc-number">2.4.1.3.</span> <span class="toc-text">平方取中法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%98%E5%8F%A0%E6%B3%95"><span class="toc-number">2.4.1.4.</span> <span class="toc-text">折叠法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%A4%E7%95%99%E4%BD%99%E6%95%B0%E6%B3%95"><span class="toc-number">2.4.1.5.</span> <span class="toc-text">除留余数法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%B3%95"><span class="toc-number">2.4.1.6.</span> <span class="toc-text">随机数法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-number">2.5.</span> <span class="toc-text">红黑树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E4%BA%94%E6%9D%A1%E6%A0%B8%E5%BF%83%E8%A7%84%E5%88%99"><span class="toc-number">2.5.1.</span> <span class="toc-text">红黑树的五条核心规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E8%BF%9D%E8%A7%84%E7%9A%84%E2%80%9C%E5%B0%8F%E6%8A%84%E2%80%9D"><span class="toc-number">2.5.2.</span> <span class="toc-text">修复违规的“小抄”</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+
+    <div class="content">
+        <h1>数据结构-排序</h1>
+<h2 id="排序分类">排序分类</h2>
+<h3 id="稳定性分类">稳定性分类</h3>
+<p>若<strong>序列中关键字值相等的节点经过某种排序方法进行排序之后，仍能保持它们在排序前的相对顺序</strong>，则称这种排序方法是稳定的；否则，称这种排序方法是不稳定的。<br>
+<img src="https://img.moyuin.top/i/2025/04/22/6806fc01136af.png" alt=" "></p>
+<ul>
+<li>稳定排序算法：
+<ul>
+<li>插入排序</li>
+<li>冒泡排序</li>
+<li>归并排序</li>
+</ul>
+</li>
+<li>不稳定排序算法：
+<ul>
+<li>选择排序</li>
+<li>希尔排序</li>
+<li>快速排序</li>
+<li>堆排序</li>
+</ul>
+</li>
+</ul>
+<h3 id="内存使用情况分类">内存使用情况分类</h3>
+<ul>
+<li>内部排序：数据存储和位置调整均在内存中进行</li>
+<li>外部排序：大部分数据元素存储在外存，借助内存进行位置调整</li>
+</ul>
+<h3 id="据排序实现手段分类">据排序实现手段分类</h3>
+<ul>
+<li>基于“比较-交换”的排序：通过对关键字的比较，交换关键字在序列中的位置 l 插入排序、冒泡排序、选择排序、快速排序、归并排序、希尔排序、堆排序</li>
+<li>基于“分配”的排序：通过将元素进行分配和收集进行排序 l 桶排序、计数排序和基数排序</li>
+</ul>
+<h3 id="难易程度分类">难易程度分类</h3>
+<ul>
+<li>基本排序：插入排序、冒泡排序、选择排序、……</li>
+<li>高级排序：快速排序、归并排序、堆排序、基数排序、……</li>
+</ul>
+<h2 id="经典排序">经典排序</h2>
+<h3 id="插入排序">插入排序</h3>
+<p><strong>基本思想</strong>：将一个记录插入到已经排好序的序列中，形成一个新的、记录数增1的有序序列 。<br>
+<img src="https://img.moyuin.top/i/2025/04/22/6806fd4235798.png" alt=" "></p>
+<p>我们一般使用直接插入排序。将<code>A[i]</code>插入有序序列，让前面所有的元素比它大/小，从而得到新有序序列。<br>
+<img src="https://img.moyuin.top/i/2025/04/22/6806fde5b07cf.png" alt=" "></p>
+<p>时间复杂度：平均为<code>O(n^2)</code><br>
+空间复杂度： <code>O(1)</code></p>
+<h4 id="折半插入排序"><strong>折半插入排序</strong></h4>
+<p>二分法进入排序,即为<strong>折半插入排序</strong>,查找位置时间复杂度为<code>O(logn)</code>,但是元素挪动依然为<code>O(n)</code>,所以整体的时间复杂度为<code>O(n^2)</code></p>
+<h4 id="希尔排序">希尔排序</h4>
+<p><strong>基本原理</strong>：先对所有记录按<strong>增量</strong>(d)进行分组，组内进行插入排序；然后减少增量重复上述步骤，直至增量为1 。<br>
+<strong>画线可以连接在一起的视为一个组，比如示例，57，48，66为一个组，进行比较的时候57与48交换，交换后也要考虑57和66是否可以互相交换。</strong><br>
+<img src="https://pic.moyuin.top/2025/05/13/6822ef3d3770b.png" alt="image.png"></p>
+<p><strong>时间复杂度</strong>：依赖于增量序列，没有确切结论，可以优于 O(n2)，例如某些情况下可达到 O(nlog2n) 或 O(n^3/2) 。</p>
+<ul>
+<li>选一个初始 gap，比如 n/2</li>
+<li>按 gap 把数组分成若干组</li>
+<li>对每组做插入排序</li>
+<li>缩小 gap，比如 gap /= 2</li>
+<li>重复直到 gap = 1（就是普通插排）</li>
+</ul>
+<hr>
+<h3 id="简单选择排序">简单选择排序</h3>
+<p><strong>基本思想</strong>：<strong>首先选出最小的项，与第一个项交换；然后在剩余项中选出次小的项，与第二个项交换</strong>；以此类推，直到整个序列有序 。<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822ef207dcbe.png" alt="image.png"></p>
+<ul>
+<li><strong>过程</strong>：每次在未排序序列中找到最小（或最大）元素，存放到排序序列的起始位置 。</li>
+<li><strong>性能</strong>：
+<ul>
+<li>时间复杂度：O(n^2) (最佳、最坏、平均情况均为 O(n^2) 次比较) 。</li>
+<li>空间复杂度：O(1) 。</li>
+</ul>
+</li>
+</ul>
+<h3 id="堆排序">堆排序</h3>
+<p><strong>基本思想</strong>：将待排序序列构造成一个大顶堆（或小顶堆），此时堆顶元素即为最大（或最小）值。将其与末尾元素交换，然后将剩余n-1个元素重新调整为堆，重复此过程 。<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822ff1c9ca87.png" alt=""><br>
+<img src="https://pic.moyuin.top/2025/05/13/6822ffb93f7c1.png" alt="image.png"><br>
+<img src="https://pic.moyuin.top/2025/05/13/68230027ccde9.png" alt="image.png"></p>
+<p><strong>过程</strong>：包括建堆和调整堆两个主要步骤 。<br>
+先看建立堆过程吧。<br>
+<img src="https://pic.moyuin.top/2025/05/13/682300a81fde4.png" alt="image.png"><br>
+<img src="https://pic.moyuin.top/2025/05/13/682300c8137b0.png" alt="image.png"><br>
+<img src="https://pic.moyuin.top/2025/05/13/682300d308554.png" alt="image.png"><br>
+<img src="https://pic.moyuin.top/2025/05/13/682300dcca925.png" alt="image.png"></p>
+<p><strong>性能</strong>：</p>
+<ul>
+<li>时间复杂度：O(nlogn) 。</li>
+<li>空间复杂度：O(1) 。</li>
+</ul>
+<h3 id="交换排序">交换排序</h3>
+<p><strong>核心思路</strong>：对序列中的元素进行多次两两交换，从而使序列元素有序 。</p>
+<h4 id="冒泡排序">冒泡排序</h4>
+<p><strong>基本思想</strong>：依次比较相邻两个元素，如果反序则交换，重复操作直到整个序列有序。每趟排序会将当前未排序部分的最大（或最小）元素&quot;冒泡&quot;到最终位置 。<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822f27f1f2f3.png" alt="image.png"></p>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822efdc611e9.png" alt="image.png"></p>
+<p><strong>性能</strong>：</p>
+<ul>
+<li>时间复杂度：O(n2) 。</li>
+<li>空间复杂度：O(1)。</li>
+</ul>
+<h4 id="快速排序">快速排序</h4>
+<p><strong>基本思想</strong>：通过递归分治方法，基于轴点 (pivot) 将待排序序列拆分成两个子序列（<strong>左边元素均小于等于轴点，右边元素均大于等于轴点</strong>），然后对两个子序列分别递归排序 。</p>
+<ul>
+<li>
+<p><strong>选定轴点</strong>：通常是当前子序列最后一个元素（也可以是别的，但这是经典选择）。</p>
+</li>
+<li>
+<p><strong>分区过程</strong>：</p>
+<ul>
+<li>使用左右指针（或一个指针<code>i</code>）遍历序列。</li>
+<li>保证所有小于轴点的元素在左边，大于等于轴点的在右边。</li>
+<li><strong>划定边界</strong>：找出最终轴点应该插入的位置，把它交换过去。</li>
+</ul>
+</li>
+<li>
+<p><strong>递归处理</strong>：</p>
+<ul>
+<li>以轴点为界，继续分别对左子序列和右子序列进行快速排序。</li>
+</ul>
+</li>
+<li>
+<p><strong>终止条件</strong>：</p>
+<ul>
+<li>子序列长度为 0 或 1，说明那一段已经有序，无需继续处理。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822f634c5e24.png" alt="image.png"></p>
+<p>快排比较复杂，这里给一个拆分示例，轴点寻找和插入位置寻找不看图不行。（<strong>这里使用的是左右双指针法</strong>）：</p>
+<p>👇 初始数组：</p>
+<pre class="line-numbers language-none"><code class="language-none">[10, 20, 15, 4, 1, 9, 6]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们使用最简单直观的 <strong>Lomuto 分区法</strong>（用最后一个元素当轴点）。每一次递归我们都分区 + 继续快排子数组。</p>
+<hr>
+<p>✅ 第一次快排（全数组）<br>
+<strong>数组</strong>：<code>[10, 20, 15, 4, 1, 9, 6]</code><br>
+<strong>pivot</strong>（轴点）= <code>6</code><br>
+<strong>i = -1</strong></p>
+<p>遍历 j=0 到 j=5：</p>
+<ul>
+<li><code>10 &gt; 6</code> → 跳过</li>
+<li><code>20 &gt; 6</code> → 跳过</li>
+<li><code>15 &gt; 6</code> → 跳过</li>
+<li><code>4 &lt; 6</code> → <code>i=0</code>, 交换 <code>arr[0] ↔ arr[3]</code> → <code>[4, 20, 15, 10, 1, 9, 6]</code></li>
+<li><code>1 &lt; 6</code> → <code>i=1</code>, 交换 <code>arr[1] ↔ arr[4]</code> → <code>[4, 1, 15, 10, 20, 9, 6]</code></li>
+<li><code>9 &gt; 6</code> → 跳过</li>
+</ul>
+<p>结束后，<code>i = 1</code>，交换 <code>arr[2] ↔ pivot (arr[6])</code><br>
+→ 最终：[4, 1, 6, 10, 20, 9, 15]</p>
+<p>现在 <code>6</code> 已经在正确的位置了！</p>
+<hr>
+<p>🎯 快排左边 <code>[4, 1]</code><br>
+pivot = <code>1</code><br>
+i = -1</p>
+<ul>
+<li><code>4 &gt; 1</code> → 跳过<br>
+结束后 i = -1，交换 <code>arr[0] ↔ arr[1]</code><br>
+→ <code>[1, 4]</code>，完成了！</li>
+</ul>
+<hr>
+<p>🎯 快排右边 <code>[10, 20, 9, 15]</code><br>
+pivot = <code>15</code><br>
+i = 2（<code>6</code> 已经在前面了）<br>
+从 j=3 开始：</p>
+<ul>
+<li><code>10 &lt; 15</code> → <code>i=3</code>, 交换 <code>arr[3] ↔ arr[3]</code>（自交换）</li>
+<li><code>20 &gt; 15</code> → 跳过</li>
+<li><code>9 &lt; 15</code> → <code>i=4</code>, 交换 <code>arr[4] ↔ arr[5]</code><br>
+→ <code>[1, 4, 6, 10, 9, 20, 15] 交换 pivot </code>arr[6]<code>和</code>arr[5]<code>→</code>[1, 4, 6, 10, 9, 15, 20]`</li>
+</ul>
+<hr>
+<p>🎯 快排 <code>[10, 9]</code><br>
+pivot = <code>9</code></p>
+<ul>
+<li><code>10 &gt; 9</code> → 跳过<br>
+交换 <code>arr[3] ↔ arr[4]</code><br>
+→ <code>[1, 4, 6, 9, 10, 15, 20]</code></li>
+</ul>
+<hr>
+<p>✅ 最终结果：</p>
+<pre class="line-numbers language-none"><code class="language-none">[1, 4, 6, 9, 10, 15, 20]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<p><strong>性能</strong>：</p>
+<ul>
+<li>时间复杂度：平均 O(nlogn)，最坏 O(n2) (当序列已基本有序或轴点选择不佳时) 。</li>
+<li>空间复杂度 (递归栈深度)：平均 O(logn)，最坏 O(n) 。</li>
+</ul>
+<h3 id="归并排序">归并排序</h3>
+<ul>
+<li>
+<p><strong>核心思路</strong>：基于分治思想，将两个或两个以上的有序序列合并为一个新的有序序列 。</p>
+</li>
+<li>
+<p><strong>归并次序</strong> ：</p>
+<ul>
+<li>
+<p><strong>自顶向下</strong>：将序列递归拆分到单个元素，然后两两合并。<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822f2ae78335.png" alt="image.png"></p>
+</li>
+<li>
+<p><strong>自底向上</strong>：将序列看作n个长度为1的有序子序列，然后两两合并，直到合并为一个序列。<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822f2c9130de.png" alt="image.png"></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>二路归并 (Two-Way Merge)</strong>：将两个有序序列合并为一个新的有序序列，时间复杂度为 O(m+n)，其中m和n为两个序列的长度 。</p>
+</li>
+<li>
+<p><strong>性能</strong>：</p>
+<ul>
+<li>时间复杂度：O(nlogn) (自顶向下和自底向上均为) 。</li>
+<li>空间复杂度：O(n) (需要额外的辅助空间) 。</li>
+</ul>
+</li>
+<li>
+<p><strong>应用</strong>：求逆序对数量 。</p>
+</li>
+</ul>
+<h3 id="分配排序">分配排序</h3>
+<p>不基于“比较-移动”的排序方式。</p>
+<h4 id="计数排序">计数排序</h4>
+<ul>
+<li>
+<ul>
+<li><strong>假设</strong>：输入元素是 0 到 k 之间的一个整数 。
+<ul>
+<li><strong>基本思想</strong>：统计每个元素出现的次数，然后根据计数确定每个元素在输出数组中的位置 。</li>
+<li><strong>性能</strong>：
+<ul>
+<li>时间复杂度：O(n+k)，当 k 为 O(n) 时，复杂度为 O(n) 。</li>
+<li>空间复杂度：O(n+k) 。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="桶排序">桶排序</h4>
+<ul>
+<li>
+<ul>
+<li><strong>基本思想</strong>：将元素分配到有限数量的桶中，然后对每个桶内的元素进行排序（通常用插入排序），最后依次连接各桶中的元素得到有序序列 。
+<ul>
+<li><strong>与计数排序关系</strong>：计数排序可以看作是桶排序的一种特殊情况，其中每个桶只包含相同值的元素 。</li>
+<li><strong>性能</strong>：
+<ul>
+<li>时间复杂度：平均 O(n+kn2​+k) (假设均匀分配到k个桶)，如果元素能均匀分配，可以达到 O(n) 。最坏 O(n2) 。</li>
+<li>空间复杂度：O(n+k) 。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="基数排序">基数排序</h4>
+<ul>
+<li>
+<p><strong>核心思路</strong>：将待排序元素看作基于基数（如十进制的10）的元组表示，然后从最低位（LSD）或最高位（MSD）开始，对每一位进行排序（通常使用计数排序作为子排序算法） 。  <br>
+<img src="https://pic.moyuin.top/2025/05/13/68230a0966517.png" alt="image.png"></p>
+</li>
+<li>
+<p><strong>分类</strong>：</p>
+<ul>
+<li><strong>最低位优先 (LSD) 基数排序</strong> ：从最低位到最高位，逐位进行稳定排序。</li>
+<li><strong>最高位优先 (MSD) 基数排序</strong> ：从最高位开始，递归地对子序列进行排序。</li>
+</ul>
+</li>
+<li>
+<p><strong>性能</strong> (设n个元素，每个元素有d位，基数为k)：</p>
+<ul>
+<li>LSD时间复杂度：O(d(n+k)) 。</li>
+<li>MSD时间复杂度：最坏 O(d⋅n⋅k)，平均也类似 。</li>
+<li>空间复杂度：O(n+k) 。</li>
+</ul>
+</li>
+</ul>
+<h3 id="索引排序">索引排序</h3>
+<ul>
+<li><strong>核心思路</strong>：创建一个索引序列，排序时不直接移动原序列中的元素，而是移动索引。排序完成后，索引序列指明了原序列元素应有的顺序。这在元素移动和拷贝代价很大时非常有用 。</li>
+<li><strong>元素顺序调整</strong>：得到排序后的索引序列后，可以根据索引将原序列元素调整到正确位置。</li>
+</ul>
+<p><img src="https://pic.moyuin.top/2025/05/12/68219fdb8c19f.png" alt=" "></p>
+<hr>
+<h1>数据结构-查找</h1>
+<h2 id="基本查找算法">基本查找算法</h2>
+<h3 id="顺序查找">顺序查找</h3>
+<p>一个一个查，O(n)</p>
+<h3 id="二分查找">二分查找</h3>
+<p>中位 middle=<code>(low+high)/2</code><br>
+low 和 high 要随时改成 middle+1 (去右边找)或者 middle-1 （去左边找）<br>
+时间复杂度 O(logn)</p>
+<hr>
+<h3 id="索引查找（分块查找）">索引查找（分块查找）</h3>
+<ul>
+<li>创建存储数据的表，再根据要求建立相应索引<br>
+（如创建字典目录，有点像 unordered_map 建立映射）</li>
+<li>索引查找需要牺牲空间，从而降低时间复杂度</li>
+</ul>
+<h4 id="如何构建索引？">如何构建索引？</h4>
+<ul>
+<li>表中数据分块，使得内部分块的关键字值都大于或小于下一个块。称为“分块有序”。</li>
+<li>为每块建立一个索引项，包含 <code>key</code> 和 <code>index</code> 。即关键码字段和指针字段。</li>
+<li>通过<code>key</code> 找到关键字值的记录块，然后在块内进行 <strong>顺序查找或者二分查找</strong><br>
+<img src="https://pic.moyuin.top/2025/05/06/681972101597a.png" alt=" "></li>
+</ul>
+<p>其实时间复杂度也是线性，但是依赖于块数据的大小与块内查找方式。<br>
+<img src="https://pic.moyuin.top/2025/05/06/681972634d44b.png" alt=" "></p>
+<ul>
+<li>O(s)与O(logs)的查找时间，还得看分块的大小。</li>
+</ul>
+<hr>
+<h2 id="二叉查找树-（BST）">二叉查找树 （BST）</h2>
+<h3 id="基本定义">基本定义</h3>
+<p>二叉查找树或者是一棵空树；<br>
+或者是具有如下特性的二叉树：</p>
+<ul>
+<li>若根结点的左子树不空，则左子树上所有结点的值均小于根结点的值；</li>
+<li>若根结点的右子树不空，则右子树上所有结点的值均大于根结点的值；<br>
+性质：<strong>任何二叉查找树的中序遍历都是有序序列</strong><br>
+且一般规律是: 任意左子树的值 &lt; 根节点的值 &lt; 对应右子树的值。<br>
+<img src="https://pic.moyuin.top/2025/05/06/6819743c74b9c.png" alt=" "></li>
+</ul>
+<h3 id="查找">查找</h3>
+<p>如果要在二叉查找树寻找关键值 <code>key</code> ,基本原理和二分查找相同。如果给定值比当前节点小则去当前节点的左子树继续寻找，大则去右子树继续寻找。<br>
+<img src="https://pic.moyuin.top/2025/05/06/6819755227c8c.png" alt=" "></p>
+<p>时间复杂度为 O(h),h为树的高度。基本也就是进行递归调用。</p>
+<p>对于其时间复杂度，性能最差可能会退化到线性查找。<br>
+<img src="https://pic.moyuin.top/2025/05/06/68197f1c9f9d9.png" alt=" "><br>
+<img src="https://pic.moyuin.top/2025/05/06/68197f320c789.png" alt=" "></p>
+<h3 id="二叉树插入算法">二叉树插入算法</h3>
+<p>注意：<strong>插入位置是节点从根节点比较一步一步确定的，小于该节点移到左侧与左节点比较，反之同理，不是随便写的。</strong><br>
+也是利用查找，确定好要进入的树节点，从而插入值。<br>
+<strong>“插入”操作在查找不成功时才进行</strong>。如果树中存在该值，BST 不允许有重复值。<br>
+<img src="https://pic.moyuin.top/2025/05/06/6819771990a1b.png" alt=" "></p>
+<h3 id="二叉查找树的建立">二叉查找树的建立</h3>
+<p>将根节点设置为一个空集（变成可以设定为一个无限小），然后往下查找往下画即可。</p>
+<h3 id="二叉查找树的删除">二叉查找树的删除</h3>
+<p>删除可分三种情况讨论：<br>
+（1）被删除的结点是叶子 ，不用管孩子，很简单<br>
+<img src="https://pic.moyuin.top/2025/05/06/68197c6df26f8.png" alt=" "></p>
+<p>（2）被删除的结点只有左子树或者只有右子树 ，像链表一样需要删除节点的操作<br>
+<img src="https://pic.moyuin.top/2025/05/06/68197c8725d4c.png" alt=" "></p>
+<p>（3）被删除的结点既有左子树，也有右子树。这个比较复杂，与堆的那个操作不太一样。<br>
+相当于在序列里将其往前移动一格，拼起来。<br>
+<img src="https://pic.moyuin.top/2025/05/06/68197ca755bb7.png" alt=" "></p>
+<h2 id="平衡二叉树（AVL树）">平衡二叉树（AVL树）</h2>
+<h3 id="基本定义-2">基本定义</h3>
+<p>AVL树或者是一棵空树，或者是具有下列性质的二叉查找树：</p>
+<ul>
+<li>左、右子树都是平衡二叉树；</li>
+<li>左、右子树的高度差绝对值不超过1。（这里的高度差左子树高度-右子树高度）<br>
+<img src="https://pic.moyuin.top/2025/05/06/6819815d362ff.png" alt=" "></li>
+</ul>
+<h3 id="构造AVL树">构造AVL树</h3>
+<p>看个例子。所谓<strong>平衡旋转</strong>，左旋和右旋，就是：</p>
+<blockquote>
+<p><strong>右旋 = 左子过重时，把左儿子提上来当新根，把原根放到右边；左儿子的右子（如果有）会变成原根的左子。</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>左旋 = 右子过重时，把右儿子提上来当新根，把原根放到左边；右儿子的左子（如果有）会变成原根的右子。</strong></p>
+</blockquote>
+<p><img src="https://pic.moyuin.top/2025/05/06/681981a599c96.png" alt=" "><br>
+<img src="https://pic.moyuin.top/2025/05/06/6819822c4d942.png" alt=" "></p>
+<h3 id="将BST转化为AVL">将BST转化为AVL</h3>
+<p><img src="https://pic.moyuin.top/2025/05/06/6819847d7e3d3.png" alt=" "></p>
+<h4 id="平衡化旋转">平衡化旋转</h4>
+<p><img src="https://pic.moyuin.top/2025/05/06/681984a26bbb9.png" alt=" "></p>
+<h4 id="失衡调整旋转平衡处理">失衡调整旋转平衡处理</h4>
+<ul>
+<li>
+<p>第一个字母代表：<strong>失衡节点是哪个子树高了</strong>（L = 左子树，R = 右子树）</p>
+</li>
+<li>
+<p>第二个字母代表：<strong>哪边插入导致了这个子树变高</strong>（L = 左边插入，R = 右边插入）<br>
+图例</p>
+</li>
+<li>
+<p>单调右旋 （LL）<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822a9dc26338.png" alt=" "></p>
+</li>
+<li>
+<p>单调左旋（RR）<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822aa0aa6af7.png" alt=" "></p>
+</li>
+<li>
+<p>先左后右旋 （LR）<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822aa1910657.png" alt=" "></p>
+</li>
+<li>
+<p>先右后左旋转（RL）<br>
+<img src="https://pic.moyuin.top/2025/05/13/6822aa29095e7.png" alt=" "></p>
+</li>
+</ul>
+<h3 id="插入">插入</h3>
+<p>AVL树的新结点的插入过程包括两个步骤：</p>
+<ul>
+<li>结点插入： 按照BST构建方法插入，同时更新平衡因子</li>
+<li>平衡化：如果插入过程中出现不平衡，采用<strong>平衡化调整</strong>，以保持AVL的性质</li>
+</ul>
+<p>插入有一个递归算法，太长了…</p>
+<h3 id="删除">删除</h3>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822b48508436.png" alt="image.png"></p>
+<hr>
+<h2 id="散列查找-哈希查找">散列查找 | 哈希查找</h2>
+<p>建立映射，<code>unordered_map</code>的伟大无需多言。<br>
+散列查找需要建立某种哈希函数，通过某种数学方法将数据转化为哈希地址，建立一个哈希表，映射建立。<br>
+<strong>由于哈希函数是一个压缩映射</strong>，因此在一般情况下<strong>容易产生冲突</strong>，避免冲突，要么就哈希地址更复杂，要么就哈希函数更复杂。</p>
+<blockquote>
+<p>很难找到一个不产生冲突的散列函数。一般情况下，只能选择恰当的散列函数，使冲突尽可能少地产生。</p>
+</blockquote>
+<h3 id="散列函数-哈希函数">散列函数 | 哈希函数</h3>
+<p>一般来说，一个好的散列函数应满足下列两个条件：</p>
+<ul>
+<li>计算简单</li>
+<li>冲突少</li>
+</ul>
+<p>常见的哈希函数构造方法有：</p>
+<ul>
+<li>直接地址存储法</li>
+<li>数字分析法</li>
+<li>平方取中法</li>
+<li>折叠法</li>
+<li>除留余数法</li>
+<li>随机数法</li>
+</ul>
+<h4 id="直接地址存储法">直接地址存储法</h4>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822ba1cd89c6.png" alt="image.png"></p>
+<h4 id="数字分析法">数字分析法</h4>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822ba49733cc.png" alt="image.png"></p>
+<h4 id="平方取中法">平方取中法</h4>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822ba5da25cd.png" alt="image.png"></p>
+<p>平方取中法思想：<strong>以关键字的平方值的中间几位作为存储地址。</strong><br>
+关键字的各位都在平方值的中间几位有所贡献，Hash 值中应该有各位影子。</p>
+<h4 id="折叠法">折叠法</h4>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822bad72914b.png" alt="image.png"></p>
+<h4 id="除留余数法">除留余数法</h4>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822bb08893b4.png" alt="image.png"></p>
+<h4 id="随机数法">随机数法</h4>
+<p>注意随机一定要真随机，设置好 seed 随机种子。</p>
+<p><img src="https://pic.moyuin.top/2025/05/13/6822bb403f316.png" alt="image.png"></p>
+<p>散列表的绘制之后补充。</p>
+<h2 id="红黑树">红黑树</h2>
+<h3 id="红黑树的五条核心规则">红黑树的五条核心规则</h3>
+<ol>
+<li>每个节点要么是<strong>红色</strong>，要么是<strong>黑色</strong>。</li>
+<li>根节点永远是<strong>黑色</strong>。</li>
+<li>所有叶子节点（NIL/空节点）都是<strong>黑色</strong>的。</li>
+<li><strong>红色</strong>节点的子节点必须是<strong>黑色</strong>的。（即不能有两个连续的红色节点）</li>
+<li>从任一节点到其所有后代叶子节点的路径上，<strong>黑色</strong>节点的数量都相同。</li>
+</ol>
+<p><strong>插入策略</strong>：新插入的节点<strong>总是红色</strong>的。然后通过“变色”和“旋转”来修复可能违反的规则。</p>
+<h3 id="修复违规的“小抄”">修复违规的“小抄”</h3>
+<p>当你插入一个<strong>红色</strong>新节点 <code>N</code>，发现它的父节点 <code>P</code> 也是<strong>红色</strong>时（违反了规则4），你只需要看它<strong>叔叔节点 <code>U</code> 的颜色</strong>：</p>
+<ul>
+<li><strong>情况1：叔叔 <code>U</code> 是红色</strong>
+<ul>
+<li><strong>操作</strong>：<strong>变色</strong>。将父节点 <code>P</code> 和叔叔 <code>U</code> 变为<strong>黑色</strong>，将祖父节点 <code>G</code> 变为<strong>红色</strong>。然后将祖父节点 <code>G</code> 当作新的插入点，继续向上检查。</li>
+</ul>
+</li>
+<li><strong>情况2：叔叔 <code>U</code> 是黑色（或NIL/空节点）</strong>
+<ul>
+<li><strong>操作</strong>：<strong>旋转+变色</strong>。这又分为两种：
+<ul>
+<li><strong>直线型 (LL / RR)</strong>：直接对祖父节点 <code>G</code> 进行旋转，然后将 <code>P</code> 和 <code>G</code> 变色。</li>
+<li><strong>三角型 (LR / RL)</strong>：先对父节点 <code>P</code> 进行旋转，变成直线型，然后再按直线型处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Moyuin, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags text-capitalize">
+            
+            <i class="icon"></i>
+            <a href="/tags/学习/" class="tag">#学习</a><a href="/tags/数据结构/" class="tag">#数据结构</a><a href="/tags/编程/" class="tag">#编程</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/05/06/sheng-huo/ji-lu/vim-xue-xi/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Vim 学习 Daily</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/04/14/xue-xi/shu-ju-jie-gou/shu-ju-jie-gou-jing-dian-suan-fa-she-ji-qi-zhong-bei-kao-yong/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">数据结构-经典算法设计（期中备考用）</h3>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    <!-- ✅ 替换成 Twikoo 评论 -->
+    
+    
+    
+</article>
+
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a target="_blank" rel="noopener" href="https://blog.moyuin.top" class="item">Blog</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/moyuin-aka" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://x.com/Moyuin1" class="item">Twitter</a>
+                
+                <a href="mailto:me@moyuin.top" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 Moyuin<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
